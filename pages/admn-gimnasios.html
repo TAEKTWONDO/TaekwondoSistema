@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../assets/css/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="../assets/scss/style.scss">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>
+        Karem
+    </title>
+</head>
+
+<body>
+    <!--Header-->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <div class="mdl-navigation mdl-layout">
+                    <a class="mdl-navigation__link mdl-js-ripple-effect" href="admn-profesores.html">
+            MAESTROS
+          </a>
+
+                    <a class="mdl-navigation__link" href="">
+                    GIMNASIOS
+                    </a>
+                    <a class="mdl-navigation__link" href="admn-torneos.html">
+                    TORNEOS
+                    </a>
+                </div>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <a class="mdl__link" href="">
+                    <i class="material-icons md-36">person_pin</i>
+                </a>
+                <a class="mdl__link" href="">
+                    <i class="material-icons md-32">input</i>
+                </a>
+
+            </div>
+        </header>
+
+        <!--Contains-->
+
+        <div class="mdl-cell--12-col mdl-grid">
+
+            <div class="mdl-cell mdl-cell--3-col" style="text-align: right;">
+                <br><br>
+
+
+                <button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+			<i class="material-icons">add</i>
+		</button>
+                <div class="mdl-tooltip mdl-tooltip--large  " data-mdl-for="tt3">
+                    Agregar Gimnasio Nuevo
+                </div>
+            </div>
+
+            <ul>
+                <br>
+                <h3 class="mdl-list__item-primary-content" style="text-align: center;">Gimnasios</h3>
+
+                <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+						<i class="material-icons">search</i>
+					</label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" id="sample6">
+                            <label class="mdl-textfield__label" for="sample-expandable" style="color: black;">Buscar</label>
+                        </div>
+                    </div>
+                </form>
+
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+				<i class="material-icons  mdl-list__item-avatar">location_city</i>
+				Gimnasio 1
+			</span>
+
+                    <span style="color:white;">...........................................</span>
+
+                    <span class="mdl-list__item-secondary-action">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">edit</i>
+				</button>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">delete</i>
+				</button>
+			</span>
+                </li>
+
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+				<i class="material-icons  mdl-list__item-avatar">location_city</i>
+				Gimnasio 2 
+			</span>
+                    <span style="color:white;">...........................................</span>
+                    <span class="mdl-list__item-secondary-action">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">edit</i>
+				</button>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">delete</i>
+				</button>
+			</span>
+                </li>
+
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+				<i class="material-icons  mdl-list__item-avatar">location_city</i>
+				Gimnasio 3
+			</span>
+                    <span style="color:white;">...........................................</span>
+
+                    <span class="mdl-list__item-secondary-action">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">edit</i>
+				</button>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+					<i class="material-icons">delete</i>
+				</button>
+			</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
