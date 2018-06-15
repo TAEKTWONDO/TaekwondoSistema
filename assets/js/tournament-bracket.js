@@ -181,7 +181,7 @@ $(document).on("click", "button", function () {
     });
     changeToButtons();
 
-    cola.push($(this).text().replace(/^\s+|\s+$/gm, ''));
+    cola.unshift($(this).text().replace(/^\s+|\s+$/gm, ''));
     //console.log(cola);
 
     
