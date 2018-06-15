@@ -215,16 +215,17 @@ function soundWon(resultadoName) {
     // responsiveVoice.speak(categoriaTorneo, "Spanish Female");
     // text = encodeURIComponent(categoriaTorneo);
     // var url = "http://";
-    responsiveVoice.speak(primer, "Spanish Female");
-    text = encodeURIComponent(primer);
-    var url = "http://";
-    responsiveVoice.speak(segundo, "Spanish Female");
-    text = encodeURIComponent(segundo);
-    var url = "http://";
     responsiveVoice.speak(tercer, "Spanish Female");
     text = encodeURIComponent(tercer);
     var url = "http://";
     responsiveVoice.speak(tercer2, "Spanish Female");
     text = encodeURIComponent(tercer2);
     var url = "http://";
+    responsiveVoice.speak(segundo, "Spanish Female");
+    text = encodeURIComponent(segundo);
+    var url = "http://";
+    responsiveVoice.speak(primer, "Spanish Female");
+    text = encodeURIComponent(primer);
+    var url = "http://";
+    
 }
