@@ -5,71 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="../assets/js/calculateEntries.js"></script>
+    <title>Clasificación Inicial</title>
 </head>
 
-<body onload="get_values()">
-
-    <script>
-        var gender, age, height, colorBelt, score;
-
-        function get_values() {
-            var values = ["Juanita Pérez", "Femenino", "10", "1.70", "Verde"];
-            for (var i = 0; i < values.length; i++) {
-                if (i == 1) {
-                    gender = values[i];
-                } else if (i == 2) {
-                    age = values[i];
-                } else if (i == 3) {
-                    height = values[i];
-                } else if (i == 4) {
-                    colorBelt = values[i];
-                }
-            }
-            console.log(gender, age, height, colorBelt);
-            var aux;
-            if (gender == "Masculino") {
-                score++;
-            }
-            if (age >= 17) {
-                score++;
-            } else if (age == 4) {} else {
-                aux = age - 4;
-                score = aux * 0.07692;
-            }
-
-            switch (colorBelt) {
-                case "Blanca":
-                    break;
-                case "Amarilla":
-                    score += 0.2
-                    break;
-                case "Verde":
-                    score += 0.4
-                    break;
-                case "Azul":
-                    score += 0.6
-                    break;
-                case "Rojo":
-                    score += 0.8
-                    break;
-                case "Negra":
-                    score++;
-                    break;
-            }
-            var nuevaAltura;
-            if (height >= 2.00) {
-                score++;
-            } else if (height == 0.8) {} else {
-                aux = height - 0.8;
-                nuevaAltura = (aux*100) * 0.0083;
-            }
-
-            console.log(nuevaAltura);
-
-        }
-    </script>
-
+<body>
+        <p>Nombre:</p>
+        <textarea name="name" type="text"></textarea>
+        <p>Género:</p>
+        <textarea name="gender" type="text"></textarea>
+        <p>Edad:</p>
+        <textarea name="age" type="text"></textarea>
+        <p>Altura:</p>
+        <textarea name="height" type="text"></textarea>
+        <p>Cinta:</p>
+        <textarea name="belt" type="text"></textarea>
+    <a href="#" onclick="get()">Hola</a>
 </body>
-
 </html>
