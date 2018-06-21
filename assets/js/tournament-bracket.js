@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     $('#remove').on('click', function () {
         console.log('removed');
@@ -117,6 +119,7 @@ for (var i = 0; i < participants.length; i++) {
     changeToButtons();
 }
 
+
 function changeToButtons() {
 
     $(".bracket").each(function () {
@@ -188,10 +191,41 @@ $(document).on("click", "button", function () {
     //Eliminar datos repetidos
     colaGanadores = cola.filter(function (elem, index, self) {
         return index == self.indexOf(elem);
+        console.log(index);
     });
 
    colaGanadores = colaGanadores.filter(function (str) {
         return /\S/.test(str);
     });
-     console.log(colaGanadores);
 });
+
+function enviarGanadores(){
+    console.log("Enviando ganadores para que sean anunciados");
+    console.log(colaGanadores);  
+    soundWon(colaGanadores);  
+}
+
+function soundWon(resultadoName) {
+    //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
+    var primer = "El ganador del primer lugar es: " + resultadoName[0] + ". Felicitaciones.";
+    var segundo = "El ganador del segundo lugar es: " + resultadoName[1] + ". Felicitaciones.";
+    var tercer = "El ganador del tercer lugar es: : " + resultadoName[2] + ". Felicitaciones.";
+    var tercer2 = "El ganador del tercer lugar es: : " + resultadoName[3] + ". Felicitaciones.";
+    
+    // responsiveVoice.speak(categoriaTorneo, "Spanish Female");
+    // text = encodeURIComponent(categoriaTorneo);
+    // var url = "http://";
+    responsiveVoice.speak(tercer, "Spanish Female");
+    text = encodeURIComponent(tercer);
+    var url = "http://";
+    responsiveVoice.speak(tercer2, "Spanish Female");
+    text = encodeURIComponent(tercer2);
+    var url = "http://";
+    responsiveVoice.speak(segundo, "Spanish Female");
+    text = encodeURIComponent(segundo);
+    var url = "http://";
+    responsiveVoice.speak(primer, "Spanish Female");
+    text = encodeURIComponent(primer);
+    var url = "http://";
+    
+}
