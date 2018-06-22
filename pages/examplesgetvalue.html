@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../assets/js/calculateEntries.js"></script>
+    <script src="../assets/js/perceptronMethod.js"></script>
+    <script src="../assets/js/perceptronMethodSimple.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/synaptic/1.1.4/synaptic.js"></script>
     <title>Clasificación Inicial</title>
 </head>
 
@@ -20,6 +23,14 @@
         <textarea name="height" type="text"></textarea>
         <p>Cinta:</p>
         <textarea name="belt" type="text"></textarea>
-    <a href="#" onclick="get()">Hola</a>
+        <a href="#" onclick="perceptronMethod()">Perceptron Synaptic</a>
+        <br>
+        <br>
+        <br>
+        <a href="#" onclick="perceptron()">Percetron Simple</a>
+        <br>
+        <br>
+        <br>
+        <a href="#" onclick="perceptronMultilayer()">Percetron Multiple</a>
 </body>
 </html>

@@ -15,6 +15,7 @@
     "gulp-open": "^2.1.0"
   },
   "dependencies": {
-    "mdl-stepper": "^1.1.6"
+    "mdl-stepper": "^1.1.6",
+    "synaptic": "^1.1.4"
   }
 }
