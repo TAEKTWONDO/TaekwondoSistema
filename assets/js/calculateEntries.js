@@ -1,5 +1,6 @@
 var gender, age, height, colorBelt, score;
 var entriesFinal = new Array;
+var scoreFinal = new Array;
 
 function get() {
     cleanAll();
@@ -16,6 +17,11 @@ function get() {
     get_values(nameGet, genderGet, ageGet, heightGet, beltGet);
 }
 
+//Here calculate all the values from all the contestants
+function getValuesLoop(){
+    
+}
+
 function cleanAll() {
     gender = "";
     age = "";
@@ -23,6 +29,7 @@ function cleanAll() {
     colorBelt = "";
     score = "";
     entriesFinal = [];
+    scoreFinal = [];
     nameGet = "";
     genderGet = "";
     ageGet = "";
@@ -48,6 +55,8 @@ function get_values(name, genderStudent, ageStudent, heightStudent, belt) {
             colorBelt = values[i];
         }
     }
+    scoreFinal.push(name);
+
     console.log(gender, age, height, colorBelt);
     var aux;
     if (gender == "masculino") {
@@ -55,6 +64,9 @@ function get_values(name, genderStudent, ageStudent, heightStudent, belt) {
     } else {
         gender = 0;
     }
+    //Add the value
+    scoreFinal.push(gender);
+
     if (age >= 17) {
         age = 1;
     } else if (age == 4) {
@@ -63,6 +75,8 @@ function get_values(name, genderStudent, ageStudent, heightStudent, belt) {
         aux = age - 4;
         age = aux * 0.07692;
     }
+    //Add the value
+    scoreFinal.push(age);
 
     switch (colorBelt) {
         case "blanca":
@@ -84,6 +98,9 @@ function get_values(name, genderStudent, ageStudent, heightStudent, belt) {
             colorBelt = 1;
             break;
     }
+    //Add the value
+    scoreFinal.push(colorBelt);
+
     if (height >= 2.00) {
         height = 1;
     } else if (height == 0.8) {
@@ -92,7 +109,10 @@ function get_values(name, genderStudent, ageStudent, heightStudent, belt) {
         aux = height - 0.8;
         height = (aux * 100) * 0.0083;
     }
-    console.log(height);
+    //Add the value
+    scoreFinal.push(height);
+    console.log(scoreFinal);
     //Value for used in the perceptron method
-    entriesFinal.push(height);
+    entriesFinal.push(scoreFinal);
+    console.log(entriesFinal);
 }
