@@ -8,23 +8,25 @@ function addValues(){
     threshold = 0.5;
     downZero = -1;
     upZero = 1;
-    entriesValues = [7, 3, 1];
+    entriesValues = [5, 2, 1];
     exitWish = 1;
-    height = [5, -6, 3];
+    height = [0, -8, 2];
 }
 
-function perceptron(){
+function perceptron(limit){
     addValues();
-    resultZ = calculateZ();
-    erroResult = 0;
-    if (resultZ >= 0){
-        errorResult = error(upZero);
+    for (var r = 0; r <= limit; r++){
+        resultZ = calculateZ();
+        erroResult = 0;
+        if (resultZ >= 0){
+            errorResult = error(upZero);
+        }
+        else if (resultZ < 0 ){
+            errorResult = error(downZero);
+        }
+        console.log("Error: " + errorResult);
+        newHeight(errorResult);
     }
-    else if (resultZ < 0 ){
-        errorResult = error(downZero);
-    }
-    console.log("Error: " + errorResult);
-    newHeight(errorResult);
 }
 
 //yd = exit wish, yob = downZero or upZero
@@ -49,6 +51,7 @@ function newHeight(errorValue){
         wk.push( height[o] + ((threshold * errorValue) * entriesValues[o]));
     }
     console.log("New heights");
-    console.table(wk);
-    return wk;
+    height = [];
+    height = wk;
+    console.table(height);
 }
