@@ -42,7 +42,7 @@
         <div class="row">
           <div class="col-md-5 ml-auto mr-auto">
             <div class="card card-signup">
-              <form class="form" method="" action="">
+              <form class="form" method="POST" action="../assets/php/index.php">
 
                 <div class="card-header card-header-primary text-center">
                   <h2>Bienvenido</h2>                  
@@ -58,7 +58,7 @@
                       </span>
                     </div>
 
-                    <input type="email" class="form-control" placeholder="Correo electrónico">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name="email">
                   </div>
 
 
@@ -69,7 +69,7 @@
                       </span>
                     </div>
 
-                    <input type="password" class="form-control" placeholder="Contraseña">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="password" name="password">
                   </div>
                   <!-- If you want to add a checkbox to this form, uncomment this code
 
@@ -84,7 +84,7 @@
                 </div> -->
                 </div>
                 <div class="card-footer justify-content-center">
-                  <a href="prof-alumnos.html" class="btn btn-link btn-primary btn-lg">Iniciar Sesión</a>
+                  <button type="submit" class="btn btn-link btn-primary btn-lg">Iniciar Sesión</button>
                 </div>
               </form>
             </div>

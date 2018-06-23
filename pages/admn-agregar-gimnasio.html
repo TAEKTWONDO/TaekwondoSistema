@@ -43,10 +43,8 @@
                 </div>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl__link" href="">
-                    <i class="material-icons md-36">person_pin</i>
-                </a>
-                <a class="mdl__link" href="">
+               
+                <a class="mdl__link" href="index.html">
                     <i class="material-icons md-32">input</i>
                 </a>
 
@@ -83,12 +81,13 @@
                 </div>
 
                 <div class="mdl-cell mdl-cell--6-col">
+                        
                     <ul>
                         <br>
                         <h3 class="mdl-list__item-primary-content" style="text-align: center;">Agregar Gimnasio</h3>
 
                         <br>
-                        <form action="#">
+                        <form method="POST" name="add_gym" id="add_gym" action="../assets/php/admins_gym.php" autocomplete="off">
                             <!--Información general-->
                             <div>
                                 <h4 style="color: black;">
@@ -101,11 +100,12 @@
                                 <div class="valign-center">
 
                                     <img src="https://png.icons8.com/ios/50/000000/rod-barbells.png" style="padding-right: 20px; width: 10%;">
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="nombre_gym" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
-                                        <label class="mdl-textfield__label" for="nombre_gym"> Nombre Gimnasio</label>
+                                    <div class="mdl-textfield mdl-js-textfield" >
+                                        <input class="mdl-textfield__input" type="text" name="nombre_gym" id="nombre_gym" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
+                                        <label class="mdl-textfield__label"> Nombre Gimnasio</label>
                                         <span class="mdl-textfield__error">Ingresar unicamente letras</span>
                                     </div>
+                                    
 
                                 </div>
                             </div>
@@ -124,32 +124,32 @@
                                     <img src="https://png.icons8.com/ios/50/000000/order-delivered-filled.png" style="padding-right: 20px;" width="10%">
                                     <div class="mdl-textfield mdl-js-textfield">
 
-                                        <textarea class="mdl-textfield__input" data-length="120" id="direccion_gym"></textarea>
+                                        <textarea class="mdl-textfield__input" data-length="120" id="direccion_gym" name="direccion_gym"></textarea>
                                         <label class="mdl-textfield__label" for="direccion_gym"> Dirección del Gimnasio </label>
                                     </div>
                                 </div>
                                 <div class="valign-center">
                                     <img src="https://png.icons8.com/ios/50/000000/phonelink-ring-filled.png" style="padding-right: 20px;" width="10%">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="tel" id="telefono_gym" pattern="[0-9.]*">
+                                        <input class="mdl-textfield__input" type="tel" id="telefono_gym"  name="telefono_gym" pattern="[0-9.]*">
                                         <label class="mdl-textfield__label" for="telefono_gym">Telefono</label>
                                         <span class="mdl-textfield__error">Ingresar unicamente números</span>
                                     </div>
                                 </div>
                             </div>
-
+                
                             <div class="mdl-card__actions mdl-card--border">
                                 <div class="mdl-card__actions" style="text-align: right;">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
 					<i class="material-icons">send</i>
 				</button>
 
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
-					<i class="material-icons">cancel</i>
-                      </button>
+                                    <a href="admn-gimnasios.php"><button type="button"  class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
+					<i class="material-icons" >cancel</i>
+                      </button></a>
                                 </div>
                             </div>
-                        </form>
+                        </from>
                     </ul>
                 </div>
             </div>

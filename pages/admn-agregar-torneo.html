@@ -43,10 +43,7 @@
                 </div>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl__link" href="">
-                    <i class="material-icons md-36">person_pin</i>
-                </a>
-                <a class="mdl__link" href="">
+                <a class="mdl__link" href="index.html">
                     <i class="material-icons md-32">input</i>
                 </a>
 
@@ -76,7 +73,7 @@
                         <h3 class="mdl-list__item-primary-content" style="text-align: center;">Crear Torneo</h3>
 
                         <br>
-                        <form action="#">
+                        <form method="POST" name="add_gym" id="add_gym" action="../assets/php/admins_torneo.php" autocomplete="off">
                             <!--Información general-->
                             <div>
                                 <h4 style="color: black;">
@@ -90,7 +87,7 @@
 
                                     <img src="https://png.icons8.com/ios/50/000000/rod-barbells.png" style="padding-right: 20px; width: 10%;">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="nombre_torneo" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
+                                        <input class="mdl-textfield__input" type="text" id="nombre_torneo" name="nombre_torneo" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
                                         <label class="mdl-textfield__label" for="nombre_torneo"> Nombre Torneo</label>
                                         <span class="mdl-textfield__error">Ingresar unicamente letras</span>
                                     </div>
@@ -102,7 +99,7 @@
                                     <img src="https://png.icons8.com/ios/50/000000/create-new-filled.png" style="padding-right: 20px;" width="10%">
                                     <div class="mdl-textfield mdl-js-textfield">
 
-                                        <textarea class="mdl-textfield__input" data-length="120" id="descripcion_torneo"></textarea>
+                                        <textarea class="mdl-textfield__input" data-length="120" id="descripcion_torneo" name="descripcion_torneo"></textarea>
                                         <label class="mdl-textfield__label" for="descripcion_torneo"> Descripción</label>
                                     </div>
                                 </div>
@@ -111,7 +108,7 @@
 
                                     <img src="https://png.icons8.com/ios/50/000000/calendar-filled.png" style="padding-right: 20px; width: 10%;">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="date" id="fecha_torneo" onreset="if(!this.value)this.type='text'" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+                                        <input class="mdl-textfield__input" type="date" id="fecha_torneo" name="fecha_torneo" onreset="if(!this.value)this.type='text'" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
                                         <label class="mdl-textfield__label" for="date"></label>
                                     </div>
 
@@ -120,8 +117,8 @@
                                 <div class="valign-center">
                                     <img src="https://png.icons8.com/ios/50/000000/clock-filled.png" style="padding-right: 20px;" width="10%">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="nombre_torneo" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
-                                        <label class="mdl-textfield__label" for="nombre_torneo"> Hora Torneo</label>
+                                        <input class="mdl-textfield__input" type="time" id="hora_torneo" name="hora_torneo" >
+                                        <label class="mdl-textfield__label" for="nombre_torneo"></label>
                                     </div>
                                 </div>
                             </div>
@@ -131,9 +128,9 @@
 					<i class="material-icons">send</i>
 				</button>
 
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
-					<i class="material-icons">cancel</i>
-                      </button>
+                <a href="admn-torneos.php"><button type="button"  class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
+                        <i class="material-icons" >cancel</i>
+                          </button></a>
                                 </div>
                             </div>
 

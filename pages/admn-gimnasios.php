@@ -1,3 +1,18 @@
+<?php
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$bd = "taektwondo";
+
+
+$conexion = new mysqli($servidor, $usuario, $contra, $bd);
+$conexion->set_charset("utf8");
+
+if ($conexion->connect_error) {
+    die("Conexion Fallida: " . $conexion->connect_error);
+    echo "Error";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,26 +35,23 @@
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <div class="mdl-navigation mdl-layout">
-                    <a class="mdl-navigation__link mdl-js-ripple-effect" href="admn-profesores.html">
+                    <a class="mdl-navigation__link mdl-js-ripple-effect" href="admn-profesores.php">
             MAESTROS
           </a>
 
                     <a class="mdl-navigation__link" href="">
                     GIMNASIOS
                     </a>
-                    <a class="mdl-navigation__link" href="admn-torneos.html">
+                    <a class="mdl-navigation__link" href="admn-torneos.php">
                     TORNEOS
                     </a>
-                    <a class="mdl-navigation__link" href="admn-jueces.html">
+                    <a class="mdl-navigation__link" href="admn-jueces.php">
            JUECES
           </a>
                 </div>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl__link" href="">
-                    <i class="material-icons md-36">person_pin</i>
-                </a>
-                <a class="mdl__link" href="">
+                <a class="mdl__link" href="index.html">
                     <i class="material-icons md-32">input</i>
                 </a>
 
@@ -78,56 +90,24 @@
                     </div>
                 </form>
 
-                <li class="mdl-list__item">
+               <?php foreach ($conexion->query('SELECT nombre FROM gyms') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+                    
+                    <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-				<i class="material-icons  mdl-list__item-avatar">location_city</i>
-				Gimnasio 1
+				<i class="material-icons  mdl-list__item-avatar">person</i>
+				<?php echo $row['nombre'] ?>
 			</span>
-
                     <span style="color:white;">...........................................</span>
-
                     <span class="mdl-list__item-secondary-action">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">edit</i>
-				</button>
+				
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
 					<i class="material-icons">delete</i>
 				</button>
 			</span>
                 </li>
-
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-				<i class="material-icons  mdl-list__item-avatar">location_city</i>
-				Gimnasio 2 
-			</span>
-                    <span style="color:white;">...........................................</span>
-                    <span class="mdl-list__item-secondary-action">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">edit</i>
-				</button>
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">delete</i>
-				</button>
-			</span>
-                </li>
-
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-				<i class="material-icons  mdl-list__item-avatar">location_city</i>
-				Gimnasio 3
-			</span>
-                    <span style="color:white;">...........................................</span>
-
-                    <span class="mdl-list__item-secondary-action">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">edit</i>
-				</button>
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">delete</i>
-				</button>
-			</span>
-                </li>
+                    <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>
