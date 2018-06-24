@@ -20,7 +20,7 @@ Agente voz
 
 Agente graficas
     ponerlo en su pagina correspondiente
-    sacar los datos de la bd
+    de la consulta pasarlos a js
     generar el vector
 
 Percetron Simple
