@@ -6,13 +6,8 @@ $GENERO = $_POST["genero"];
 $CINTA = $_POST["cinta"];
 $PESO = $_POST["peso"];
 $ALTURA = $_POST["altura"];
-echo "\n".$NOMBRE;
-echo "\n".$APELLIDOS;
-echo "\n".$NACIMIENTO;
-echo "\n".$GENERO;
-echo "\n".$CINTA;
-echo "\n".$PESO;
-echo "\n".$ALTURA;
+session_start();
+echo $_SESSION["ID_PROFE"];
 
 $servidor = "localhost";
 $usuario = "root";
@@ -28,12 +23,12 @@ if ($conexion->connect_error) {
     echo "Error";
 } else {
     echo "Conexion correcta\n\r";
-    $sql_insert = "INSERT INTO participantes (nombre)
+    $sql_insert = "INSERT INTO ALUMNOS (APELLIDOS)
      values (\"".$NOMBRE."\"";
     try {
         echo "\nEntro";
         $alumno_insert = $conexion->query($sql_insert);
-        $sql_alumno = "SELECT * FROM participantes";
+        $sql_alumno = "SELECT * FROM alumnos";
         $res_alumno = $conexion->query($sql_alumno);
         echo "\n" . $sql_alumno;
         //header('Location: ../../pages/prof-alumnos.php');

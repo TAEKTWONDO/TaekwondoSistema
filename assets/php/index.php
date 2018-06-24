@@ -18,7 +18,7 @@ if ($conexion->connect_error) {
     $res_profe = $conexion->query($sql_profe);
     $maestros = mysqli_fetch_array($res_profe);
     //Jueces
-    $sql_juez = "SELECT * FROM JUECES WHERE correo = \"".$EMAIL."\"";
+    $sql_juez = "SELECT * FROM jueces WHERE correo = \"".$EMAIL."\"";
     $res_juez = $conexion->query($sql_juez);
     $jueces = mysqli_fetch_array($res_juez);
     //Administradores
@@ -26,19 +26,21 @@ if ($conexion->connect_error) {
     $res_admins = $conexion->query($sql_admins);
     $administrador = mysqli_fetch_array($res_admins);
     session_start();
-    if ($res_admins->num_rows > 0){
+    if ($res_admins->num_rows >= 0){
         if ($administrador[3] == $EMAIL && $administrador[2] == $CLAVE){
             header('Location: ../../pages/admn-profesores.php');
         }
     }
-    else if ($res_profe->num_rows > 0){
+    if ($res_profe->num_rows >= 0){
         if ($maestros[7] == $EMAIL && $maestros[6] == $CLAVE){
+            $_SESSION["ID_PROFE"] = ($maestros[0]);
+            echo $_SESSION["ID_PROFE"];
             header('Location: ../../pages/prof-alumnos.php');
         }
     }
-    else if ($res_juez->num_rows > 0){
+    if ($res_juez->num_rows >= 0){
         if ($jueces[5] == $EMAIL && $jueces[4] == $CLAVE){
-            header('Location: ../../pages/juez-index.php');
+            header('Location: ../../pages/juez-index.html');
         }
     }
     else {

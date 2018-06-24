@@ -78,7 +78,7 @@ if ($conexion->connect_error) {
 					</div>
 				</div>
 			</form>
-			<?php foreach ($conexion->query('SELECT nombre FROM PARTICIPANTES') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+			<?php foreach ($conexion->query('SELECT nombre FROM ALUMNOS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
 				<li class="mdl-list__item">
 			<span class="mdl-list__item-primary-content">
 				<i class="material-icons  mdl-list__item-avatar">person</i>

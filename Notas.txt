@@ -1,7 +1,7 @@
 Modulo de administrador:
     elimine los datos
     en los maestros guarde el campo de la lista de gyms  
-        admn-agregar-profesores linea 191
+        admn-agregar-profesores linea 191 asignarle el valor de id al elemento de la lista
     buscadores
 
 Modulo maestros 
@@ -13,10 +13,10 @@ Modulo maestros
     estadisticas (Mineria de datos)
 
 Modulo jueces
-    todo
+    grafica
 
 Agente voz
-    ponerlo donde va
+    nada
 
 Agente graficas
     ponerlo en su pagina correspondiente
