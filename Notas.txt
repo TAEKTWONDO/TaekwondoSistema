@@ -1,0 +1,28 @@
+Modulo de administrador:
+    elimine los datos
+    en los maestros guarde el campo de la lista de gyms  
+        admn-agregar-profesores linea 191
+    buscadores
+
+Modulo maestros 
+    eliminar alumno
+    guardar un nuevo alumno
+    participantes 
+        vector dinamico
+        buscadores
+    estadisticas (Mineria de datos)
+
+Modulo jueces
+    todo
+
+Agente voz
+    ponerlo donde va
+
+Agente graficas
+    ponerlo en su pagina correspondiente
+    sacar los datos de la bd
+    generar el vector
+
+Percetron Simple
+    sacar los datos de la bd
+    comparar esos datos con lo que se espera

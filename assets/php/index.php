@@ -33,12 +33,12 @@ if ($conexion->connect_error) {
     }
     else if ($res_profe->num_rows > 0){
         if ($maestros[7] == $EMAIL && $maestros[6] == $CLAVE){
-            header('Location: ../../pages/prof-alumnos.html');
+            header('Location: ../../pages/prof-alumnos.php');
         }
     }
     else if ($res_juez->num_rows > 0){
         if ($jueces[5] == $EMAIL && $jueces[4] == $CLAVE){
-            header('Location: ../../pages/juez-index.html');
+            header('Location: ../../pages/juez-index.php');
         }
     }
     else {

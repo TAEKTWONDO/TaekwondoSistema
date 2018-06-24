@@ -1,3 +1,18 @@
+<?php
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$bd = "taektwondo";
+
+
+$conexion = new mysqli($servidor, $usuario, $contra, $bd);
+$conexion->set_charset("utf8");
+
+if ($conexion->connect_error) {
+    die("Conexion Fallida: " . $conexion->connect_error);
+    echo "Error";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +35,11 @@
       <div class="mdl-layout__header-row">
         <!-- Title -->
         <div class="mdl-navigation mdl-layout">
-          <a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.html">
+          <a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.php">
             ALUMNOS
           </a>
           
-          <a class="mdl-navigation__link" href="prof-torneos.html">
+          <a class="mdl-navigation__link" href="prof-torneos.php">
             TORNEOS
           </a>
           <a class="mdl-navigation__link" href="">
@@ -33,10 +48,8 @@
         </div>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>      
-        <a class="mdl__link" href="">
-          <i class="material-icons md-36">person_pin</i>
-        </a>
-        <a class="mdl__link" href="">
+        
+        <a class="mdl__link" href="index.html">
             <i class="material-icons md-32">input</i>
         </a>
          
@@ -56,7 +69,8 @@
 		<h3 class="mdl-list__item-primary-content" style="text-align: center;">Estadísticas</h3>
 		
 		
-	
+		<?php foreach ($conexion->query('SELECT nombre, descripcion, fecha FROM TORNEOS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+		
 		<li class="mdl-list__item">   
 		
 			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--7-col">
@@ -64,10 +78,10 @@
 			
 				<div class="mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
 					<div class="mdl-card__supporting-text mdl-cell--12-col">
-						<h4>Copa Monarca</h4>
-						<p>Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado de Durango, Durango
-						En el gimnacion del CCH y tomará inicio a las 9 am. <br>El día 5 de Mayo del 2018
-							</p>
+					<h3><?php echo $row['nombre'] ?></h3>
+            <p><?php echo $row['descripcion'] ?>
+            </p>
+            <h4><?php echo $row['fecha'] ?></h4>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 					<div class="mdl-card__actions" style="text-align: right;">
@@ -82,31 +96,9 @@
 			</section>
 			
 		</li>
-
-		<li class="mdl-list__item">
-		
-			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--7-col">
-		
-		
-				<div class="mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-					<div class="mdl-card__supporting-text-blue mdl-cell--12-col">
-						<h4>Copa Juarez</h4>
-					<p>	Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado de Durango, Durango En el gimnacion
-						del CCH y tomará inicio a las 9 am. <br>El día 9 de Abril del 2018
-					</p>	</div>
-					<div class="mdl-card__actions mdl-card--border">
-						<div class="mdl-card__actions" style="text-align: right;">
-							<a href="#" class="mdl-button">Ver estadísticas</a>
-						</div>
-					</div>
-		
-				</div>
-		
-		
-		
-			</section>
-		
-		</li>
+		<?php
+                    }
+                ?>
 
 	</ul>
 </div>

@@ -67,7 +67,7 @@ if ($conexion->connect_error) {
                 <br><br>
 
 
-                <button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location='admn-agregar-profesores.html'">
+                <button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location='admn-agregar-profesores.php'">
 			<i class="material-icons">add</i>
 		</button>
                 <div class="mdl-tooltip mdl-tooltip--large  " data-mdl-for="tt3">

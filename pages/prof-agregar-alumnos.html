@@ -26,14 +26,14 @@
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
 				<div class="mdl-navigation mdl-layout">
-					<a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.html">
+					<a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.php">
 						ALUMNOS
 					</a>
 
-					<a class="mdl-navigation__link" href="prof-torneos.html">
+					<a class="mdl-navigation__link" href="prof-torneos.php">
 						TORNEOS
 					</a>
-					<a class="mdl-navigation__link" href="prof-estadisticas.html">
+					<a class="mdl-navigation__link" href="prof-estadisticas.php">
 						ESTADÍSTICAS
 					</a>
 				</div>
@@ -107,7 +107,7 @@
 						<h3 class="mdl-list__item-primary-content" style="text-align: center;">Agregar Alumno</h3>
 
 						<br>
-						<form action="#">
+						<form method="POST" name="add_gym" id="add_gym" action="../assets/php/prof_alumno.php" autocomplete="off">
 							<!--Información personal-->
 							<div>
 								<h4 style="color: black;">
@@ -121,7 +121,7 @@
 
 									<img src="https://png.icons8.com/android/30/000000/user.png" style="padding-right: 10px;">
 									<div class="mdl-textfield mdl-js-textfield">
-										<input class="mdl-textfield__input" type="text" id="nombre" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
+										<input class="mdl-textfield__input" type="text" id="nombre" name="nombre" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
 										<label class="mdl-textfield__label" for="nombre"> Nombre(s)</label>
 										<span class="mdl-textfield__error">Ingresar unicamente letras</span>
 									</div>
@@ -130,7 +130,7 @@
 								<div class="valign-center" style="padding-left: 39px;">
 
 									<div class="mdl-textfield mdl-js-textfield">
-										<input class="mdl-textfield__input" type="text" id="apellidos" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
+										<input class="mdl-textfield__input" type="text" id="apellidos" name="apellidos" pattern="[A-Z,a-z, , áéíóúÁÉÍÓÚÜü]*">
 										<label class="mdl-textfield__label" for="apellidos">Apellidos</label>
 										<span class="mdl-textfield__error">Ingresar unicamente letras</span>
 									</div>
@@ -142,7 +142,7 @@
 
 									<i class="material-icons" style="padding-right: 10px; font-size: 34px">cake</i>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label 	">
-										<input class="mdl-textfield__input" type="date" id="fecha_nacimiento" onreset="if(!this.value)this.type='text'" onfocus="(this.type='date')"
+										<input class="mdl-textfield__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" onreset="if(!this.value)this.type='text'" onfocus="(this.type='date')"
 										    onblur="if(!this.value)this.type='text'">
 										<label class="mdl-textfield__label" for="date"></label>
 									</div>
@@ -153,13 +153,13 @@
 									<img src="https://png.icons8.com/material/38/000000/transgender.png" style="padding-right: 10px;">
 									<!-- Simple Select with arrow -->
 									<div class="mdl-textfield mdl-js-textfield getmdl-select">
-										<input type="text" value="" class="mdl-textfield__input" id="genero" readonly>
+										<input type="text" value="" class="mdl-textfield__input" id="genero" name="genero" readonly>
 										<input type="hidden" value="" name="genero">
 										<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 										<label for="sample2" class="mdl-textfield__label">Sexo</label>
 										<ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-											<li class="mdl-menu__item" data-val="DEU">Femenino</li>
-											<li class="mdl-menu__item" data-val="BLR">Masculino</li>
+											<li class="mdl-menu__item" data-val="F">Femenino</li>
+											<li class="mdl-menu__item" data-val="H">Masculino</li>
 										</ul>
 									</div>
 								</div>
@@ -179,13 +179,17 @@
 
 									<!-- Simple Select with arrow -->
 									<div class="mdl-textfield mdl-js-textfield getmdl-select">
-										<input type="text" value="" class="mdl-textfield__input" id="cinta" readonly>
+										<input type="text" value="" class="mdl-textfield__input" id="cinta" name="cinta" >
 										<input type="hidden" value="" name="cinta">
 										<i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
 										<label for="sample2" class="mdl-textfield__label">Cinta</label>
 										<ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-											<li class="mdl-menu__item" data-val="DEU">Blanca</li>
-											<li class="mdl-menu__item" data-val="BLR">Blanca Avanzada</li>
+											<li class="mdl-menu__item" data-val="blanca">Blanca</li>
+											<li class="mdl-menu__item" data-val="amarilla">Amarrilla</li>
+											<li class="mdl-menu__item" data-val="verde">Verde</li>
+											<li class="mdl-menu__item" data-val="azul">Azul</li>
+											<li class="mdl-menu__item" data-val="rojo">Rojo</li>
+											<li class="mdl-menu__item" data-val="negra">Negra</li>
 										</ul>
 									</div>
 								</div>
@@ -203,30 +207,30 @@
 								<div class="valign-center">
 									<img src="https://png.icons8.com/material/38/000000/kitchen-scales.png">
 									<div class="mdl-textfield mdl-js-textfield">
-										<input class="mdl-textfield__input" type="text" id="nombre" pattern="[0-9.]*">
-										<label class="mdl-textfield__label" for="nombre"> Peso en kilogramos</label>
+										<input class="mdl-textfield__input" type="text" id="peso"  name="peso" pattern="[0-9.]*">
+										<label class="mdl-textfield__label" for="peso"> Peso en kilogramos</label>
 										<span class="mdl-textfield__error">Ingresar unicamente números</span>
 									</div>
 								</div>
 								<div class="valign-center">
 									<img src="https://png.icons8.com/ios/38/000000/height-filled.png">
 									<div class="mdl-textfield mdl-js-textfield">
-										<input class="mdl-textfield__input" type="text" id="nombre" pattern="[0-9.]*">
-										<label class="mdl-textfield__label" for="nombre">Altura en metros</label>
+										<input class="mdl-textfield__input" type="text" id="altura" name="altura" pattern="[0-9.]*">
+										<label class="mdl-textfield__label" for="altura">Altura en metros</label>
 										<span class="mdl-textfield__error">Ingresar unicamente números</span>
 									</div>
 								</div>
 								<div class="mdl-card__actions mdl-card--border">
-									<div class="mdl-card__actions" style="text-align: right;">
-										<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-											<i class="material-icons">send</i>
-										</button>
-
-										<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-											<i class="material-icons">cancel</i>
-										</button>
+										<div class="mdl-card__actions" style="text-align: right;">
+											<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
+							<i class="material-icons">send</i>
+						</button>
+		
+											<a href="prof-alumnos.php"><button type="button"  class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
+							<i class="material-icons" >cancel</i>
+							  </button></a>
+										</div>
 									</div>
-								</div>
 							</div>
 						</form>
 					</ul>

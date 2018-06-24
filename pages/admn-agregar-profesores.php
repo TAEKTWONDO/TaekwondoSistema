@@ -1,3 +1,18 @@
+<?php
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$bd = "taektwondo";
+
+
+$conexion = new mysqli($servidor, $usuario, $contra, $bd);
+$conexion->set_charset("utf8");
+
+if ($conexion->connect_error) {
+    die("Conexion Fallida: " . $conexion->connect_error);
+    echo "Error";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,17 +42,17 @@
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <div class="mdl-navigation mdl-layout">
-                    <a class="mdl-navigation__link mdl-js-ripple-effect" href="admn-profesores.html">
+                    <a class="mdl-navigation__link mdl-js-ripple-effect" href="admn-profesores.php">
 						MAESTROS
 					</a>
 
-                    <a class="mdl-navigation__link" href="admn-gimnasios.html">
+                    <a class="mdl-navigation__link" href="admn-gimnasios.php">
 						GIMNASIOS
 					</a>
-                    <a class="mdl-navigation__link" href="admn-torneos.html">
+                    <a class="mdl-navigation__link" href="admn-torneos.php">
 						TORNEOS
 					</a>
-                    <a class="mdl-navigation__link" href="admn-jueces.html">
+                    <a class="mdl-navigation__link" href="admn-jueces.php">
            JUECES
           </a>
                 </div>
@@ -171,10 +186,14 @@
                                         <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                         <label for="sample3" class="mdl-textfield__label">Gimnasio</label>
                                         <ul for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                            <li class="mdl-menu__item" data-val="DEU">Prueba 1</li>
-                                            <li class="mdl-menu__item" data-val="BLR">Prueba 2</li>
-                                            <li class="mdl-menu__item" data-val="BLR">Prueba 3</li>
-                                        </ul>
+                                        <?php foreach ($conexion->query('SELECT nombre, id FROM GYMS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+                
+                                            <li class="mdl-menu__item" data-val=><?php echo $row['nombre'] ?> 1</li>
+                                            
+                                       
+                                        <?php
+                    }
+                ?> </ul>
                                     </div>
                                 </div>
                             </div>
