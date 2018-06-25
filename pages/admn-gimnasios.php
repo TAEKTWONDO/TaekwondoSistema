@@ -90,7 +90,7 @@ if ($conexion->connect_error) {
                     </div>
                 </form>
 
-               <?php foreach ($conexion->query('SELECT nombre FROM gyms') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+               <?php foreach ($conexion->query('SELECT nombre, id_gym FROM gyms') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                     
                     <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
@@ -100,9 +100,9 @@ if ($conexion->connect_error) {
                     <span style="color:white;">...........................................</span>
                     <span class="mdl-list__item-secondary-action">
 				
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+                    <a href="../assets/php/admn-delete-gym.php?id='+<?php echo $row['id_gym'] ?>'" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
 					<i class="material-icons">delete</i>
-				</button>
+				</button></a>
 			</span>
                 </li>
                     <?php

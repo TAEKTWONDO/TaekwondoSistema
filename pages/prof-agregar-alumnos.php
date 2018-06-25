@@ -1,3 +1,18 @@
+<?php
+$servidor = "localhost";
+$usuario = "root";
+$contra = "";
+$bd = "taektwondo";
+
+
+$conexion = new mysqli($servidor, $usuario, $contra, $bd);
+$conexion->set_charset("utf8");
+
+if ($conexion->connect_error) {
+    die("Conexion Fallida: " . $conexion->connect_error);
+    echo "Error";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +55,7 @@
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
 				
-				<a class="mdl__link" href="">
+				<a class="mdl__link" href="index.html">
 					<i class="material-icons md-32">input</i>
 				</a>
 
@@ -140,9 +155,9 @@
 
 									<i class="material-icons" style="padding-right: 10px; font-size: 34px">cake</i>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label 	">
-										<input class="mdl-textfield__input" type="date" id="fecha_nacimiento" name="fecha_nacimiento" onreset="if(!this.value)this.type='text'" onfocus="(this.type='date')"
-										    onblur="if(!this.value)this.type='text'">
-										<label class="mdl-textfield__label" for="fecha_nacimiento"></label>
+										<input class="mdl-textfield__input" type="number" id="fecha_nacimiento" name="fecha_nacimiento">
+										<label class="mdl-textfield__label" for="fecha_nacimiento">Edad</label>
+										<span class="mdl-textfield__error">Ingresar unicamente letras</span>
 									</div>
 								</div>
 
@@ -191,7 +206,7 @@
 										</ul>
 									</div>
 								</div>
-							</div>
+								</div>
 							<br>
 							<!--Información médica-->
 							<div>

@@ -1,8 +1,6 @@
 <?php
-$NOMBRE_TORNEO = $_POST["nombre_torneo"];
-$DESCRIPCION = $_POST["descripcion_torneo"];
-$FECHA = $_POST["fecha_torneo"];
-$HORA_TORNEO = $_POST["hora_torneo"];
+$ID = $_GET["id"];
+echo $ID;
 
 $servidor = "localhost";
 $usuario = "root";
@@ -17,15 +15,11 @@ if ($conexion->connect_error) {
     die("Conexion Fallida: " . $conexion->connect_error);
     echo "Error";
 } else {
-    echo "Conexion correcta\n";
-    $sql_insert = "INSERT INTO TORNEOS (nombre, descripcion, hora, fecha)
-     values (\"".$NOMBRE_TORNEO."\", \"".$DESCRIPCION."\", \"".$HORA_TORNEO."\",  \"".$FECHA."\")";
-    try {
+    echo "Conexion correcta\n\r";
+    $sql_insert = "DELETE FROM TORNEOS WHERE ID_TORNEO =".$ID;
+     try {
         echo "\nEntro";
         $torneo_insert = $conexion->query($sql_insert);
-        $sql_torneo = "SELECT * FROM TORNEOS";
-        $res_torneo = $conexion->query($sql_torneo);
-        echo "\n" . $sql_torneo;
         header('Location: ../../pages/admn-torneos.php');
         
     } catch (Exception $e) {

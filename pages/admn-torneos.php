@@ -83,7 +83,7 @@ if ($conexion->connect_error) {
 
                 <h3 class="mdl-list__item-primary-content" style="text-align: center;">Próximos torneos</h3>
 
-            <?php foreach ($conexion->query('SELECT nombre, descripcion, fecha FROM TORNEOS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+            <?php foreach ($conexion->query('SELECT nombre, descripcion, fecha, id_torneo FROM TORNEOS ORDER BY FECHA DESC') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                 <li class="mdl-list__item">
 
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--7-col">
@@ -104,9 +104,9 @@ if ($conexion->connect_error) {
                     <i class="material-icons">visibility</i>
                 </button>
                 
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+                <a href="../assets/php/admn-delete-torneo.php?id='+<?php echo $row['id_torneo'] ?>'" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
                     <i class="material-icons">delete</i>
-                </button>
+                </button></a>
 
             </div>
         </div>

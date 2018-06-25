@@ -12,6 +12,8 @@ if ($conexion->connect_error) {
     die("Conexion Fallida: " . $conexion->connect_error);
     echo "Error";
 }
+session_start();
+//echo $_SESSION["ID_PROFE"]; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +67,7 @@ if ($conexion->connect_error) {
 				<br>
 
 
-				<button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location='prof-agregar-alumnos.html'">
+				<button id="tt3" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location='prof-agregar-alumnos.php'">
 					<i class="material-icons">add</i>
 				</button>
 				<div class="mdl-tooltip mdl-tooltip--large  " data-mdl-for="tt3">
@@ -88,7 +90,7 @@ if ($conexion->connect_error) {
 						</div>
 					</div>
 				</form>
-				<?php foreach ($conexion->query('SELECT nombre FROM ALUMNOS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+				<?php foreach ($conexion->query('SELECT nombre, id_alumno FROM ALUMNOS WHERE ID_MAESTRO = '. $_SESSION["ID_PROFE"]) as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                     <li class="mdl-list__item">
 					<span class="mdl-list__item-primary-content">
 						<i class="material-icons  mdl-list__item-avatar">person</i>
@@ -98,9 +100,9 @@ if ($conexion->connect_error) {
 					<span style="color:white;">...........................................</span>
 
 					<span class="mdl-list__item-secondary-action">
-						<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+						<a href="../assets/php/prof-delete.php?id='+<?php echo $row['id_alumno'] ?>'" ><button   class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
 							<i class="material-icons">delete</i>
-						</button>
+						</button></a>
 					</span>
 				</li>
 				<?php

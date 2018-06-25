@@ -1,28 +1,28 @@
 Modulo de administrador:
-    elimine los datos
-    en los maestros guarde el campo de la lista de gyms  
-        admn-agregar-profesores linea 191 asignarle el valor de id al elemento de la lista
     buscadores
 
 Modulo maestros 
-    eliminar alumno
-    guardar un nuevo alumno
     participantes 
         vector dinamico
         buscadores
     estadisticas (Mineria de datos)
 
 Modulo jueces
-    grafica
+    Agente graficas
 
 Agente voz
     nada
 
 Agente graficas
-    ponerlo en su pagina correspondiente
-    de la consulta pasarlos a js
-    generar el vector
+    obtener datos de bd 
+    pasarlos a ajax
+    trabajarlos en js (simple)
+    trabajarlos en js (perceptron simple)
+    trabajarlos en js (perceptron multicapa
 
 Percetron Simple
     sacar los datos de la bd
     comparar esos datos con lo que se espera
+
+Percetron multicapa
+    todo y su cora too

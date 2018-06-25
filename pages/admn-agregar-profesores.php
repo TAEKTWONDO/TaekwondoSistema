@@ -188,7 +188,7 @@ if ($conexion->connect_error) {
                                         <ul for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                         <?php foreach ($conexion->query('SELECT nombre, id_gym FROM GYMS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                 
-                                            <li class="mdl-menu__item" data-val=><?php echo $row['nombre'] ?> 1</li>
+                                            <li class="mdl-menu__item" data-val=<?php echo $row['id_gym'] ?> ><?php echo $row['nombre'] ?> 1</li>
                                             
                                        
                                         <?php

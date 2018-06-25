@@ -27,7 +27,7 @@ if ($conexion->connect_error) {
         $sql_juez = "SELECT * FROM JUECES";
         $res_juez = $conexion->query($sql_juez);
         echo "\n" . $sql_juez;
-        header('Location: ../../pages/admn-agregar-jueces.html');
+        header('Location: ../../pages/admn-jueces.php');
         
     } catch (Exception $e) {
         echo("Error al agregar juez: " . $e);

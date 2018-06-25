@@ -67,7 +67,7 @@ if ($conexion->connect_error) {
   <ul>
 		
 		<h3 class="mdl-list__item-primary-content" style="text-align: center;">Próximos torneos</h3>
-		<?php foreach ($conexion->query('SELECT nombre, descripcion, fecha FROM TORNEOS') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+		<?php foreach ($conexion->query('SELECT nombre, descripcion, fecha FROM TORNEOS ORDER BY FECHA DESC') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
 			<li class="mdl-list__item">   
 		
 		<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--7-col">
