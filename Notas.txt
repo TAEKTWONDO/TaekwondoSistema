@@ -14,14 +14,14 @@ Agente voz
     nada
 
 Agente graficas
-    obtener datos de bd 
     pasarlos a ajax
     trabajarlos en js (simple)
     trabajarlos en js (perceptron simple)
     trabajarlos en js (perceptron multicapa
 
 Percetron Simple
-    sacar los datos de la bd
+    pasarlos a ajax
+    trabajarlos en js
     comparar esos datos con lo que se espera
 
 Percetron multicapa
