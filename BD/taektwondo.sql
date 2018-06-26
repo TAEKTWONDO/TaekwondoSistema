@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2018 a las 19:34:03
+-- Tiempo de generación: 26-06-2018 a las 14:37:56
 -- Versión del servidor: 5.7.14
--- Versión de PHP: 5.6.25
+-- Versión de PHP: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,19 +29,67 @@ SET time_zone = "+00:00";
 CREATE TABLE `administradores` (
   `ID_ADMINISTRADOR` int(10) NOT NULL,
   `NOMBRE` varchar(200) NOT NULL,
-  `CONTRASENA` varchar(10) NOT NULL
+  `CONTRASENA` varchar(10) NOT NULL,
+  `CORREO` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`ID_ADMINISTRADOR`, `NOMBRE`, `CONTRASENA`, `CORREO`) VALUES
+(1, 'Jesus Juarez', 'gatoman1', 'gatoman195@gmail.com'),
+(2, 'Jesus Daniel', 'jdanman', 'jp.perez.gracia@gmail.com'),
+(3, 'Ana Karem', 'karem', 'karem@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cintas`
+-- Estructura de tabla para la tabla `alumnos`
 --
 
-CREATE TABLE `cintas` (
-  `ID_CINTA` int(10) NOT NULL,
-  `NOMBRE` varchar(200) NOT NULL
+CREATE TABLE `alumnos` (
+  `ID_ALUMNO` int(11) NOT NULL,
+  `NOMBRE` varchar(200) NOT NULL,
+  `APELLIDOS` varchar(200) NOT NULL,
+  `CINTA` varchar(20) NOT NULL,
+  `EDAD` int(3) NOT NULL,
+  `ALTURA` float NOT NULL,
+  `SEXO` varchar(1) NOT NULL,
+  `ID_MAESTRO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`ID_ALUMNO`, `NOMBRE`, `APELLIDOS`, `CINTA`, `EDAD`, `ALTURA`, `SEXO`, `ID_MAESTRO`) VALUES
+(2, 'Alexandra \r\n', '-', 'Blanca', 10, 1.22, 'F', 19),
+(3, 'Ashley\r\n', '-', 'Blanca', 4, 0.8, 'F', 20),
+(4, 'Leonardo\r\n', '-', 'Blanca', 4, 0.8, 'M', 20),
+(5, 'Valeria\r\n', '-', 'Blanca', 4, 0.85, 'F', 20),
+(6, 'Densel\r\n', '-', 'Blanca', 6, 0.8, 'M', 20),
+(7, 'Yosgar\r\n', '-', 'Rojo', 12, 1.52, 'M', 20),
+(8, 'Valentina\r\n', '-', 'Rojo', 8, 1.25, 'F', 21),
+(9, 'Leslie\r\n', '-', 'Verde', 9, 1.45, 'F', 20),
+(10, 'Andrea\r\n', '-', 'Amarilla', 8, 1.3, 'F', 21),
+(11, 'Karla\r\n', '-', 'Amarilla', 10, 1.45, 'F', 20),
+(12, 'Maximiliano\r\n', '-', 'Amarilla', 9, 1.3, 'M', 20),
+(13, 'Ángel\r\n', '-', 'Blanca', 12, 1.45, 'M', 20),
+(14, 'Óscar\r\n', '-', 'Blanca', 12, 1.67, 'M', 20),
+(15, 'América\r\n', '-', 'Azul', 16, 1.7, 'F', 21),
+(16, 'Karim\r\n', '-', 'Azul', 10, 1.35, 'M', 21),
+(17, 'Maggie\r\n', '-', 'Amarilla', 15, 1.5, 'F', 21),
+(18, 'Aurora\r\n', '-', 'Rojo', 8, 1.2, 'F', 22),
+(19, 'Debian\r\n', '-', 'Rojo', 7, 1, 'M', 22),
+(20, 'César\r\n', '-', 'Blanca', 10, 1.25, 'M', 21),
+(21, 'Alán\r\n', '-', 'Blanca', 7, 0.9, 'M', 19),
+(22, 'Valeria Fuentes\r\n', '-', 'Negra', 19, 1.65, 'F', 21),
+(23, 'Karla\r\n', '-', 'Negra', 21, 1.65, 'F', 20),
+(24, 'Leonardo\r\n', '-', 'Blanca', 12, 1.5, 'M', 20),
+(25, 'Ericka\r\n', '-', 'Azul', 18, 1.6, 'F', 22),
+(26, 'Tadeo\r\n', '-', 'Blanca', 12, 1.5, 'M', 20),
+(27, 'Tadeo\r\n', '-', 'Verde', 11, 1.4, 'M', 20);
 
 -- --------------------------------------------------------
 
@@ -52,22 +100,61 @@ CREATE TABLE `cintas` (
 CREATE TABLE `concursantes` (
   `ID_CONCURSANTE` int(10) NOT NULL,
   `ID_TORNEO` int(10) NOT NULL,
-  `ID_MAESTRO` int(10) NOT NULL,
-  `ID_PARTICIPANTE` int(10) NOT NULL
+  `ID_ALUMNO` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `concursantes`
+--
+
+INSERT INTO `concursantes` (`ID_CONCURSANTE`, `ID_TORNEO`, `ID_ALUMNO`) VALUES
+(2, 3, 5);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `gym's`
+-- Estructura de tabla para la tabla `gyms`
 --
 
-CREATE TABLE `gym's` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE `gyms` (
+  `ID_GYM` int(11) NOT NULL,
   `NOMBRE` varchar(200) NOT NULL,
   `DIRECCION` varchar(200) NOT NULL,
   `TELEFONO` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `gyms`
+--
+
+INSERT INTO `gyms` (`ID_GYM`, `NOMBRE`, `DIRECCION`, `TELEFONO`) VALUES
+(20, 'Memos', 'Calle Rosa #222', '8143399'),
+(22, 'ActiveBody', 'Calle Mercados #600', '6184479528'),
+(23, 'Northwest', 'Francisco Villa #415', '8497588'),
+(24, 'Strong', 'Japon #256', '8336794');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jueces`
+--
+
+CREATE TABLE `jueces` (
+  `ID_JUEZ` int(11) NOT NULL,
+  `NOMBRE` varchar(200) NOT NULL,
+  `APELLIDOS` varchar(200) NOT NULL,
+  `TELEFONO` int(17) NOT NULL,
+  `CONTRASENA` varchar(10) NOT NULL,
+  `CORREO` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `jueces`
+--
+
+INSERT INTO `jueces` (`ID_JUEZ`, `NOMBRE`, `APELLIDOS`, `TELEFONO`, `CONTRASENA`, `CORREO`) VALUES
+(7, 'Marco', 'Reyes Polo', 618456223, 'marco', 'Polo@gmail.com'),
+(6, 'Karem', 'Reyes', 618469745, 'ana', 'karem@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -76,35 +163,94 @@ CREATE TABLE `gym's` (
 --
 
 CREATE TABLE `maestros` (
-  `ID_MAESTRO` int(10) NOT NULL,
+  `ID_MAESTRO` int(11) NOT NULL,
   `NOMBRE` varchar(200) NOT NULL,
+  `APELLIDOS` varchar(200) NOT NULL,
   `DIRECCION` varchar(200) NOT NULL,
   `TELEFONO` varchar(12) NOT NULL,
-  `ID_GYM` int(11) NOT NULL,
-  `CONTRASENA` varchar(10) NOT NULL
+  `ID_GYM` int(11) DEFAULT NULL,
+  `CONTRASENA` varchar(10) NOT NULL,
+  `CORREO` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maestros`
+--
+
+INSERT INTO `maestros` (`ID_MAESTRO`, `NOMBRE`, `APELLIDOS`, `DIRECCION`, `TELEFONO`, `ID_GYM`, `CONTRASENA`, `CORREO`) VALUES
+(19, 'Julio', 'Verne', 'Cobre #45', '6184443322', 22, 'julio', 'Verne@gmail.com'),
+(20, 'Jose', 'Ruiz Reyna', 'Estroncio #660', '6184667788', 20, 'jose', 'Ruiz@gmail.com'),
+(21, 'Carlos', 'Leon Sanches', 'México #56', '8123456', 23, 'carlos', 'leon@gmail.com'),
+(22, 'Ana', 'Sanches', 'Bronce #55', '8447755', 24, 'ana', 'sanches@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `participantes`
+-- Estructura de tabla para la tabla `puntuaciones`
 --
 
-CREATE TABLE `participantes` (
-  `ID_PARTICIPANTE` int(10) NOT NULL,
-  `NOMBRE` varchar(200) NOT NULL,
-  `APELLIDOS` varchar(200) NOT NULL,
-  `ID_CINTA` int(10) NOT NULL,
-  `EDAD` int(2) NOT NULL,
-  `ALTURA` float NOT NULL,
-  `PESO` float NOT NULL,
-  `SEXO` varchar(1) NOT NULL,
-  `ID_MAESTRO` int(10) NOT NULL,
-  `ID_GYM` int(11) NOT NULL,
-  `CONTRASENA` varchar(10) NOT NULL,
-  `CIUDAD` varchar(200) NOT NULL,
-  `ESTADO` varchar(200) NOT NULL
+CREATE TABLE `puntuaciones` (
+  `ID_PUNTUACION` int(11) NOT NULL,
+  `ID_ALUMNO` int(11) NOT NULL,
+  `PUNTUACION` int(10) NOT NULL,
+  `AMONESTACIONES` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `puntuaciones`
+--
+
+INSERT INTO `puntuaciones` (`ID_PUNTUACION`, `ID_ALUMNO`, `PUNTUACION`, `AMONESTACIONES`) VALUES
+(1, 4, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `resultadospreparacion`
+--
+
+CREATE TABLE `resultadospreparacion` (
+  `id_resultadopreparacion` int(11) NOT NULL,
+  `gender` float NOT NULL,
+  `age` float NOT NULL,
+  `belt` float NOT NULL,
+  `height` float NOT NULL,
+  `result(Ps)` float NOT NULL,
+  `whishresult` float NOT NULL,
+  `result(PM)` float NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `resultadospreparacion`
+--
+
+INSERT INTO `resultadospreparacion` (`id_resultadopreparacion`, `gender`, `age`, `belt`, `height`, `result(Ps)`, `whishresult`, `result(PM)`) VALUES
+(1, 0, 0.46132, 0, 0.3486, -0.122962, 0, 0),
+(2, 0, 0, 0, 0, 0, 1, 0),
+(3, 1, 0, 0, 0, 1, 1, 0),
+(4, 0, 0, 0, 0.0415, 0.166, -1, 0),
+(5, 1, 0.1538, 0, 0, -0.206746, 0, 0),
+(6, 1, 0.61508, 0.8, 0.5976, -0.93024, 0, 0),
+(7, 0, 0.30756, 0.8, 0.3735, 0.63352, -1, 0),
+(8, 0, 0.38444, 0.4, 0.5395, 0.481624, 1, 0),
+(9, 0, 0.30756, 0.2, 0.415, 0.212886, 1, 0),
+(10, 0, 0.46132, 0.2, 0.5395, 0.499069, 1, 0),
+(11, 1, 0.38444, 0.2, 0.415, -0.335206, 0, 0),
+(12, 1, 0.61508, 0, 0.5395, -0.258565, 0, 0),
+(13, 1, 0.61508, 0, 0.7221, -2.03224, -1, 0),
+(14, 0, 0.9226, 0.6, 0.747, -3.1928, -1, 0),
+(15, 1, 0.46132, 0.6, 0.4565, -0.66456, 1, 0),
+(16, 0, 0.84572, 0.2, 0.581, -2.41504, -1, 0),
+(17, 0, 0.30756, 0.8, 0.332, 0.42752, 0, 0),
+(18, 1, 0.23068, 0.8, 0.166, 0.41856, 1, 0),
+(19, 1, 0.46132, 0, 0.3735, -2.19656, -1, 0),
+(20, 1, 0.23068, 0, 0.083, 0.08656, 0, 0),
+(21, 0, 1, 1, 0.7055, -3.178, -1, 0),
+(22, 0, 1, 1, 0.7055, -0.68027, 1, 0),
+(23, 1, 0.61508, 0, 0.581, -2.59664, -1, 0),
+(24, 0, 1, 0.6, 0.664, -0.542208, 0, 0),
+(25, 1, 0.61508, 0, 0.581, -0.0228134, 0, 0),
+(26, 1, 0.5382, 0.4, 0.498, -0.664768, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,9 +261,18 @@ CREATE TABLE `participantes` (
 CREATE TABLE `torneos` (
   `ID_TORNEO` int(10) NOT NULL,
   `NOMBRE` varchar(200) NOT NULL,
-  `LUGAR` varchar(200) NOT NULL,
+  `DESCRIPCION` varchar(1000) NOT NULL,
+  `HORA` time(6) DEFAULT NULL,
   `FECHA` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `torneos`
+--
+
+INSERT INTO `torneos` (`ID_TORNEO`, `NOMBRE`, `DESCRIPCION`, `HORA`, `FECHA`) VALUES
+(3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02'),
+(4, 'Copa Corona', 'orneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-08');
 
 --
 -- Índices para tablas volcadas
@@ -130,16 +285,136 @@ ALTER TABLE `administradores`
   ADD PRIMARY KEY (`ID_ADMINISTRADOR`);
 
 --
--- Indices de la tabla `cintas`
+-- Indices de la tabla `alumnos`
 --
-ALTER TABLE `cintas`
-  ADD PRIMARY KEY (`ID_CINTA`);
+ALTER TABLE `alumnos`
+  ADD PRIMARY KEY (`ID_ALUMNO`),
+  ADD KEY `ID_MAESTRO` (`ID_MAESTRO`);
 
 --
 -- Indices de la tabla `concursantes`
 --
 ALTER TABLE `concursantes`
-  ADD PRIMARY KEY (`ID_CONCURSANTE`);
+  ADD PRIMARY KEY (`ID_CONCURSANTE`),
+  ADD KEY `ID_TORNEO` (`ID_TORNEO`),
+  ADD KEY `ID_PARTICIPANTE` (`ID_ALUMNO`);
+
+--
+-- Indices de la tabla `gyms`
+--
+ALTER TABLE `gyms`
+  ADD PRIMARY KEY (`ID_GYM`);
+
+--
+-- Indices de la tabla `jueces`
+--
+ALTER TABLE `jueces`
+  ADD PRIMARY KEY (`ID_JUEZ`);
+
+--
+-- Indices de la tabla `maestros`
+--
+ALTER TABLE `maestros`
+  ADD PRIMARY KEY (`ID_MAESTRO`),
+  ADD KEY `ID_GYM` (`ID_GYM`);
+
+--
+-- Indices de la tabla `puntuaciones`
+--
+ALTER TABLE `puntuaciones`
+  ADD PRIMARY KEY (`ID_PUNTUACION`),
+  ADD KEY `id_participante` (`ID_ALUMNO`),
+  ADD KEY `ID_ALUMNO` (`ID_ALUMNO`);
+
+--
+-- Indices de la tabla `resultadospreparacion`
+--
+ALTER TABLE `resultadospreparacion`
+  ADD PRIMARY KEY (`id_resultadopreparacion`);
+
+--
+-- Indices de la tabla `torneos`
+--
+ALTER TABLE `torneos`
+  ADD PRIMARY KEY (`ID_TORNEO`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `ID_ADMINISTRADOR` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `ID_ALUMNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT de la tabla `concursantes`
+--
+ALTER TABLE `concursantes`
+  MODIFY `ID_CONCURSANTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `gyms`
+--
+ALTER TABLE `gyms`
+  MODIFY `ID_GYM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `jueces`
+--
+ALTER TABLE `jueces`
+  MODIFY `ID_JUEZ` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `maestros`
+--
+ALTER TABLE `maestros`
+  MODIFY `ID_MAESTRO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `puntuaciones`
+--
+ALTER TABLE `puntuaciones`
+  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `resultadospreparacion`
+--
+ALTER TABLE `resultadospreparacion`
+  MODIFY `id_resultadopreparacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `torneos`
+--
+ALTER TABLE `torneos`
+  MODIFY `ID_TORNEO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`ID_MAESTRO`) REFERENCES `maestros` (`ID_MAESTRO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `concursantes`
+--
+ALTER TABLE `concursantes`
+  ADD CONSTRAINT `concursantes_ibfk_1` FOREIGN KEY (`ID_TORNEO`) REFERENCES `torneos` (`ID_TORNEO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `concursantes_ibfk_2` FOREIGN KEY (`ID_ALUMNO`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `maestros`
+--
+ALTER TABLE `maestros`
+  ADD CONSTRAINT `maestros_ibfk_1` FOREIGN KEY (`ID_GYM`) REFERENCES `gyms` (`ID_GYM`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `puntuaciones`
+--
+ALTER TABLE `puntuaciones`
+  ADD CONSTRAINT `puntuaciones_ibfk_1` FOREIGN KEY (`ID_ALUMNO`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
