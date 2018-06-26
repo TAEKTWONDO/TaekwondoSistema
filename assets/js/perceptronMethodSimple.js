@@ -5,7 +5,7 @@ var exitWish = new Array;
 var height = new Array;
 
 function addValues(){
-    threshold = 0.5;
+    threshold = 0.5; //Bias
     downZero = -1;
     upZero = 1;
     entriesValues = [1, 0.5382, 0.4, 0.498];
