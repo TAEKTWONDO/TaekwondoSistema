@@ -40,7 +40,7 @@ if ($conexion->connect_error) {
     }
     if ($res_juez->num_rows >= 0){
         if ($jueces[5] == $EMAIL && $jueces[4] == $CLAVE){
-            header('Location: ../../pages/juez-index.html');
+            header('Location: ../../pages/juez/juez-index.html');
         }
     }
     else {
