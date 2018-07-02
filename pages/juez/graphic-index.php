@@ -14,8 +14,8 @@
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 	<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
 	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
-	<script language="javascript" type="text/javascript" src="../../assets/js/voz.js"></script>
-
+	<script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="data_concursantes.js" type="text/javascript"></script>
 	<title>
 		Karem
 	</title>
@@ -28,8 +28,11 @@
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
 				<div class="mdl-navigation mdl-layout">
-					<a class="mdl-navigation__link mdl-js-ripple-effect" href="juez-index.html">
-						INICIO
+					<a class="mdl-navigation__link mdl-js-ripple-effect"  onclick="graphic()">
+						INICIAR
+					</a>
+					<a class="mdl-navigation__link mdl-js-ripple-effect"  onclick="enviarGanadores()">
+						ANUNCIAR GANADORES
 					</a>
 
 					
@@ -37,22 +40,18 @@
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
 			
-				<a class="mdl__link" href="index.html">
+				<a class="mdl__link" href="../index.html">
 					<i class="material-icons md-32">input</i>
 				</a>
 
 			</div>
 		</header>
-
-
+		
 		<!--Contains-->
 		<br>
 		<br>
 		<br>
 		<br>
-		<div style="text-align: right">
-			<a href="#" onclick="enviarGanadores()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGray mdl-js-ripple-effect mdl-checkbox__input aling-rights">Enviar a premiación</a>
-		</div>
 		<div class="tournament">
 			<script src="tournament-bracket.js">
 			</script>
