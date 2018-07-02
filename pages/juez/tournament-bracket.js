@@ -1,33 +1,71 @@
-
+var misResultados;
+var arrayNames = new Array();
+var sizeArray = 0;
+var participants = new Array();
+var cola = new Array();
+var colaGanadores = new Array();
+var $tournament, $winner;
+var xmlhttp;
 
 $(document).ready(function () {
     $('#remove').on('click', function () {
         console.log('removed');
     });
 });
+//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////BD////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+console.log("BD");
+//Solicitud al servidor
+xmlhttp = new XMLHttpRequest();
+//Si la solicitud fue exitosa...
+xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        misResultados = JSON.parse(this.responseText);
+        arrayNames = misResultados;
+        //console.table(misResultados);
+        if (sizeArray == 0){
+        for (i in misResultados) {
+            //arrayNames.push(misResultados[i]);
+            // console.log(misResultados[i]);
+            sizeArray += 1;
+        }
+        //console.log(sizeArray);
+    }
+    }
+    return sizeArray;
+};
 
-var $tournament = $(".tournament"),
+//Parametros de la solicitud (Metodo, URL, async)
+xmlhttp.open("GET", "load_concursantes.php", true);
+//Solicita el archivo al servidor
+xmlhttp.send();
+
+$tournament = $(".tournament"),
     $bracket = $('<ul class="bracket"><li></li><li></li></ul>');
-var cola;
-cola = new Array;
-var colaGanadores;
-cola = new Array;
-//Solo mandar los nombres ordenados, y en base a eso, genera la gráfica segun los
-//que sean
+//////////////////////////////////////////////////////////////////////////
+/////////////////////////Participantes////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
-//Si es impar, agregar un espacio solo para evitar problems
-var participants = [
-    "Melanie Rodriguez","",
-    "Daniela Pérez",
-    "Karem Reyes",
-    "Angelica Vazquez",
-    "Veronica Arciniega",
-    "Alejandra Morales",
-    "Corazón Solis",
-   
-    
-];
+
+participants.push("Melanie Rodriguez");
+participants.push("");
+participants.push("Daniela Pérez");
+participants.push("Karem Reyes");
+participants.push("Angelica Vazquez");
+participants.push("Veronica Arciniega");
+participants.push("Alejandra Morales");
+participants.push("Corazón Solis");
+//////////////////////////////////////////////////////////////////////////
+//////////////////////Para obtener los pesos//////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
 
 function buildBracket($el, p1, p2) {
     if (!p1 && !p2) {
@@ -121,9 +159,8 @@ for (var i = 0; i < participants.length; i++) {
 
 
 function changeToButtons() {
-
     $(".bracket").each(function () {
-        var $winner = $(this).children(".winner");
+        $winner = $(this).children(".winner");
         if ($winner.length === 0) {
             var $winners = $(this)
                 .children("li")
@@ -227,5 +264,4 @@ function soundWon(resultadoName) {
     responsiveVoice.speak(primer, "Spanish Female");
     text = encodeURIComponent(primer);
     var url = "http://";
-    
 }
