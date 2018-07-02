@@ -12,28 +12,29 @@ function perceptronSynaptic() {
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
-    var learningRate = .3; //Bias
-    for (var i = 0; i < 90000; i++) {
-        myPerceptron.activate([0, 0]); //Entradas
-        myPerceptron.propagate(learningRate, [0]);
-        //Salida deseada
-        myPerceptron.activate([0, 1]);
-        myPerceptron.propagate(learningRate, [1]);
+    // var learningRate = .3; //Bias
+    // for (var i = 0; i < 90000; i++) {
+    //     myPerceptron.activate([0, 0]); //Entradas
+    //     myPerceptron.propagate(learningRate, [0]);
+    //     //Salida deseada
+    //     myPerceptron.activate([0, 1]);
+    //     myPerceptron.propagate(learningRate, [1]);
 
-        myPerceptron.activate([1, 0]);
-        myPerceptron.propagate(learningRate, [1]);
+    //     myPerceptron.activate([1, 0]);
+    //     myPerceptron.propagate(learningRate, [1]);
 
-        myPerceptron.activate([1, 1]);
-        myPerceptron.propagate(learningRate, [0]);
-    }
+    //     myPerceptron.activate([1, 1]);
+    //     myPerceptron.propagate(learningRate, [0]);
+    // }
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
     // test the network
-    console.log(myPerceptron.activate([0, 0]));
-    console.log(myPerceptron.activate([0, 1]));
+    myPerceptron.propagate(0.50, [0]);
     console.log(myPerceptron.activate([1, 0]));
-    console.log(myPerceptron.activate([1, 1]));
+    // console.log(myPerceptron.activate([0, 1]));
+    // console.log(myPerceptron.activate([1, 0]));
+    // console.log(myPerceptron.activate([1, 1]));
 }
 
 

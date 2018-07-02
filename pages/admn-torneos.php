@@ -83,7 +83,7 @@ if ($conexion->connect_error) {
 
                 <h3 class="mdl-list__item-primary-content" style="text-align: center;">Próximos torneos</h3>
 
-            <?php foreach ($conexion->query('SELECT nombre, descripcion, fecha, id_torneo FROM TORNEOS ORDER BY FECHA DESC') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+            <?php foreach ($conexion->query('SELECT nombre, descripcion, fecha, id_torneo, estado, im5, i56, i78, i910, i1112, j1314, j1516, a17 FROM TORNEOS ORDER BY FECHA DESC') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                 <li class="mdl-list__item">
 
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell--7-col">
@@ -95,17 +95,70 @@ if ($conexion->connect_error) {
             <p><?php echo $row['descripcion'] ?>
             </p>
             <h4><?php echo $row['fecha'] ?></h4>
+            <h4>Categorías:</h4>
+            <?php if  ($row['im5'] == "S"){ ?>
+                <p>Infantiles menor a 5 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['i56'] == "S"){ ?>
+                    <p>Infantiles de 5 a 6 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['i78'] == "S"){ ?>
+                    <p>Infantiles de 7 a 8 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['i910'] == "S"){ ?>
+                    <p>Infantiles de 9 a 10 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['i1112'] == "S"){ ?>
+                <p>Infantiles de 11 a 12 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['j1314'] == "S"){ ?>
+                    <p>Juveniles de 13 a 14 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['j1516'] == "S"){ ?>
+                    <p>Juveniles de 15 a 16 años</p>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['a17'] == "S"){ ?>
+                    <p>Adultos mayor a 17 años</p>
+                <?php
+                    }
+                ?>
+
         </div>
+        
         <div class="mdl-card__actions mdl-card--border">
             <div class="mdl-card__actions" style="text-align: right;">
 
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredCyan mdl-js-ripple-effect mdl-checkbox__input aling-rights"
-                    style="left:-68%;" onclick="location='admn-torneos-categorias.html'">
-                    <i class="material-icons">visibility</i>
-                </button>
-                
+                <?php if  ($row['estado'] == "A"){ ?>
+                 <a href="../assets/php/admn-change-torneo.php?id='+<?php echo $row['id_torneo'] ?>'&categoria=I" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+                    <i class="material-icons">assignment_turned_in</i>
+                </button></a>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['estado'] == "I"){ ?>
+                <a href="../assets/php/admn-change-torneo.php?id='+<?php echo $row['id_torneo'] ?>' &categoria=A" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredWhite mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+                    <i class="material-icons">assignment_late</i>
+                </button></a>
+                <?php
+                    }
+                ?>
                 <a href="../assets/php/admn-delete-torneo.php?id='+<?php echo $row['id_torneo'] ?>'" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
                     <i class="material-icons">delete</i>
+                    
                 </button></a>
 
             </div>

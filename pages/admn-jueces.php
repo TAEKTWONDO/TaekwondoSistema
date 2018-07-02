@@ -78,17 +78,7 @@ if ($conexion->connect_error) {
                 <br>
                 <h3 class="mdl-list__item-primary-content" style="text-align: center;">Jueces </h3>
 
-                <form action="#">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                        <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-						<i class="material-icons">search</i>
-					</label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" id="sample6">
-                            <label class="mdl-textfield__label" for="sample-expandable" style="color: black;">Buscar</label>
-                        </div>
-                    </div>
-                </form>
+                
                 <?php foreach ($conexion->query('SELECT nombre, id_juez FROM jueces') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                     
                     <li class="mdl-list__item">
