@@ -85,7 +85,7 @@ if ($conexion->connect_error) {
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 					<div class="mdl-card__actions" style="text-align: right;">
-						<a href="#" class="mdl-button">Ver estadísticas</a>
+						<a href="prof-alumnos-estadisticas.php" class="mdl-button">Ver estadísticas</a>
 					</div>
 					</div>
 					
