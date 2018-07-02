@@ -1,28 +1,25 @@
 Modulo de administrador:
-    buscadores
+    Terminado
 
 Modulo maestros 
-    participantes 
-        vector dinamico
-        buscadores
     estadisticas (Mineria de datos)
+        investigarlo
+        estructurarlo
+        hacerlo
+        que
+        funcione
+        :P
 
 Modulo jueces
     Agente graficas
-
+    
 Agente voz
-    nada
+    Terminado
 
 Agente graficas
-    pasarlos a ajax
-    trabajarlos en js (simple)
-    trabajarlos en js (perceptron simple)
-    trabajarlos en js (perceptron multicapa
-
-Percetron Simple
-    pasarlos a ajax
-    trabajarlos en js
-    comparar esos datos con lo que se espera
+    filtro de edad de los alumnos
+    enviar las entradas al perceptron para que haga su show
+    hacer el match
 
 Percetron multicapa
-    todo y su cora too
+    Terminado

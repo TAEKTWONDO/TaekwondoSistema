@@ -16,6 +16,9 @@
 	<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 	<script src="jquery-3.3.1.min.js" type="text/javascript"></script>
 	<script src="data_concursantes.js" type="text/javascript"></script>
+	<script src="MultilayerPerceptronMethod.js"></script>
+    <!-- Esta libreria no se debe borrar -->
+    <script src="synaptic.js"></script>
 	<title>
 		Karem
 	</title>
