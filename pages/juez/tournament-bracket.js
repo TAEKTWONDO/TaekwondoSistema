@@ -830,12 +830,12 @@ function perceptronMethod(){
     // console.log(myPerceptronNeuron6.activate([0, 0.462, 0, 0.3486]));
     // console.log(myPerceptronNeuron7.activate([0, 0.462, 0, 0.3486]));
     // console.log(myPerceptronNeuron8.activate([0, 0.462, 0, 0.3486]));
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
-    console.log("🙈Calculando datos en base a las entradas🙈");
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈");
-    console.log("🙈🙈Resultados🙈🙈");
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈");
+    console.log("🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢");
+    console.log("🐢Calculando datos en base a las entradas🐢");
+    console.log("🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢");
+    console.log("👽👽👽👽👽👽👽👽👽");
+    console.log("👽👽Resultados👽👽");
+    console.log("👽👽👽👽👽👽👽👽👽");
     for (var w = 0; w <= nameScoreFinal.length - 1; w++){
         console.log(myPerceptronNeuron1.activate([genderScoreFinal[w], ageScoreFinal[w], heightScoreFinal[w], beltScoreFinal[w]]));
     }
