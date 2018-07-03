@@ -1,3 +1,9 @@
+<?php
+$CATEGORIA = $_GET["categoria"];
+// echo $CATEGORIA;
+session_start();
+$_SESSION["CATEGORIA"] = $CATEGORIA;
+?>
 <!DOCTYPE html>
 <html lang="en">
 

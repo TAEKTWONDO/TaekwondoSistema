@@ -113,11 +113,12 @@ if ($conexion->connect_error) {
                 <li class="mdl-list__item">
 				<span class="mdl-list__item-primary-content">
 					<i class="material-icons  mdl-list__item-avatar">wc</i>
-                 
+                
                     <p>Infantiles de 7 a 8 años</p>
-                    <span style="color:white;">...........................................</span>
+                    </span>
+            <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=I78"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=I56"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -126,6 +127,7 @@ if ($conexion->connect_error) {
                 <?php
                     }
                 ?>
+
 <?php if  ($row['i910'] == "S"){ ?>
                 <li class="mdl-list__item">
 				<span class="mdl-list__item-primary-content">

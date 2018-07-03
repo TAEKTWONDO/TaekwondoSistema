@@ -17,7 +17,6 @@ Agente voz
     Terminado
 
 Agente graficas
-    filtro de edad de los alumnos
     enviar las entradas al perceptron para que haga su show
     hacer el match
 

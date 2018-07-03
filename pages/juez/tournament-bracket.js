@@ -22,9 +22,18 @@ var heightGet = new Array();
 var genderGet = new Array();
 //////////////
 var learningRate = 0.30;
+//////////////
+var idScoreFinal = new Array();
+var nameScoreFinal = new Array();
+var genderScoreFinal = new Array();
+var beltScoreFinal = new Array();
+var heightScoreFinal = new Array();
+var ageScoreFinal = new Array();
+//////////////////////////////////////////
+/////////////////////////////////////////
 
 
-function graphic() {
+function graphic(texto) {
     $(document).ready(function () {
         $('#remove').on('click', function () {
             console.log('removed');
@@ -32,6 +41,27 @@ function graphic() {
     });
     //////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////BD////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //Para obtener la variable que pasamos en la URL
+    var loc = document.location.href;
+    var getString = loc.split('?')[1];
+    var GET = getString.split('&');
+    var get = {};
+    for(var i = 0, l = GET.length; i < l; i++){
+        var tmp = GET[i].split('=');
+        get[tmp[0]] = unescape(decodeURI(tmp[1]));
+    }
+    // console.log(get.categoria);
+    var EDAD1 = 0; EDAD2 = 0;
+    if (get.categoria == "IM5") {EDAD1 = 0; EDAD2 = 4;}
+    if (get.categoria == "I56") {EDAD1 = 5; EDAD2 = 6;}
+    if (get.categoria == "I78") {EDAD1 = 7; EDAD2 = 8;}
+    if (get.categoria == "I910") {EDAD1 = 9; EDAD2 = 10;}
+    if (get.categoria == "I1112") {EDAD1 = 11; EDAD2 = 12;}
+    if (get.categoria == "J1314") {EDAD1 = 13; EDAD2 = 14;}
+    if (get.categoria == "J1516") {EDAD1 = 15; EDAD2 = 16;}
+    if (get.categoria == "A17") {EDAD1 = 17; EDAD2 = 80;}
+    //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     console.log("BD");
 
@@ -48,24 +78,27 @@ function graphic() {
             var values = $.map(DatosFuera[i], function (value, index) {
                 return [value];
             });
-            participants.push(values[1]);
-            id.push(values[0]);
-            names.push(values[1]);
-            belt.push(values[2]);
-            age.push(values[3]);
-            height.push(values[4]);
-            gender.push(values[5]);
+            //Para filtrar la informacion
+            if (values[3] >= EDAD1 & values[3] <= EDAD2){
+                participants.push(values[1]);
+                id.push(values[0]);
+                names.push(values[1]);
+                belt.push(values[2]);
+                age.push(values[3]);
+                height.push(values[4]);
+                gender.push(values[5]);
+            }
         }       
-
+        // console.log(names);
         ////////////////////////////////////////////////////////////////////////////
         //////////////////////Checar participantes///////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////
         console.log("Realiza los calculos");
-       checkParticipants();
+        checkParticipants();
         ////////////////////////////////////////////////////////////////////////////
         ////////////////////////Obtener pesos///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////
-        console.log("Calcular valores 🙈🙈");
+        console.log("Calcular valores 😛😛. (Entradas).");
         //Aqui se envian los datos a una funcion para que los almacene en otros vectores
         //Ya que si se hace con los vectores originales no sale bien
         for (var  t = 0; t< names.length; t++){
@@ -75,10 +108,6 @@ function graphic() {
         //Por ultimo llamamos a esta funcion para que de estos nuevos vectores los envie a la funcion que 
         //calcule los valores
         calculateHeights();
-        //Value for used in the perceptron method
-
-
-
     });
     //////////////////////////////////////////////////////////////////////////
     //////////////////////Percetron///////////////////////////////////////////
@@ -88,6 +117,9 @@ function graphic() {
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
     function buildBracket($el, p1, p2) {
         if (!p1 && !p2) {
@@ -303,8 +335,8 @@ function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStud
             colorBelt = values[4];
             height = values[1];
             
-        scoreFinal.push(idStudent);
-        scoreFinal.push(nameStudent);
+        idScoreFinal.push(idStudent);
+        nameScoreFinal.push(nameStudent);
         // console.log(gender, age, height, colorBelt);
         var aux;
        
@@ -314,7 +346,7 @@ function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStud
             gender = 0;
         }
         //Add the value
-        scoreFinal.push(gender);
+        genderScoreFinal.push(gender);
 
         if (age >= 17) {
             age = 1;
@@ -325,7 +357,7 @@ function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStud
             age = aux * 0.07692;
         }
         //Add the value
-        scoreFinal.push(age);
+        ageScoreFinal.push(age);
 
         switch (colorBelt) {
             case "Blanca":
@@ -348,7 +380,7 @@ function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStud
                 break;
         }
         //Add the value
-        scoreFinal.push(colorBelt);
+        beltScoreFinal.push(colorBelt);
 
         if (height >= 2.00) {
             height = 1;
@@ -359,7 +391,7 @@ function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStud
             height = (aux * 100) * 0.0083;
         }
         //Add the value
-        scoreFinal.push(height);
+        heightScoreFinal.push(height);
         // console.table(scoreFinal);
 }
 
@@ -389,7 +421,7 @@ function sendValues(names2, gender2, age2, height2, belt2){
     ageGet.push(age2);
     heightGet.push(height2);
     beltGet.push(belt2);
-    console.log(names2, gender2, age2, height2, belt2);
+    // console.log(names2, gender2, age2, height2, belt2);
 }
 
 function calculateHeights(){
@@ -790,15 +822,24 @@ function perceptronMethod(){
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
-    console.log(myPerceptronNeuron1.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron2.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron3.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron4.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron5.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron6.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron7.activate([0, 0.462, 0, 0.3486]));
-    console.log(myPerceptronNeuron8.activate([0, 0.462, 0, 0.3486]));
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
-    console.log("🙈🙈🙈Calculando  datos🙈🙈🙈");
-    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
+    // console.log(myPerceptronNeuron1.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron2.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron3.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron4.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron5.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron6.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron7.activate([0, 0.462, 0, 0.3486]));
+    // console.log(myPerceptronNeuron8.activate([0, 0.462, 0, 0.3486]));
+    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
+    console.log("🙈Calculando datos en base a las entradas🙈");
+    console.log("🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈🙈");
+    console.log("🙈🙈🙈🙈🙈🙈🙈🙈");
+    console.log("🙈🙈Resultados🙈🙈");
+    console.log("🙈🙈🙈🙈🙈🙈🙈🙈");
+    for (var w = 0; w <= nameScoreFinal.length - 1; w++){
+        console.log(myPerceptronNeuron1.activate([genderScoreFinal[w], ageScoreFinal[w], heightScoreFinal[w], beltScoreFinal[w]]));
+    }
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
 }
