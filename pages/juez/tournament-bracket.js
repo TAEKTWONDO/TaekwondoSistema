@@ -679,7 +679,7 @@ function perceptronMethod(){
     console.log("😛😛Haciendo Match😛😛");
     console.log("😛😛😛😛😛😛😛😛😛😛");
     for (var w = 0; w <= outputsNetwork1.length - 1; w++){
-        if (w + 1){
+        if (w + 1 < outputsNetwork1.length){
             console.log("dd");
             auxiliar = outputsNetwork1[w];
             auxiliar2 = outputsNetwork1[w + 1];
