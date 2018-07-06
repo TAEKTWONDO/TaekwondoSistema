@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2018 a las 14:37:56
+-- Tiempo de generación: 06-07-2018 a las 01:55:34
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -108,7 +108,11 @@ CREATE TABLE `concursantes` (
 --
 
 INSERT INTO `concursantes` (`ID_CONCURSANTE`, `ID_TORNEO`, `ID_ALUMNO`) VALUES
-(2, 3, 5);
+(2, 3, 5),
+(3, 3, 12),
+(4, 3, 20),
+(6, 4, 21),
+(7, 3, 11);
 
 -- --------------------------------------------------------
 
@@ -191,66 +195,31 @@ INSERT INTO `maestros` (`ID_MAESTRO`, `NOMBRE`, `APELLIDOS`, `DIRECCION`, `TELEF
 
 CREATE TABLE `puntuaciones` (
   `ID_PUNTUACION` int(11) NOT NULL,
-  `ID_ALUMNO` int(11) NOT NULL,
-  `PUNTUACION` int(10) NOT NULL,
-  `AMONESTACIONES` int(11) NOT NULL
+  `ID_ALUMNO` int(11) DEFAULT NULL,
+  `ID_TORNEO` int(11) DEFAULT NULL,
+  `PUNTUACION` int(10) DEFAULT NULL,
+  `AMONESTACIONES` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `puntuaciones`
 --
 
-INSERT INTO `puntuaciones` (`ID_PUNTUACION`, `ID_ALUMNO`, `PUNTUACION`, `AMONESTACIONES`) VALUES
-(1, 4, 4, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `resultadospreparacion`
---
-
-CREATE TABLE `resultadospreparacion` (
-  `id_resultadopreparacion` int(11) NOT NULL,
-  `gender` float NOT NULL,
-  `age` float NOT NULL,
-  `belt` float NOT NULL,
-  `height` float NOT NULL,
-  `result(Ps)` float NOT NULL,
-  `whishresult` float NOT NULL,
-  `result(PM)` float NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `resultadospreparacion`
---
-
-INSERT INTO `resultadospreparacion` (`id_resultadopreparacion`, `gender`, `age`, `belt`, `height`, `result(Ps)`, `whishresult`, `result(PM)`) VALUES
-(1, 0, 0.46132, 0, 0.3486, -0.122962, 0, 0),
-(2, 0, 0, 0, 0, 0, 1, 0),
-(3, 1, 0, 0, 0, 1, 1, 0),
-(4, 0, 0, 0, 0.0415, 0.166, -1, 0),
-(5, 1, 0.1538, 0, 0, -0.206746, 0, 0),
-(6, 1, 0.61508, 0.8, 0.5976, -0.93024, 0, 0),
-(7, 0, 0.30756, 0.8, 0.3735, 0.63352, -1, 0),
-(8, 0, 0.38444, 0.4, 0.5395, 0.481624, 1, 0),
-(9, 0, 0.30756, 0.2, 0.415, 0.212886, 1, 0),
-(10, 0, 0.46132, 0.2, 0.5395, 0.499069, 1, 0),
-(11, 1, 0.38444, 0.2, 0.415, -0.335206, 0, 0),
-(12, 1, 0.61508, 0, 0.5395, -0.258565, 0, 0),
-(13, 1, 0.61508, 0, 0.7221, -2.03224, -1, 0),
-(14, 0, 0.9226, 0.6, 0.747, -3.1928, -1, 0),
-(15, 1, 0.46132, 0.6, 0.4565, -0.66456, 1, 0),
-(16, 0, 0.84572, 0.2, 0.581, -2.41504, -1, 0),
-(17, 0, 0.30756, 0.8, 0.332, 0.42752, 0, 0),
-(18, 1, 0.23068, 0.8, 0.166, 0.41856, 1, 0),
-(19, 1, 0.46132, 0, 0.3735, -2.19656, -1, 0),
-(20, 1, 0.23068, 0, 0.083, 0.08656, 0, 0),
-(21, 0, 1, 1, 0.7055, -3.178, -1, 0),
-(22, 0, 1, 1, 0.7055, -0.68027, 1, 0),
-(23, 1, 0.61508, 0, 0.581, -2.59664, -1, 0),
-(24, 0, 1, 0.6, 0.664, -0.542208, 0, 0),
-(25, 1, 0.61508, 0, 0.581, -0.0228134, 0, 0),
-(26, 1, 0.5382, 0.4, 0.498, -0.664768, 0, 0);
+INSERT INTO `puntuaciones` (`ID_PUNTUACION`, `ID_ALUMNO`, `ID_TORNEO`, `PUNTUACION`, `AMONESTACIONES`) VALUES
+(35, 2, 3, 2, 2),
+(36, 9, 3, 9, 9),
+(37, 5, 3, 5, 5),
+(40, 2, 3, 2, 2),
+(41, 9, 3, 9, 9),
+(42, 5, 3, 5, 5),
+(45, 2, 3, 2, 2),
+(46, 9, 3, 9, 9),
+(49, 2, 3, 2, 2),
+(50, 9, 3, 9, 9),
+(51, 5, 3, 5, 5),
+(54, 2, 3, 2, 2),
+(55, 9, 3, 9, 9),
+(56, 5, 3, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -263,16 +232,25 @@ CREATE TABLE `torneos` (
   `NOMBRE` varchar(200) NOT NULL,
   `DESCRIPCION` varchar(1000) NOT NULL,
   `HORA` time(6) DEFAULT NULL,
-  `FECHA` date NOT NULL
+  `FECHA` date NOT NULL,
+  `ESTADO` varchar(1) NOT NULL,
+  `IM5` varchar(1) NOT NULL,
+  `I56` varchar(1) NOT NULL,
+  `I78` varchar(1) NOT NULL,
+  `I910` varchar(1) NOT NULL,
+  `I1112` varchar(1) NOT NULL,
+  `J1314` varchar(1) NOT NULL,
+  `J1516` varchar(1) NOT NULL,
+  `A17` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `torneos`
 --
 
-INSERT INTO `torneos` (`ID_TORNEO`, `NOMBRE`, `DESCRIPCION`, `HORA`, `FECHA`) VALUES
-(3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02'),
-(4, 'Copa Corona', 'orneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-08');
+INSERT INTO `torneos` (`ID_TORNEO`, `NOMBRE`, `DESCRIPCION`, `HORA`, `FECHA`, `ESTADO`, `IM5`, `I56`, `I78`, `I910`, `I1112`, `J1314`, `J1516`, `A17`) VALUES
+(3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02', 'A', 'S', 'S', 'S', 'S', 'N', 'N', 'N', 'N'),
+(4, 'Copa Corona', 'orneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-08', 'I', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S');
 
 --
 -- Índices para tablas volcadas
@@ -324,13 +302,8 @@ ALTER TABLE `maestros`
 ALTER TABLE `puntuaciones`
   ADD PRIMARY KEY (`ID_PUNTUACION`),
   ADD KEY `id_participante` (`ID_ALUMNO`),
-  ADD KEY `ID_ALUMNO` (`ID_ALUMNO`);
-
---
--- Indices de la tabla `resultadospreparacion`
---
-ALTER TABLE `resultadospreparacion`
-  ADD PRIMARY KEY (`id_resultadopreparacion`);
+  ADD KEY `ID_ALUMNO` (`ID_ALUMNO`),
+  ADD KEY `ID_TORNEO` (`ID_TORNEO`);
 
 --
 -- Indices de la tabla `torneos`
@@ -351,17 +324,17 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `ID_ALUMNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_ALUMNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT de la tabla `concursantes`
 --
 ALTER TABLE `concursantes`
-  MODIFY `ID_CONCURSANTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_CONCURSANTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `gyms`
 --
 ALTER TABLE `gyms`
-  MODIFY `ID_GYM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID_GYM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `jueces`
 --
@@ -371,22 +344,17 @@ ALTER TABLE `jueces`
 -- AUTO_INCREMENT de la tabla `maestros`
 --
 ALTER TABLE `maestros`
-  MODIFY `ID_MAESTRO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID_MAESTRO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `puntuaciones`
 --
 ALTER TABLE `puntuaciones`
-  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `resultadospreparacion`
---
-ALTER TABLE `resultadospreparacion`
-  MODIFY `id_resultadopreparacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT de la tabla `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `ID_TORNEO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_TORNEO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -414,7 +382,8 @@ ALTER TABLE `maestros`
 -- Filtros para la tabla `puntuaciones`
 --
 ALTER TABLE `puntuaciones`
-  ADD CONSTRAINT `puntuaciones_ibfk_1` FOREIGN KEY (`ID_ALUMNO`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `puntuaciones_ibfk_1` FOREIGN KEY (`ID_ALUMNO`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `puntuaciones_ibfk_2` FOREIGN KEY (`ID_TORNEO`) REFERENCES `torneos` (`ID_TORNEO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
