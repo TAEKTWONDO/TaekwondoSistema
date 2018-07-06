@@ -52,20 +52,45 @@ function graphic(texto) {
     var getString = loc.split('?')[1];
     var GET = getString.split('&');
     var get = {};
-    for(var i = 0, l = GET.length; i < l; i++){
+    for (var i = 0, l = GET.length; i < l; i++) {
         var tmp = GET[i].split('=');
         get[tmp[0]] = unescape(decodeURI(tmp[1]));
     }
     // console.log(get.categoria);
-    var EDAD1 = 0; EDAD2 = 0;
-    if (get.categoria == "IM5") {EDAD1 = 0; EDAD2 = 4;}
-    if (get.categoria == "I56") {EDAD1 = 5; EDAD2 = 6;}
-    if (get.categoria == "I78") {EDAD1 = 7; EDAD2 = 8;}
-    if (get.categoria == "I910") {EDAD1 = 9; EDAD2 = 10;}
-    if (get.categoria == "I1112") {EDAD1 = 11; EDAD2 = 12;}
-    if (get.categoria == "J1314") {EDAD1 = 13; EDAD2 = 14;}
-    if (get.categoria == "J1516") {EDAD1 = 15; EDAD2 = 16;}
-    if (get.categoria == "A17") {EDAD1 = 17; EDAD2 = 80;}
+    var EDAD1 = 0;
+    EDAD2 = 0;
+    if (get.categoria == "IM5") {
+        EDAD1 = 0;
+        EDAD2 = 4;
+    }
+    if (get.categoria == "I56") {
+        EDAD1 = 5;
+        EDAD2 = 6;
+    }
+    if (get.categoria == "I78") {
+        EDAD1 = 7;
+        EDAD2 = 8;
+    }
+    if (get.categoria == "I910") {
+        EDAD1 = 9;
+        EDAD2 = 10;
+    }
+    if (get.categoria == "I1112") {
+        EDAD1 = 11;
+        EDAD2 = 12;
+    }
+    if (get.categoria == "J1314") {
+        EDAD1 = 13;
+        EDAD2 = 14;
+    }
+    if (get.categoria == "J1516") {
+        EDAD1 = 15;
+        EDAD2 = 16;
+    }
+    if (get.categoria == "A17") {
+        EDAD1 = 17;
+        EDAD2 = 80;
+    }
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     $tournament = $(".tournament"),
@@ -82,7 +107,7 @@ function graphic(texto) {
                 return [value];
             });
             //Para filtrar la informacion
-            if (values[3] >= EDAD1 & values[3] <= EDAD2){
+            if (values[3] >= EDAD1 & values[3] <= EDAD2) {
                 //participants.push(values[1]);
                 id.push(values[0]);
                 names.push(values[1]);
@@ -91,14 +116,14 @@ function graphic(texto) {
                 height.push(values[4]);
                 gender.push(values[5]);
             }
-        }       
+        }
         // console.log(names);
         ////////////////////////////////////////////////////////////////////////////
         ////////////////////////Obtener pesos///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////
         //Aqui se envian los datos a una funcion para que los almacene en otros vectores
         //Ya que si se hace con los vectores originales no sale bien
-        for (var  t = 0; t< names.length; t++){
+        for (var t = 0; t < names.length; t++) {
             //console.log(names[t], gender[t], age[t], height[t], belt[t]);
             sendValues(names[t], gender[t], age[t], height[t], belt[t]);
         }
@@ -109,11 +134,11 @@ function graphic(texto) {
     //////////////////////////////////////////////////////////////////////////
     //////////////////////Percetron///////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
-    perceptronMethod();
-////////////////////////////////////////////////////////////////////////////
-        //////////////////////Checar participantes///////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////
-        checkParticipants();
+    //perceptronMethod();
+    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////Checar participantes///////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    //checkParticipants();
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
@@ -172,6 +197,7 @@ function graphic(texto) {
     }
 
     function cleanUp() {
+
         var $brackets = $(".bracket"),
             removed = false;
         for (var i = 0; i < $brackets.length; i++) {
@@ -196,6 +222,14 @@ function graphic(texto) {
     }
 
     // just do it over and over
+    participants = participants.fill(null);
+
+    perceptronMethod();
+    //no se porque shingados con esto aparece César >:c
+    //checkParticipants();
+
+    console.log("Outside Clean up");
+    console.table(participants);
     while (cleanUp()) {}
 
     var $empty = $("li:empty");
@@ -325,71 +359,71 @@ function saveWon() {
     document.location.href = "save_won.php?id_alumno=" + elements + "&puntuacion=" + elements + "&amonestaciones=" + elements + "&torneo=" + 3;
 }
 
-function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent){
+function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
     var values = [nameStudent, genderStudent, ageStudent, heightStudent, beltStudent];
-            gender = values[3];
-            age = values[2];
-            colorBelt = values[4];
-            height = values[1];
-            
-        idScoreFinal.push(idStudent);
-        nameScoreFinal.push(nameStudent);
-        // console.log(gender, age, height, colorBelt);
-        var aux;
-       
-        if (gender == "M") {
-            gender = 1;
-        } else {
-            gender = 0;
-        }
-        //Add the value
-        genderScoreFinal.push(gender);
+    gender = values[3];
+    age = values[2];
+    colorBelt = values[4];
+    height = values[1];
 
-        if (age >= 17) {
-            age = 1;
-        } else if (age == 4) {
-            age = 0;
-        } else {
-            aux = age - 4;
-            age = aux * 0.07692;
-        }
-        //Add the value
-        ageScoreFinal.push(age);
+    idScoreFinal.push(idStudent);
+    nameScoreFinal.push(nameStudent);
+    // console.log(gender, age, height, colorBelt);
+    var aux;
 
-        switch (colorBelt) {
-            case "Blanca":
-                colorBelt = 0;
-                break;
-            case "Amarilla":
-                colorBelt = 0.2;
-                break;
-            case "Verde":
-                colorBelt = 0.4;
-                break;
-            case "Azul":
-                colorBelt = 0.6;
-                break;
-            case "Rojo":
-                colorBelt = 0.8;
-                break;
-            case "Negra":
-                colorBelt = 1;
-                break;
-        }
-        //Add the value
-        beltScoreFinal.push(colorBelt);
+    if (gender == "M") {
+        gender = 1;
+    } else {
+        gender = 0;
+    }
+    //Add the value
+    genderScoreFinal.push(gender);
 
-        if (height >= 2.00) {
-            height = 1;
-        } else if (height == 0.8) {
-            height = 0;
-        } else {
-            aux = height - 0.8;
-            height = (aux * 100) * 0.0083;
-        }
-        //Add the value
-        heightScoreFinal.push(height);
-        // console.table(scoreFinal);
+    if (age >= 17) {
+        age = 1;
+    } else if (age == 4) {
+        age = 0;
+    } else {
+        aux = age - 4;
+        age = aux * 0.07692;
+    }
+    //Add the value
+    ageScoreFinal.push(age);
+
+    switch (colorBelt) {
+        case "Blanca":
+            colorBelt = 0;
+            break;
+        case "Amarilla":
+            colorBelt = 0.2;
+            break;
+        case "Verde":
+            colorBelt = 0.4;
+            break;
+        case "Azul":
+            colorBelt = 0.6;
+            break;
+        case "Rojo":
+            colorBelt = 0.8;
+            break;
+        case "Negra":
+            colorBelt = 1;
+            break;
+    }
+    //Add the value
+    beltScoreFinal.push(colorBelt);
+
+    if (height >= 2.00) {
+        height = 1;
+    } else if (height == 0.8) {
+        height = 0;
+    } else {
+        aux = height - 0.8;
+        height = (aux * 100) * 0.0083;
+    }
+    //Add the value
+    heightScoreFinal.push(height);
+    // console.table(scoreFinal);
 }
 
 function cleanAll() {
@@ -412,7 +446,7 @@ function cleanAll() {
     belt = "";
 }
 
-function sendValues(names2, gender2, age2, height2, belt2){
+function sendValues(names2, gender2, age2, height2, belt2) {
     namesGet.push(names2);
     genderGet.push(gender2);
     ageGet.push(age2);
@@ -421,13 +455,13 @@ function sendValues(names2, gender2, age2, height2, belt2){
     // console.log(names2, gender2, age2, height2, belt2);
 }
 
-function calculateHeights(){
-    for (var u = 0; u < namesGet.length; u++){
-        getValues(id[u] ,namesGet[u], genderGet[u], ageGet[u], heightGet[u], beltGet[u]);
+function calculateHeights() {
+    for (var u = 0; u < namesGet.length; u++) {
+        getValues(id[u], namesGet[u], genderGet[u], ageGet[u], heightGet[u], beltGet[u]);
     }
 }
 
-function checkParticipants(){
+function checkParticipants() {
     //Aqui se compara si un participante esta solo, en caso de que sea asi
     //Luchara contra Gasper
     if (participants.length % 2) {
@@ -459,7 +493,7 @@ function Perceptron(input, hidden, output) {
     });
 }
 
-function perceptronMethod(){
+function perceptronMethod() {
     //Need this constants for work
     const {
         Network
@@ -474,38 +508,64 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.337078653]);
-        myPerceptronNeuron1.activate([0]);                myPerceptronNeuron1.propagate(learningRate, [0]);
-        myPerceptronNeuron1.activate([0]);                myPerceptronNeuron1.propagate(learningRate, [0.127689597]);
-        myPerceptronNeuron1.activate([0]);           myPerceptronNeuron1.propagate(learningRate, [0]);
-        myPerceptronNeuron1.activate([0]);           myPerceptronNeuron1.propagate(learningRate, [0.13483146121]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.337078653]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.127689597]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.13483146121]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.8]);   myPerceptronNeuron1.propagate(learningRate, [0.58426966561]);
-        myPerceptronNeuron1.activate([0.8]);   myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
-        myPerceptronNeuron1.activate([0.4]);   myPerceptronNeuron1.propagate(learningRate, [0.35955056341]);
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.21348314698]);
-        myPerceptronNeuron1.activate([0.2]);   myPerceptronNeuron1.propagate(learningRate, [0.348314083]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.58426966561]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
+        myPerceptronNeuron1.activate([0.4]);
+        myPerceptronNeuron1.propagate(learningRate, [0.35955056341]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.21348314698]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.348314083]);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.41573033896]);
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.41573033896]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.6]);     myPerceptronNeuron1.propagate(learningRate, [0.77528090248]);
-        myPerceptronNeuron1.activate([0.6]);   myPerceptronNeuron1.propagate(learningRate, [0.43820224918]);
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.75280899226]);
-        myPerceptronNeuron1.activate([0.8]);    myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
-        myPerceptronNeuron1.activate([0.8]);    myPerceptronNeuron1.propagate(learningRate, [0.31460674297]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.77528090248]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.43820224918]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.75280899226]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.31460674297]);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.40449438385]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.26966292253]);
-        myPerceptronNeuron1.activate([1]);           myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
-        myPerceptronNeuron1.activate([1]);           myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
-        myPerceptronNeuron1.activate([0.6]);          myPerceptronNeuron1.propagate(learningRate, [0.97752809446]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.40449438385]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.26966292253]);
+        myPerceptronNeuron1.activate([1]);
+        myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
+        myPerceptronNeuron1.activate([1]);
+        myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.97752809446]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.4]);     myPerceptronNeuron1.propagate(learningRate, [0.56179775539]);
-        }
+        myPerceptronNeuron1.activate([0.4]);
+        myPerceptronNeuron1.propagate(learningRate, [0.56179775539]);
+    }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -515,38 +575,58 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron2.activate([0]);     myPerceptronNeuron2.propagate(learningRate, [0.2553192054]);
-        myPerceptronNeuron2.activate([0]);                
-        myPerceptronNeuron2.activate([1]);                
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([1]);           myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2553192054]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);   myPerceptronNeuron2.propagate(learningRate, [0.7234044362]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.2978724082]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7234044362]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2978724082]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);    myPerceptronNeuron2.propagate(learningRate, [0.4042554152]);
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.4042554152]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([0]);     myPerceptronNeuron2.propagate(learningRate, [0.8297874432]);
-        myPerceptronNeuron2.activate([1]);   myPerceptronNeuron2.propagate(learningRate, [0.7021278348]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.7872342404]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
-        myPerceptronNeuron2.activate([1]);    myPerceptronNeuron2.propagate(learningRate, [0.4680852194]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.8297874432]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7021278348]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7872342404]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.4680852194]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.3829788138]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([0]);          
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.3829788138]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([0]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6808512334]);
-        
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6808512334]);
+
     }
 
     //////////////////////////////////////////////////////
@@ -558,38 +638,64 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron3.activate([0.46132]);     myPerceptronNeuron3.propagate(learningRate, [0.3255814]);
-        myPerceptronNeuron3.activate([0]);                myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0]);                myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0]);           myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0.1538]);           myPerceptronNeuron3.propagate(learningRate, [0.1162790699]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3255814]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0.1538]);
+        myPerceptronNeuron3.propagate(learningRate, [0.1162790699]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.61508]);   myPerceptronNeuron3.propagate(learningRate, [0.5813953499]);
-        myPerceptronNeuron3.activate([0.30756]);   myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
-        myPerceptronNeuron3.activate([0.38444]);   myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
-        myPerceptronNeuron3.activate([0.30756]);    myPerceptronNeuron3.propagate(learningRate, [0.1860465119]);
-        myPerceptronNeuron3.activate([0.46132]);   myPerceptronNeuron3.propagate(learningRate, [0.3255813959]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5813953499]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
+        myPerceptronNeuron3.activate([0.38444]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.1860465119]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3255813959]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.38444]);    myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
-        myPerceptronNeuron3.activate([0.61508]);     myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);      myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);      myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);     myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.38444]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.9226]);     myPerceptronNeuron3.propagate(learningRate, [0.7674418619]);
-        myPerceptronNeuron3.activate([0.46132]);   myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
-        myPerceptronNeuron3.activate([0.84572]);    myPerceptronNeuron3.propagate(learningRate, [0.7441860479]);
-        myPerceptronNeuron3.activate([0.30756]);    myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
-        myPerceptronNeuron3.activate([0.23068]);    myPerceptronNeuron3.propagate(learningRate, [0.3023255819]);
+        myPerceptronNeuron3.activate([0.9226]);
+        myPerceptronNeuron3.propagate(learningRate, [0.7674418619]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
+        myPerceptronNeuron3.activate([0.84572]);
+        myPerceptronNeuron3.propagate(learningRate, [0.7441860479]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
+        myPerceptronNeuron3.activate([0.23068]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3023255819]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.46132]);     myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
-        myPerceptronNeuron3.activate([0.23068]);      myPerceptronNeuron3.propagate(learningRate, [0.2558139539]);
-        myPerceptronNeuron3.activate([1]);           myPerceptronNeuron3.propagate(learningRate, [1]);
-        myPerceptronNeuron3.activate([1]);           myPerceptronNeuron3.propagate(learningRate, [1]);
-        myPerceptronNeuron3.activate([1]);          myPerceptronNeuron3.propagate(learningRate, [0.9069767459]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
+        myPerceptronNeuron3.activate([0.23068]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2558139539]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [1]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [1]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [0.9069767459]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.5382]);     myPerceptronNeuron3.propagate(learningRate, [0.5581395359]);
-        
+        myPerceptronNeuron3.activate([0.5382]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5581395359]);
+
     }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -600,59 +706,85 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron4.activate([0.3486]);     myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
-        myPerceptronNeuron4.activate([0]);                myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0]);                myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0.0415]);           myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0]);           myPerceptronNeuron4.propagate(learningRate, [0.0681818173]);
+        myPerceptronNeuron4.activate([0.3486]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0.0415]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0.0681818173]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.5976]);   myPerceptronNeuron4.propagate(learningRate, [0.5681818079]);
-        myPerceptronNeuron4.activate([0.3735]);   myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
-        myPerceptronNeuron4.activate([0.5395]);   myPerceptronNeuron4.propagate(learningRate, [0.3863636295]);
-        myPerceptronNeuron4.activate([0.415]);    myPerceptronNeuron4.propagate(learningRate, [0.2272727234]);
-        myPerceptronNeuron4.activate([0.5395]);   myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
+        myPerceptronNeuron4.activate([0.5976]);
+        myPerceptronNeuron4.propagate(learningRate, [0.5681818079]);
+        myPerceptronNeuron4.activate([0.3735]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3863636295]);
+        myPerceptronNeuron4.activate([0.415]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2272727234]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.415]);    myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
-        myPerceptronNeuron4.activate([0.5395]);     myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.581]);      myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.581]);      myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.7221]);     myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.415]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.7221]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.747]);     myPerceptronNeuron4.propagate(learningRate, [0.8181818032]);
-        myPerceptronNeuron4.activate([0.4565]);   myPerceptronNeuron4.propagate(learningRate, [0.4090909018]);
-        myPerceptronNeuron4.activate([0.581]);    myPerceptronNeuron4.propagate(learningRate, [0.7727272586]);
-        myPerceptronNeuron4.activate([0.332]);    myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
-        myPerceptronNeuron4.activate([0.166]);    myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.747]);
+        myPerceptronNeuron4.propagate(learningRate, [0.8181818032]);
+        myPerceptronNeuron4.activate([0.4565]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4090909018]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.7727272586]);
+        myPerceptronNeuron4.activate([0.332]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.166]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.3735]);     myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
-        myPerceptronNeuron4.activate([0.083]);      myPerceptronNeuron4.propagate(learningRate, [0.2045454511]);
-        myPerceptronNeuron4.activate([0.7055]);           myPerceptronNeuron4.propagate(learningRate, [1]);
-        myPerceptronNeuron4.activate([0.7055]);           myPerceptronNeuron4.propagate(learningRate, [1]);
-        myPerceptronNeuron4.activate([0.664]);          myPerceptronNeuron4.propagate(learningRate, [0.954545437]);
+        myPerceptronNeuron4.activate([0.3735]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
+        myPerceptronNeuron4.activate([0.083]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2045454511]);
+        myPerceptronNeuron4.activate([0.7055]);
+        myPerceptronNeuron4.propagate(learningRate, [1]);
+        myPerceptronNeuron4.activate([0.7055]);
+        myPerceptronNeuron4.propagate(learningRate, [1]);
+        myPerceptronNeuron4.activate([0.664]);
+        myPerceptronNeuron4.propagate(learningRate, [0.954545437]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.498]);     myPerceptronNeuron4.propagate(learningRate, [0.5227272633]);
-        
+        myPerceptronNeuron4.activate([0.498]);
+        myPerceptronNeuron4.propagate(learningRate, [0.5227272633]);
+
     }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     var resultsNetworks = 0;
-    for (var w = 0; w <= beltScoreFinal.length - 1; w++){
+    for (var w = 0; w <= beltScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron1.activate([beltScoreFinal[w]]);
         outputsNetwork1[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= genderScoreFinal.length - 1; w++){
+    for (var w = 0; w <= genderScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron2.activate([genderScoreFinal[w]]);
         outputsNetwork2[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= ageScoreFinal.length - 1; w++){
+    for (var w = 0; w <= ageScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron3.activate([ageScoreFinal[w]]);
         outputsNetwork3[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= heightScoreFinal.length - 1; w++){
+    for (var w = 0; w <= heightScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron4.activate([heightScoreFinal[w]]);
         outputsNetwork4[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
@@ -661,7 +793,8 @@ function perceptronMethod(){
     outputsNetwork2.sort(comparateThirdColumn);
     outputsNetwork3.sort(comparateThirdColumn);
     outputsNetwork4.sort(comparateThirdColumn);
-    function comparateThirdColumn(a, b){
+
+    function comparateThirdColumn(a, b) {
         if (a[2] == b[2]) return 0;
         else return (a[2] < b[2]) ? -1 : 1;
     }
@@ -677,16 +810,16 @@ function perceptronMethod(){
     console.log("😛😛😛😛😛😛😛😛😛😛");
     console.log("😛😛Haciendo Match😛😛");
     console.log("😛😛😛😛😛😛😛😛😛😛");
-    for (var w = 0; w <= outputsNetwork1.length - 1; w++){
-        if (w + 1 < outputsNetwork1.length){
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        if (w + 1 < outputsNetwork1.length) {
             auxiliar = outputsNetwork1[w];
             auxiliar2 = outputsNetwork1[w + 1];
             console.log(auxiliar[2]);
             console.log(auxiliar2[2]);
-            if (auxiliar[2] == auxiliar2[2]){
+            if (auxiliar[2] == auxiliar2[2]) {
                 participants.push(auxiliar[1]);
                 participants.push(auxiliar2[1]);
-                
+
             }
         }
 
