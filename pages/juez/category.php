@@ -79,7 +79,7 @@ if ($conexion->connect_error) {
             </span>
             <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-              <a href="graphic-index.php?categoria=IM5"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+              <a href="graphic-index.php?categoria=IM5&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>" ><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -99,7 +99,7 @@ if ($conexion->connect_error) {
                     </span>
             <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=I56"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=I56&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -118,7 +118,7 @@ if ($conexion->connect_error) {
                     </span>
             <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=I56"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=I56&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -136,7 +136,7 @@ if ($conexion->connect_error) {
                     <p>Infantiles de 9 a 10 años</p>
                     <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=I910"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=I910&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -154,7 +154,7 @@ if ($conexion->connect_error) {
                 <p>Infantiles de 11 a 12 años</p>
                 <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=I1112"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=I1112&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -172,7 +172,7 @@ if ($conexion->connect_error) {
                     <p>Juveniles de 13 a 14 años</p>
                     <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=J1314"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=J1314&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -190,7 +190,7 @@ if ($conexion->connect_error) {
                     <p>Juveniles de 15 a 16 años</p>
                     <span style="color:white;">...........................................</span>
           <span class="mdl-list__item-secondary-action">
-          <a href="graphic-index.php?categoria=J1516"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+          <a href="graphic-index.php?categoria=J1516&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
@@ -207,7 +207,7 @@ if ($conexion->connect_error) {
 					<i class="material-icons  mdl-list__item-avatar">wc</i>
                     <p>Adultos mayor a 17 años</p>
                     <span class="mdl-list__item-secondary-action">
-                    <a href="graphic-index.php?categoria=A17"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
+                    <a href="graphic-index.php?categoria=A17&categorias= + <?php if($row['im5'] == "S"){echo "IM5 ";} if($row['i56'] == "S"){echo "I56 ";} if($row['i78'] == "S"){echo "I78 ";} if($row['i910'] == "S"){echo "I910 ";} if($row['i1112'] == "S"){echo "I1112 ";} if($row['j1314'] == "S"){echo "J1314 ";} if($row['j1516'] == "S"){echo "J1516 ";}  if($row['a17'] == "S"){echo "A17";} ?>"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" 
                style="background:rgb(42, 149, 24);">
                   <i class="material-icons">assignment_turned_in</i>
               </button></a>
