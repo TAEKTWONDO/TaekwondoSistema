@@ -77,6 +77,9 @@ var outputsNetwork3Up = new Array();
 var outputsNetwork4Up = new Array();
 //////////////////////////////////////////
 /////////////////////////////////////////
+var participantes = new Array();
+var auxId = new Array();
+////////////////////////////////////////
 
 function graphic(texto) {
     $(document).ready(function () {
@@ -92,7 +95,7 @@ function graphic(texto) {
     var getString = loc.split('?')[1];
     var GET = getString.split('&');
     var get = {};
-    for(var i = 0, l = GET.length; i < l; i++){
+    for (var i = 0, l = GET.length; i < l; i++) {
         var tmp = GET[i].split('=');
         get[tmp[0]] = unescape(decodeURI(tmp[1]));
         Category = get[tmp[0]];
@@ -102,15 +105,40 @@ function graphic(texto) {
     tournamentCategory = get.categorias.split(" ");
     delete tournamentCategory[1];
 
-    var EDAD1 = 0; EDAD2 = 0;
-    if (get.categoria == "IM5") {EDAD1 = 0; EDAD2 = 4;}
-    if (get.categoria == "I56") {EDAD1 = 5; EDAD2 = 6;}
-    if (get.categoria == "I78") {EDAD1 = 7; EDAD2 = 8;}
-    if (get.categoria == "I910") {EDAD1 = 9; EDAD2 = 10;}
-    if (get.categoria == "I1112") {EDAD1 = 11; EDAD2 = 12;}
-    if (get.categoria == "J1314") {EDAD1 = 13; EDAD2 = 14;}
-    if (get.categoria == "J1516") {EDAD1 = 15; EDAD2 = 16;}
-    if (get.categoria == "A17") {EDAD1 = 17; EDAD2 = 80;}
+    var EDAD1 = 0;
+    EDAD2 = 0;
+    if (get.categoria == "IM5") {
+        EDAD1 = 0;
+        EDAD2 = 4;
+    }
+    if (get.categoria == "I56") {
+        EDAD1 = 5;
+        EDAD2 = 6;
+    }
+    if (get.categoria == "I78") {
+        EDAD1 = 7;
+        EDAD2 = 8;
+    }
+    if (get.categoria == "I910") {
+        EDAD1 = 9;
+        EDAD2 = 10;
+    }
+    if (get.categoria == "I1112") {
+        EDAD1 = 11;
+        EDAD2 = 12;
+    }
+    if (get.categoria == "J1314") {
+        EDAD1 = 13;
+        EDAD2 = 14;
+    }
+    if (get.categoria == "J1516") {
+        EDAD1 = 15;
+        EDAD2 = 16;
+    }
+    if (get.categoria == "A17") {
+        EDAD1 = 17;
+        EDAD2 = 80;
+    }
     //////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
     $tournament = $(".tournament"),
@@ -127,7 +155,7 @@ function graphic(texto) {
                 return [value];
             });
             //Para filtrar la informacion de la categoria que se ha seleccionado
-            if (values[3] >= EDAD1 & values[3] <= EDAD2){
+            if (values[3] >= EDAD1 & values[3] <= EDAD2) {
                 id.push(values[0]);
                 names.push(values[1]);
                 belt.push(values[2]);
@@ -137,45 +165,45 @@ function graphic(texto) {
             }
             //A continuacion filtra todos los concursantes que no esten en la categoria seleccionada
             //Esto ya que si alguien queda solo se busca en una categoria superior o inferior
-            if (tournamentCategory[2] == "IM5"){
-                if (values[3] <= 5){
+            if (tournamentCategory[2] == "IM5") {
+                if (values[3] <= 5) {
                     categoryIM5[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[3] == "I56"){
-                if (values[3] >= 5 && values[3] <= 6){
+            if (tournamentCategory[3] == "I56") {
+                if (values[3] >= 5 && values[3] <= 6) {
                     categoryI56[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[4] == "I78"){
-                if (values[3] >= 7 && values[3] <= 8){
+            if (tournamentCategory[4] == "I78") {
+                if (values[3] >= 7 && values[3] <= 8) {
                     categoryI78[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[5] == "I910"){
-                if (values[3] >= 9 && values[3] <= 10){
+            if (tournamentCategory[5] == "I910") {
+                if (values[3] >= 9 && values[3] <= 10) {
                     categoryI910[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[6] == "I1112"){
-                if (values[3] >= 11 && values[3] <= 12){
+            if (tournamentCategory[6] == "I1112") {
+                if (values[3] >= 11 && values[3] <= 12) {
                     categoryI1112[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[7] == "J1314"){
-                if (values[3] >= 13 && values[3] <= 14){
+            if (tournamentCategory[7] == "J1314") {
+                if (values[3] >= 13 && values[3] <= 14) {
                     categoryI1314[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[8] == "J1516"){
-                if (values[3] >= 15 && values[3] <= 16){
+            if (tournamentCategory[8] == "J1516") {
+                if (values[3] >= 15 && values[3] <= 16) {
                     categoryI1516[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
-            if (tournamentCategory[9] == "A17"){
-                if (values[3] >= 17){
+            if (tournamentCategory[9] == "A17") {
+                if (values[3] >= 17) {
                     categoryA17[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
-                }  
+                }
             }
         }
         //Para eliminar elementos vacios o espacios vacios del array
@@ -193,7 +221,7 @@ function graphic(texto) {
         ////////////////////////////////////////////////////////////////////////////
         //Aqui se envian los datos a una funcion para que los almacene en otros vectores
         //Ya que si se hace con los vectores originales no sale bien
-        for (var  t = 0; t< names.length; t++){
+        for (var t = 0; t < names.length; t++) {
             //console.log(names[t], gender[t], age[t], height[t], belt[t]);
             sendValues(names[t], gender[t], age[t], height[t], belt[t]);
         }
@@ -419,71 +447,71 @@ function saveWon() {
     document.location.href = "save_won.php?id_alumno=" + elements + "&puntuacion=" + elements + "&amonestaciones=" + elements + "&torneo=" + 3;
 }
 
-function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent){
+function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
     var values = [nameStudent, genderStudent, ageStudent, heightStudent, beltStudent];
-            gender = values[3];
-            age = values[2];
-            colorBelt = values[4];
-            height = values[1];
-            
-        idScoreFinal.push(idStudent);
-        nameScoreFinal.push(nameStudent);
-        // console.log(gender, age, height, colorBelt);
-        var aux;
-       
-        if (gender == "M") {
-            gender = 1;
-        } else {
-            gender = 0;
-        }
-        //Add the value
-        genderScoreFinal.push(gender);
+    gender = values[3];
+    age = values[2];
+    colorBelt = values[4];
+    height = values[1];
 
-        if (age >= 17) {
-            age = 1;
-        } else if (age == 4) {
-            age = 0;
-        } else {
-            aux = age - 4;
-            age = aux * 0.07692;
-        }
-        //Add the value
-        ageScoreFinal.push(age);
+    idScoreFinal.push(idStudent);
+    nameScoreFinal.push(nameStudent);
+    // console.log(gender, age, height, colorBelt);
+    var aux;
 
-        switch (colorBelt) {
-            case "Blanca":
-                colorBelt = 0;
-                break;
-            case "Amarilla":
-                colorBelt = 0.2;
-                break;
-            case "Verde":
-                colorBelt = 0.4;
-                break;
-            case "Azul":
-                colorBelt = 0.6;
-                break;
-            case "Rojo":
-                colorBelt = 0.8;
-                break;
-            case "Negra":
-                colorBelt = 1;
-                break;
-        }
-        //Add the value
-        beltScoreFinal.push(colorBelt);
+    if (gender == "M") {
+        gender = 1;
+    } else {
+        gender = 0;
+    }
+    //Add the value
+    genderScoreFinal.push(gender);
 
-        if (height >= 2.00) {
-            height = 1;
-        } else if (height == 0.8) {
-            height = 0;
-        } else {
-            aux = height - 0.8;
-            height = (aux * 100) * 0.0083;
-        }
-        //Add the value
-        heightScoreFinal.push(height);
-        // console.table(scoreFinal);
+    if (age >= 17) {
+        age = 1;
+    } else if (age == 4) {
+        age = 0;
+    } else {
+        aux = age - 4;
+        age = aux * 0.07692;
+    }
+    //Add the value
+    ageScoreFinal.push(age);
+
+    switch (colorBelt) {
+        case "Blanca":
+            colorBelt = 0;
+            break;
+        case "Amarilla":
+            colorBelt = 0.2;
+            break;
+        case "Verde":
+            colorBelt = 0.4;
+            break;
+        case "Azul":
+            colorBelt = 0.6;
+            break;
+        case "Rojo":
+            colorBelt = 0.8;
+            break;
+        case "Negra":
+            colorBelt = 1;
+            break;
+    }
+    //Add the value
+    beltScoreFinal.push(colorBelt);
+
+    if (height >= 2.00) {
+        height = 1;
+    } else if (height == 0.8) {
+        height = 0;
+    } else {
+        aux = height - 0.8;
+        height = (aux * 100) * 0.0083;
+    }
+    //Add the value
+    heightScoreFinal.push(height);
+    // console.table(scoreFinal);
 }
 
 function cleanAll() {
@@ -506,7 +534,7 @@ function cleanAll() {
     belt = "";
 }
 
-function sendValues(names2, gender2, age2, height2, belt2){
+function sendValues(names2, gender2, age2, height2, belt2) {
     namesGet.push(names2);
     genderGet.push(gender2);
     ageGet.push(age2);
@@ -515,13 +543,13 @@ function sendValues(names2, gender2, age2, height2, belt2){
     // console.log(names2, gender2, age2, height2, belt2);
 }
 
-function calculateHeights(){
-    for (var u = 0; u < namesGet.length; u++){
-        getValues(id[u] ,namesGet[u], genderGet[u], ageGet[u], heightGet[u], beltGet[u]);
+function calculateHeights() {
+    for (var u = 0; u < namesGet.length; u++) {
+        getValues(id[u], namesGet[u], genderGet[u], ageGet[u], heightGet[u], beltGet[u]);
     }
 }
 
-function checkParticipants(){
+function checkParticipants() {
     //Aqui se compara si un participante esta solo, en caso de que sea asi
     //Luchara contra Gasper
     if (participants.length % 2) participants.push(" ");
@@ -549,7 +577,7 @@ function Perceptron(input, hidden, output) {
     });
 }
 
-function perceptronMethod(){
+function perceptronMethod() {
     //Need this constants for work
     const {
         Network
@@ -564,38 +592,64 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.337078653]);
-        myPerceptronNeuron1.activate([0]);                myPerceptronNeuron1.propagate(learningRate, [0]);
-        myPerceptronNeuron1.activate([0]);                myPerceptronNeuron1.propagate(learningRate, [0.127689597]);
-        myPerceptronNeuron1.activate([0]);           myPerceptronNeuron1.propagate(learningRate, [0]);
-        myPerceptronNeuron1.activate([0]);           myPerceptronNeuron1.propagate(learningRate, [0.13483146121]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.337078653]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.127689597]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.13483146121]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.8]);   myPerceptronNeuron1.propagate(learningRate, [0.58426966561]);
-        myPerceptronNeuron1.activate([0.8]);   myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
-        myPerceptronNeuron1.activate([0.4]);   myPerceptronNeuron1.propagate(learningRate, [0.35955056341]);
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.21348314698]);
-        myPerceptronNeuron1.activate([0.2]);   myPerceptronNeuron1.propagate(learningRate, [0.348314083]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.58426966561]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
+        myPerceptronNeuron1.activate([0.4]);
+        myPerceptronNeuron1.propagate(learningRate, [0.35955056341]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.21348314698]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.348314083]);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.41573033896]);
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.41573033896]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.53932584517]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.6]);     myPerceptronNeuron1.propagate(learningRate, [0.77528090248]);
-        myPerceptronNeuron1.activate([0.6]);   myPerceptronNeuron1.propagate(learningRate, [0.43820224918]);
-        myPerceptronNeuron1.activate([0.2]);    myPerceptronNeuron1.propagate(learningRate, [0.75280899226]);
-        myPerceptronNeuron1.activate([0.8]);    myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
-        myPerceptronNeuron1.activate([0.8]);    myPerceptronNeuron1.propagate(learningRate, [0.31460674297]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.77528090248]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.43820224918]);
+        myPerceptronNeuron1.activate([0.2]);
+        myPerceptronNeuron1.propagate(learningRate, [0.75280899226]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.24719101231]);
+        myPerceptronNeuron1.activate([0.8]);
+        myPerceptronNeuron1.propagate(learningRate, [0.31460674297]);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0]);     myPerceptronNeuron1.propagate(learningRate, [0.40449438385]);
-        myPerceptronNeuron1.activate([0]);      myPerceptronNeuron1.propagate(learningRate, [0.26966292253]);
-        myPerceptronNeuron1.activate([1]);           myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
-        myPerceptronNeuron1.activate([1]);           myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
-        myPerceptronNeuron1.activate([0.6]);          myPerceptronNeuron1.propagate(learningRate, [0.97752809446]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.40449438385]);
+        myPerceptronNeuron1.activate([0]);
+        myPerceptronNeuron1.propagate(learningRate, [0.26966292253]);
+        myPerceptronNeuron1.activate([1]);
+        myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
+        myPerceptronNeuron1.activate([1]);
+        myPerceptronNeuron1.propagate(learningRate, [0.93258427402]);
+        myPerceptronNeuron1.activate([0.6]);
+        myPerceptronNeuron1.propagate(learningRate, [0.97752809446]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron1.activate([0.4]);     myPerceptronNeuron1.propagate(learningRate, [0.56179775539]);
-        }
+        myPerceptronNeuron1.activate([0.4]);
+        myPerceptronNeuron1.propagate(learningRate, [0.56179775539]);
+    }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -605,38 +659,58 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron2.activate([0]);     myPerceptronNeuron2.propagate(learningRate, [0.2553192054]);
-        myPerceptronNeuron2.activate([0]);                
-        myPerceptronNeuron2.activate([1]);                
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([1]);           myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2553192054]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);   myPerceptronNeuron2.propagate(learningRate, [0.7234044362]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.2978724082]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
-        myPerceptronNeuron2.activate([0]);   myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7234044362]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2978724082]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.2765958068]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);    myPerceptronNeuron2.propagate(learningRate, [0.4042554152]);
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.4042554152]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6382980306]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([0]);     myPerceptronNeuron2.propagate(learningRate, [0.8297874432]);
-        myPerceptronNeuron2.activate([1]);   myPerceptronNeuron2.propagate(learningRate, [0.7021278348]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.7872342404]);
-        myPerceptronNeuron2.activate([0]);    myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
-        myPerceptronNeuron2.activate([1]);    myPerceptronNeuron2.propagate(learningRate, [0.4680852194]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.8297874432]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7021278348]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.7872342404]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.propagate(learningRate, [0.340425611]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.4680852194]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.3829788138]);
-        myPerceptronNeuron2.activate([1]);      myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([0]);           
-        myPerceptronNeuron2.activate([0]);          
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.3829788138]);
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.127659597]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([0]);
+        myPerceptronNeuron2.activate([0]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron2.activate([1]);     myPerceptronNeuron2.propagate(learningRate, [0.6808512334]);
-        
+        myPerceptronNeuron2.activate([1]);
+        myPerceptronNeuron2.propagate(learningRate, [0.6808512334]);
+
     }
 
     //////////////////////////////////////////////////////
@@ -648,38 +722,64 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron3.activate([0.46132]);     myPerceptronNeuron3.propagate(learningRate, [0.3255814]);
-        myPerceptronNeuron3.activate([0]);                myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0]);                myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0]);           myPerceptronNeuron3.propagate(learningRate, [0]);
-        myPerceptronNeuron3.activate([0.1538]);           myPerceptronNeuron3.propagate(learningRate, [0.1162790699]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3255814]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0]);
+        myPerceptronNeuron3.propagate(learningRate, [0]);
+        myPerceptronNeuron3.activate([0.1538]);
+        myPerceptronNeuron3.propagate(learningRate, [0.1162790699]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.61508]);   myPerceptronNeuron3.propagate(learningRate, [0.5813953499]);
-        myPerceptronNeuron3.activate([0.30756]);   myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
-        myPerceptronNeuron3.activate([0.38444]);   myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
-        myPerceptronNeuron3.activate([0.30756]);    myPerceptronNeuron3.propagate(learningRate, [0.1860465119]);
-        myPerceptronNeuron3.activate([0.46132]);   myPerceptronNeuron3.propagate(learningRate, [0.3255813959]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5813953499]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
+        myPerceptronNeuron3.activate([0.38444]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.1860465119]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3255813959]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.38444]);    myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
-        myPerceptronNeuron3.activate([0.61508]);     myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);      myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);      myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
-        myPerceptronNeuron3.activate([0.61508]);     myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.38444]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
+        myPerceptronNeuron3.activate([0.61508]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5348837219]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.9226]);     myPerceptronNeuron3.propagate(learningRate, [0.7674418619]);
-        myPerceptronNeuron3.activate([0.46132]);   myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
-        myPerceptronNeuron3.activate([0.84572]);    myPerceptronNeuron3.propagate(learningRate, [0.7441860479]);
-        myPerceptronNeuron3.activate([0.30756]);    myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
-        myPerceptronNeuron3.activate([0.23068]);    myPerceptronNeuron3.propagate(learningRate, [0.3023255819]);
+        myPerceptronNeuron3.activate([0.9226]);
+        myPerceptronNeuron3.propagate(learningRate, [0.7674418619]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3488372099]);
+        myPerceptronNeuron3.activate([0.84572]);
+        myPerceptronNeuron3.propagate(learningRate, [0.7441860479]);
+        myPerceptronNeuron3.activate([0.30756]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2325581399]);
+        myPerceptronNeuron3.activate([0.23068]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3023255819]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.46132]);     myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
-        myPerceptronNeuron3.activate([0.23068]);      myPerceptronNeuron3.propagate(learningRate, [0.2558139539]);
-        myPerceptronNeuron3.activate([1]);           myPerceptronNeuron3.propagate(learningRate, [1]);
-        myPerceptronNeuron3.activate([1]);           myPerceptronNeuron3.propagate(learningRate, [1]);
-        myPerceptronNeuron3.activate([1]);          myPerceptronNeuron3.propagate(learningRate, [0.9069767459]);
+        myPerceptronNeuron3.activate([0.46132]);
+        myPerceptronNeuron3.propagate(learningRate, [0.3953488379]);
+        myPerceptronNeuron3.activate([0.23068]);
+        myPerceptronNeuron3.propagate(learningRate, [0.2558139539]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [1]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [1]);
+        myPerceptronNeuron3.activate([1]);
+        myPerceptronNeuron3.propagate(learningRate, [0.9069767459]);
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron3.activate([0.5382]);     myPerceptronNeuron3.propagate(learningRate, [0.5581395359]);
-        
+        myPerceptronNeuron3.activate([0.5382]);
+        myPerceptronNeuron3.propagate(learningRate, [0.5581395359]);
+
     }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -690,38 +790,64 @@ function perceptronMethod(){
     /////////////////////////////////////////////////////
     ///////////////////Entrenamiento/////////////////////
     for (var i = 0; i < 90000; i++) {
-        myPerceptronNeuron4.activate([0.3486]);     myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
-        myPerceptronNeuron4.activate([0]);                myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0]);                myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0.0415]);           myPerceptronNeuron4.propagate(learningRate, [0]);
-        myPerceptronNeuron4.activate([0]);           myPerceptronNeuron4.propagate(learningRate, [0.0681818173]);
+        myPerceptronNeuron4.activate([0.3486]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0.0415]);
+        myPerceptronNeuron4.propagate(learningRate, [0]);
+        myPerceptronNeuron4.activate([0]);
+        myPerceptronNeuron4.propagate(learningRate, [0.0681818173]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.5976]);   myPerceptronNeuron4.propagate(learningRate, [0.5681818079]);
-        myPerceptronNeuron4.activate([0.3735]);   myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
-        myPerceptronNeuron4.activate([0.5395]);   myPerceptronNeuron4.propagate(learningRate, [0.3863636295]);
-        myPerceptronNeuron4.activate([0.415]);    myPerceptronNeuron4.propagate(learningRate, [0.2272727234]);
-        myPerceptronNeuron4.activate([0.5395]);   myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
+        myPerceptronNeuron4.activate([0.5976]);
+        myPerceptronNeuron4.propagate(learningRate, [0.5681818079]);
+        myPerceptronNeuron4.activate([0.3735]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3863636295]);
+        myPerceptronNeuron4.activate([0.415]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2272727234]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.415]);    myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
-        myPerceptronNeuron4.activate([0.5395]);     myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.581]);      myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.581]);      myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
-        myPerceptronNeuron4.activate([0.7221]);     myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.415]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3636363572]);
+        myPerceptronNeuron4.activate([0.5395]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
+        myPerceptronNeuron4.activate([0.7221]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4772727187]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.747]);     myPerceptronNeuron4.propagate(learningRate, [0.8181818032]);
-        myPerceptronNeuron4.activate([0.4565]);   myPerceptronNeuron4.propagate(learningRate, [0.4090909018]);
-        myPerceptronNeuron4.activate([0.581]);    myPerceptronNeuron4.propagate(learningRate, [0.7727272586]);
-        myPerceptronNeuron4.activate([0.332]);    myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
-        myPerceptronNeuron4.activate([0.166]);    myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.747]);
+        myPerceptronNeuron4.propagate(learningRate, [0.8181818032]);
+        myPerceptronNeuron4.activate([0.4565]);
+        myPerceptronNeuron4.propagate(learningRate, [0.4090909018]);
+        myPerceptronNeuron4.activate([0.581]);
+        myPerceptronNeuron4.propagate(learningRate, [0.7727272586]);
+        myPerceptronNeuron4.activate([0.332]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
+        myPerceptronNeuron4.activate([0.166]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2954545403]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.3735]);     myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
-        myPerceptronNeuron4.activate([0.083]);      myPerceptronNeuron4.propagate(learningRate, [0.2045454511]);
-        myPerceptronNeuron4.activate([0.7055]);           myPerceptronNeuron4.propagate(learningRate, [1]);
-        myPerceptronNeuron4.activate([0.7055]);           myPerceptronNeuron4.propagate(learningRate, [1]);
-        myPerceptronNeuron4.activate([0.664]);          myPerceptronNeuron4.propagate(learningRate, [0.954545437]);
+        myPerceptronNeuron4.activate([0.3735]);
+        myPerceptronNeuron4.propagate(learningRate, [0.3409090849]);
+        myPerceptronNeuron4.activate([0.083]);
+        myPerceptronNeuron4.propagate(learningRate, [0.2045454511]);
+        myPerceptronNeuron4.activate([0.7055]);
+        myPerceptronNeuron4.propagate(learningRate, [1]);
+        myPerceptronNeuron4.activate([0.7055]);
+        myPerceptronNeuron4.propagate(learningRate, [1]);
+        myPerceptronNeuron4.activate([0.664]);
+        myPerceptronNeuron4.propagate(learningRate, [0.954545437]);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        myPerceptronNeuron4.activate([0.498]);     myPerceptronNeuron4.propagate(learningRate, [0.5227272633]);
-        
+        myPerceptronNeuron4.activate([0.498]);
+        myPerceptronNeuron4.propagate(learningRate, [0.5227272633]);
+
     }
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
@@ -736,22 +862,22 @@ function perceptronMethod(){
     //////////////////////////////////////////////////////
     //Calculo de los valores de la categoria actual
     var resultsNetworks = 0;
-    for (var w = 0; w <= beltScoreFinal.length - 1; w++){
+    for (var w = 0; w <= beltScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron1.activate([beltScoreFinal[w]]);
         outputsNetwork1[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= genderScoreFinal.length - 1; w++){
+    for (var w = 0; w <= genderScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron2.activate([genderScoreFinal[w]]);
         outputsNetwork2[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= ageScoreFinal.length - 1; w++){
+    for (var w = 0; w <= ageScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron3.activate([ageScoreFinal[w]]);
         outputsNetwork3[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
     resultsNetworks = 0;
-    for (var w = 0; w <= heightScoreFinal.length - 1; w++){
+    for (var w = 0; w <= heightScoreFinal.length - 1; w++) {
         resultsNetworks = myPerceptronNeuron4.activate([heightScoreFinal[w]]);
         outputsNetwork4[w] = new Array(idScoreFinal[w], nameScoreFinal[w], resultsNetworks[0]);
     }
@@ -759,531 +885,587 @@ function perceptronMethod(){
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //Calculo de los valores de las demas categorias
-    if (Category == "IM5"){
+    if (Category == "IM5") {
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "I56"){
+    if (Category == "I56") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "I78"){
+    if (Category == "I78") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "I910"){
+    if (Category == "I910") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "I1112"){
+    if (Category == "I1112") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "J1314"){
+    if (Category == "J1314") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "J1516"){
+    if (Category == "J1516") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesA17.length - 1; w++) {
             auxiliar = categoryEntriesA17[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkA17 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkA17[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
 
-    if (Category == "A17"){
+    if (Category == "A17") {
         for (var w = 0; w <= categoryEntriesIM5.length - 1; w++) {
             auxiliar = categoryEntriesIM5[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkIM5 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkIM5[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI56.length - 1; w++) {
             auxiliar = categoryEntriesI56[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI56 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI56[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI78.length - 1; w++) {
             auxiliar = categoryEntriesI78[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI78 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI78[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI910.length - 1; w++) {
             auxiliar = categoryEntriesI910[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI910 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI910[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesI1112.length - 1; w++) {
             auxiliar = categoryEntriesI1112[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkI1112 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkI1112[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1314.length - 1; w++) {
             auxiliar = categoryEntriesJ1314[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1314 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1314[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
         for (var w = 0; w <= categoryEntriesJ1516.length - 1; w++) {
             auxiliar = categoryEntriesJ1516[w];
-            id = auxiliar[0]; nombre = auxiliar[1];
+            id = auxiliar[0];
+            nombre = auxiliar[1];
             resultsNetworksN1 = myPerceptronNeuron1.activate([auxiliar[5]]);
             resultsNetworksN2 = myPerceptronNeuron2.activate([auxiliar[2]]);
             resultsNetworksN3 = myPerceptronNeuron3.activate([auxiliar[3]]);
             resultsNetworksN4 = myPerceptronNeuron4.activate([auxiliar[4]]);
-            categoryNetworkJ1516 = new Array(id, nombre, resultsNetworksN2, resultsNetworksN3, resultsNetworksN4, resultsNetworksN1);
+            categoryNetworkJ1516[w] = new Array(id, nombre, resultsNetworksN2[0], resultsNetworksN3[0], resultsNetworksN4[0], resultsNetworksN1[0]);
         }
     }
     //////////////////////////////////////////////////////
@@ -1294,373 +1476,1072 @@ function perceptronMethod(){
     outputsNetwork2.sort(comparateThirdColumn);
     outputsNetwork3.sort(comparateThirdColumn);
     outputsNetwork4.sort(comparateThirdColumn);
-    function comparateThirdColumn(a, b){
-        if (a[2] == b[2]) return 0;
-        else return (a[2] < b[2]) ? -1 : 1;
-    }
+    categoryNetworkA17.sort(comparateThirdColumn);
+    categoryNetworkI1112.sort(comparateThirdColumn);
+    categoryNetworkI56.sort(comparateThirdColumn);
+    categoryNetworkI78.sort(comparateThirdColumn);
+    categoryNetworkI910.sort(comparateThirdColumn);
+    categoryNetworkIM5.sort(comparateThirdColumn);
+    categoryNetworkJ1314.sort(comparateThirdColumn);
+    categoryNetworkJ1516.sort(comparateThirdColumn);
+
     var auxiliar, auxiliar2, auxiliar3;
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
-    //🙈            👽
-    console.log("😛😛😛😛😛😛😛😛😛😛😛😛😛");
-    console.log("😛😛Haciendo Match (Cinta)😛😛");
-    console.log("😛😛😛😛😛😛😛😛😛😛😛😛😛");
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
     //Hace el match si dos personas tiene el mismo valor de cinta los junta, y guardamos su id para futuras modificaciones
-    var auxOutpu = new Array();
+    var auxId = new Array();
     for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
         if (w + 1 < outputsNetwork1.length) {
             auxiliar = outputsNetwork1[w];
             auxiliar2 = outputsNetwork1[w + 1];
             if (auxiliar[2] == auxiliar2[2]) {
-                    participants.push(auxiliar[1]);
-                    participants.push(auxiliar2[1]);
-            }
-            else {
-                //En caso de que no pase por la primera neurona los guardamos temporarmente
-                auxOutpu = outputsNetwork1[w];
+                participantes.push(auxiliar[1]);
+                participantes.push(auxiliar2[1]);
+                //Aumentamos uno nuestro contador, para que no pase este problema:
+                //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                w++;
+                //Guardamos id's
+                auxId.push(auxiliar[0]);
+                auxId.push(auxiliar2[0]);
             }
         }
     }
-    outputsNetwork1 = auxOutpu;
+    //0 si esta, -1 si no esta
+    // console.log(auxId.indexOf("113"));
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
+        }
+    }
     //Elimina cosas que no queremos
-    tournamentCategory = tournamentCategory.filter(Boolean);
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
     //Si todavia hay people
-    if (outputsNetwork1.length > 0){
+    //Busca quienes coincidan con su cinta
+    if (outputsNetwork1.length > 0) {
         for (var w = 0; w <= tournamentCategory.length - 1; w++) {
-            if (Category == tournamentCategory[w]){
-                if (w + 1 <tournamentCategory.length){
+            if (Category == tournamentCategory[w]) {
+                if (w + 1 < tournamentCategory.length) {
                     matchUp();
+                    break;
                 }
-                if (w -1 < tournamentCategory.length){
+                if (w - 1 < tournamentCategory.length) {
                     matchDown();
+                    break;
                 }
             }
         }
     }
+    //Elimina cosas que no queremos
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    //Busca quienes coincidan con su edad
+    if (outputsNetwork1.length > 0) {
+        for (var w = 0; w <= tournamentCategory.length - 1; w++) {
+            if (Category == tournamentCategory[w]) {
+                if (w + 1 < tournamentCategory.length) {
+                    matchUpAge();
+                    break;
+                }
+                if (w - 1 < tournamentCategory.length) {
+                    matchDownAge();
+                    break;
+                }
+            }
+        }
+    }
+    //Elimina cosas que no queremos
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    //Si no se encuentra a un competidor
+    if (outputsNetwork1.length > 0) {
+        matchAlone();
+    }
+    //Elimina cosas que no queremos
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    //En el vector hace las graficas
+    doGraphic();
+
 }
 
-function matchUp(){
-    
+function matchUp() {
+    //Para que las posiciones se acomoden bien
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    auxId = [];
+    if (Category == "IM5") {
+        //Se compara con el vector de la categoria i56
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
+                auxiliar2 = categoryNetworkI56[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I56") {
+        //Se compara con el vector de la categoria i78
+        console.table(categoryNetworkI78);
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
+                auxiliar2 = categoryNetworkI78[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I78") {
+        //Se compara con el vector de la categoria i910
+        //Se compara con el vector de la categoria i1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
+                auxiliar2 = categoryNetworkI910[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I910") {
+        //Se compara con el vector de la categoria i1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
+                auxiliar2 = categoryNetworkI1112[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I1112") {
+        //Se compara con el vector de la categoria j1314
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1314[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "J1314") {
+        //Se compara con el vector de la categoria j1516
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1516[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "J1516") {
+        //Se compara con el vector de la categoria a17
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkA17.length - 1; r++) {
+                auxiliar2 = categoryNetworkA17[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
+        }
+    }
 }
 
-function matchDown(){
-    
+
+function matchDown() {
+    //Para que las posiciones se acomoden bien
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    auxId = [];
+    if (Category == "I56") {
+        //Se compara con el vector de la categoria iM5
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkIM5.length - 1; r++) {
+                auxiliar2 = categoryNetworkIM5[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I78") {
+        //Se compara con el vector de la categoria i56
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
+                auxiliar2 = categoryNetworkI56[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I910") {
+        //Se compara con el vector de la categoria i78
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
+                auxiliar2 = categoryNetworkI78[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I1112") {
+        //Se compara con el vector de la categoria I910
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
+                auxiliar2 = categoryNetworkI910[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "J1314") {
+        //Se compara con el vector de la categoria I1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
+                auxiliar2 = categoryNetworkI1112[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "J1516") {
+        //Se compara con el vector de la categoria J1314
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1314[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "A17") {
+        //Se compara con el vector de la categoria J1516
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1516[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
+        }
+    }
 }
 
-function getValuesCategory(conta, category,idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent){
+function getValuesCategory(conta, category, idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
     var values = [nameStudent, genderStudent, ageStudent, heightStudent, beltStudent];
-            gender = values[1];
-            age = values[2];
-            colorBelt = values[4];
-            height = values[3];
-    
-        var aux;
-       
-        if (gender == "M") {
-            gender = 1;
-        } else {
-            gender = 0;
-        }
+    gender = values[1];
+    age = values[2];
+    colorBelt = values[4];
+    height = values[3];
 
-        if (age >= 17) {
-            age = 1;
-        } else if (age == 4) {
-            age = 0;
-        } else {
-            aux = age - 4;
-            age = aux * 0.07692;
-        }
+    var aux;
 
-        switch (colorBelt) {
-            case "Blanca":
-                colorBelt = 0;
-                break;
-            case "Amarilla":
-                colorBelt = 0.2;
-                break;
-            case "Verde":
-                colorBelt = 0.4;
-                break;
-            case "Azul":
-                colorBelt = 0.6;
-                break;
-            case "Rojo":
-                colorBelt = 0.8;
-                break;
-            case "Negra":
-                colorBelt = 1;
-                break;
-        }
+    if (gender == "M") {
+        gender = 1;
+    } else {
+        gender = 0;
+    }
 
-        if (height >= 2.00) {
-            height = 1;
-        } else if (height == 0.8) {
-            height = 0;
-        } else {
-            aux = height - 0.8;
-            height = (aux * 100) * 0.0083;
-        }
-        if(category == "I1112"){categoryEntriesI1112[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "A17"){categoryEntriesA17[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "I56"){categoryEntriesI56[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "I78"){categoryEntriesI78[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "I910"){categoryEntriesI910[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "IM5"){categoryEntriesIM5[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "J1314"){categoryEntriesJ1314[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        if(category == "J1516"){categoryEntriesJ1516[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)};
-        
+    if (age >= 17) {
+        age = 1;
+    } else if (age == 4) {
+        age = 0;
+    } else {
+        aux = age - 4;
+        age = aux * 0.07692;
+    }
+
+    switch (colorBelt) {
+        case "Blanca":
+            colorBelt = 0;
+            break;
+        case "Amarilla":
+            colorBelt = 0.2;
+            break;
+        case "Verde":
+            colorBelt = 0.4;
+            break;
+        case "Azul":
+            colorBelt = 0.6;
+            break;
+        case "Rojo":
+            colorBelt = 0.8;
+            break;
+        case "Negra":
+            colorBelt = 1;
+            break;
+    }
+
+    if (height >= 2.00) {
+        height = 1;
+    } else if (height == 0.8) {
+        height = 0;
+    } else {
+        aux = height - 0.8;
+        height = (aux * 100) * 0.0083;
+    }
+    if (category == "I1112") {
+        categoryEntriesI1112[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "A17") {
+        categoryEntriesA17[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "I56") {
+        categoryEntriesI56[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "I78") {
+        categoryEntriesI78[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "I910") {
+        categoryEntriesI910[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "IM5") {
+        categoryEntriesIM5[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "J1314") {
+        categoryEntriesJ1314[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+    if (category == "J1516") {
+        categoryEntriesJ1516[conta] = new Array(idStudent, nameStudent, gender, age, colorBelt, height)
+    };
+
 }
 
-function EntriesOtherCategories(){
-    if (Category == 'IM5'){
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+function EntriesOtherCategories() {
+    if (Category == 'IM5') {
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'I56'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'I56') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'I78'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'I78') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'I1112'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'I1112') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'J1314'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'J1314') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'J1516'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'J1516') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'A17'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'A17') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI910.length - 1; w++){
+        for (var w = 0; w <= categoryI910.length - 1; w++) {
             auxiliarCategorias = categoryI910[w];
             getValuesCategory(w, "I910", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
     }
 
-    if (Category == 'I910'){
-        for (var w = 0; w <= categoryIM5.length - 1; w++){
+    if (Category == 'I910') {
+        for (var w = 0; w <= categoryIM5.length - 1; w++) {
             auxiliarCategorias = categoryIM5[w];
             getValuesCategory(w, "IM5", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI56.length - 1; w++){
+        for (var w = 0; w <= categoryI56.length - 1; w++) {
             auxiliarCategorias = categoryI56[w];
             getValuesCategory(w, "I56", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI78.length - 1; w++){
+        for (var w = 0; w <= categoryI78.length - 1; w++) {
             auxiliarCategorias = categoryI78[w];
             getValuesCategory(w, "I78", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryI1112.length - 1; w++){
+        for (var w = 0; w <= categoryI1112.length - 1; w++) {
             auxiliarCategorias = categoryI1112[w];
             getValuesCategory(w, "I1112", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1314.length - 1; w++){
+        for (var w = 0; w <= categoryJ1314.length - 1; w++) {
             auxiliarCategorias = categoryJ1314[w];
             getValuesCategory(w, "J1314", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryJ1516.length - 1; w++){
+        for (var w = 0; w <= categoryJ1516.length - 1; w++) {
             auxiliarCategorias = categoryJ1516[w];
             getValuesCategory(w, "J1516", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
         }
-        for (var w = 0; w <= categoryA17.length - 1; w++){
+        for (var w = 0; w <= categoryA17.length - 1; w++) {
             auxiliarCategorias = categoryA17[w];
             getValuesCategory(w, "A17", auxiliarCategorias[0], auxiliarCategorias[1], auxiliarCategorias[4], auxiliarCategorias[3], auxiliarCategorias[5], auxiliarCategorias[2]);
+        }
+    }
+}
+
+function comparateThirdColumn(a, b) {
+    if (a[2] == b[2]) return 0;
+    else return (a[2] < b[2]) ? -1 : 1;
+}
+
+function doGraphic() {
+    for (var w = 0; w <= participantes.length - 1; w++) {
+        participants.push(participantes[w]);
+    }
+}
+
+function matchAlone() {
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxiliar = outputsNetwork1[w];
+        participantes.push(auxiliar[1]);
+        participantes.push(" ");
+    }
+}
+
+function matchUpAge() {
+    console.table(outputsNetwork1);
+    console.table(categoryNetworkI1112);
+    //Para que las posiciones se acomoden bien
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    auxId = [];
+    if (Category == "IM5") {
+        //Se compara con el vector de la categoria i56
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
+                auxiliar2 = categoryNetworkI56[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I56") {
+        //Se compara con el vector de la categoria i78
+        console.table(categoryNetworkI78);
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
+                auxiliar2 = categoryNetworkI78[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I78") {
+        //Se compara con el vector de la categoria i910
+        //Se compara con el vector de la categoria i1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
+                auxiliar2 = categoryNetworkI910[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I910") {
+        //Se compara con el vector de la categoria i1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
+                auxiliar2 = categoryNetworkI1112[r];
+                calculo = auxiliar[2] - auxiliar2[3];
+                console.log(calculo);
+                if (calculo <= 0.23064) {
+                    console.log(auxId.indexOf(auxiliar2[0]) != -1);
+                    // if(auxId.indexOf(auxiliar2[0]) != -1){
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    break;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                    // }
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I1112") {
+        //Se compara con el vector de la categoria j1314
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1314[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "J1314") {
+        //Se compara con el vector de la categoria j1516
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1516[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "J1516") {
+        //Se compara con el vector de la categoria a17
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkA17.length - 1; r++) {
+                auxiliar2 = categoryNetworkA17[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
+        }
+    }
+}
+
+function matchDownAge() {
+    //Para que las posiciones se acomoden bien
+    outputsNetwork1 = outputsNetwork1.filter(Boolean);
+    auxId = [];
+    if (Category == "I56") {
+        //Se compara con el vector de la categoria iM5
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkIM5.length - 1; r++) {
+                auxiliar2 = categoryNetworkIM5[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I78") {
+        //Se compara con el vector de la categoria i56
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
+                auxiliar2 = categoryNetworkI56[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "I910") {
+        //Se compara con el vector de la categoria i78
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
+                auxiliar2 = categoryNetworkI78[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "I1112") {
+        //Se compara con el vector de la categoria I910
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
+                auxiliar2 = categoryNetworkI910[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+
+    }
+
+    if (Category == "J1314") {
+        //Se compara con el vector de la categoria I1112
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
+                auxiliar2 = categoryNetworkI1112[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "J1516") {
+        //Se compara con el vector de la categoria J1314
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1314[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    if (Category == "A17") {
+        //Se compara con el vector de la categoria J1516
+        for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+            auxiliar = outputsNetwork1[w];
+            for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
+                auxiliar2 = categoryNetworkJ1516[r];
+                if (auxiliar[2] == auxiliar2[5]) {
+                    participantes.push(auxiliar[1]);
+                    participantes.push(auxiliar2[1]);
+                    //Aumentamos uno nuestro contador, para que no pase este problema:
+                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
+                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
+                    w++;
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                }
+            }
+        }
+    }
+
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
         }
     }
 }

@@ -17,9 +17,9 @@ Agente voz
     Terminado
 
 Agente graficas
-    enviar las entradas al perceptron para que haga su show
     hacer el match
-        compare si hay 3 con el mismo valor
+        arriba
+        abajo
 
 Percetron multicapa
     Terminado
