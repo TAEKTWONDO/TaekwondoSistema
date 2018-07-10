@@ -79,6 +79,7 @@ var outputsNetwork4Up = new Array();
 /////////////////////////////////////////
 var participantes = new Array();
 var auxId = new Array();
+var auxIdNext = new Array();
 ////////////////////////////////////////
 
 function graphic(texto) {
@@ -2234,156 +2235,221 @@ function matchAlone() {
 }
 
 function matchUpAge() {
-    console.table(outputsNetwork1);
-    console.table(categoryNetworkI1112);
     //Para que las posiciones se acomoden bien
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     auxId = [];
     if (Category == "IM5") {
-        //Se compara con el vector de la categoria i56
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
                 auxiliar2 = categoryNetworkI56[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
-
     }
 
     if (Category == "I56") {
-        //Se compara con el vector de la categoria i78
-        console.table(categoryNetworkI78);
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
                 auxiliar2 = categoryNetworkI78[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "I78") {
-        //Se compara con el vector de la categoria i910
+        conta = 0;
         //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
                 auxiliar2 = categoryNetworkI910[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "I910") {
+        conta = 0;
         //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
                 auxiliar2 = categoryNetworkI1112[r];
                 calculo = auxiliar[2] - auxiliar2[3];
-                console.log(calculo);
                 if (calculo <= 0.23064) {
-                    console.log(auxId.indexOf(auxiliar2[0]) != -1);
-                    // if(auxId.indexOf(auxiliar2[0]) != -1){
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
-                    auxId.push(auxiliar2[0]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    break;
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
                     }
                 }
+            }
         }
-        console.table(auxId);
     }
- 
+
     if (Category == "I1112") {
-        //Se compara con el vector de la categoria j1314
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
                 auxiliar2 = categoryNetworkJ1314[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
-
     }
 
     if (Category == "J1314") {
-        //Se compara con el vector de la categoria j1516
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
                 auxiliar2 = categoryNetworkJ1516[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "J1516") {
-        //Se compara con el vector de la categoria a17
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkA17.length - 1; r++) {
                 auxiliar2 = categoryNetworkA17[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
@@ -2397,159 +2463,228 @@ function matchUpAge() {
         }
     }
     auxId = [];
-    
+
 }
 
 function matchDownAge() {
     //Para que las posiciones se acomoden bien
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     auxId = [];
+
     if (Category == "I56") {
-        //Se compara con el vector de la categoria iM5
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkIM5.length - 1; r++) {
                 auxiliar2 = categoryNetworkIM5[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "I78") {
-        //Se compara con el vector de la categoria i56
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI56.length - 1; r++) {
                 auxiliar2 = categoryNetworkI56[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "I910") {
-        //Se compara con el vector de la categoria i78
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI78.length - 1; r++) {
                 auxiliar2 = categoryNetworkI78[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
-
     }
 
     if (Category == "I1112") {
-        //Se compara con el vector de la categoria I910
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI910.length - 1; r++) {
                 auxiliar2 = categoryNetworkI910[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
-
     }
 
     if (Category == "J1314") {
-        //Se compara con el vector de la categoria I1112
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkI1112.length - 1; r++) {
                 auxiliar2 = categoryNetworkI1112[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "J1516") {
-        //Se compara con el vector de la categoria J1314
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkJ1314.length - 1; r++) {
                 auxiliar2 = categoryNetworkJ1314[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
         }
     }
 
     if (Category == "A17") {
-        //Se compara con el vector de la categoria J1516
+        conta = 0;
+        //Se compara con el vector de la categoria i1112
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
             auxiliar = outputsNetwork1[w];
             for (var r = 0; r <= categoryNetworkJ1516.length - 1; r++) {
                 auxiliar2 = categoryNetworkJ1516[r];
-                if (auxiliar[2] == auxiliar2[5]) {
-                    participantes.push(auxiliar[1]);
-                    participantes.push(auxiliar2[1]);
-                    //Aumentamos uno nuestro contador, para que no pase este problema:
-                    //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
-                    //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
-                    w++;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
+                calculo = auxiliar[2] - auxiliar2[3];
+                if (calculo <= 0.23064) {
+                    if (conta == 0) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
+                    if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
+                        participantes.push(auxiliar[1]);
+                        participantes.push(auxiliar2[1]);
+                        //Guardamos id's
+                        auxId.push(auxiliar[0]);
+                        auxIdNext.push(auxiliar2[0]);
+                        conta++;
+                        break;
+                    }
                 }
             }
-        }
-    }
-
-    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
-        auxDatos = outputsNetwork1[w];
-        if (auxId.indexOf(auxDatos[0]) != -1) {
-            delete outputsNetwork1[w];
         }
     }
 
@@ -2563,4 +2698,3 @@ function matchDownAge() {
     auxId = [];
 
 }
-
