@@ -1519,11 +1519,12 @@ function perceptronMethod() {
             delete outputsNetwork1[w];
         }
     }
+    auxId = [];
     //Elimina cosas que no queremos
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     //Si todavia hay people
     //Busca quienes coincidan con su cinta
-    if (outputsNetwork1.length > 0) {
+    if (outputsNetwork1.length != 0) {
         for (var w = 0; w <= tournamentCategory.length - 1; w++) {
             if (Category == tournamentCategory[w]) {
                 if (w + 1 < tournamentCategory.length) {
@@ -1540,7 +1541,7 @@ function perceptronMethod() {
     //Elimina cosas que no queremos
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     //Busca quienes coincidan con su edad
-    if (outputsNetwork1.length > 0) {
+    if (outputsNetwork1.length != 0) {
         for (var w = 0; w <= tournamentCategory.length - 1; w++) {
             if (Category == tournamentCategory[w]) {
                 if (w + 1 < tournamentCategory.length) {
@@ -1557,9 +1558,10 @@ function perceptronMethod() {
     //Elimina cosas que no queremos
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     //Si no se encuentra a un competidor
-    if (outputsNetwork1.length > 0) {
+    if (outputsNetwork1.length != 0) {
         matchAlone();
     }
+
     //Elimina cosas que no queremos
     outputsNetwork1 = outputsNetwork1.filter(Boolean);
     //En el vector hace las graficas
@@ -1716,14 +1718,15 @@ function matchUp() {
         }
     }
 
+    //Para limpiar el vector
     for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
         auxDatos = outputsNetwork1[w];
         if (auxId.indexOf(auxDatos[0]) != -1) {
             delete outputsNetwork1[w];
         }
     }
+    auxId = [];
 }
-
 
 function matchDown() {
     //Para que las posiciones se acomoden bien
@@ -1871,12 +1874,14 @@ function matchDown() {
         }
     }
 
+    //Para limpiar el vector
     for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
         auxDatos = outputsNetwork1[w];
         if (auxId.indexOf(auxDatos[0]) != -1) {
             delete outputsNetwork1[w];
         }
     }
+    auxId = [];
 }
 
 function getValuesCategory(conta, category, idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
@@ -2310,19 +2315,19 @@ function matchUpAge() {
                     // if(auxId.indexOf(auxiliar2[0]) != -1){
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
+                    //Guardamos id's
+                    auxId.push(auxiliar[0]);
+                    auxId.push(auxiliar2[0]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
                     break;
-                    //Guardamos id's
-                    auxId.push(auxiliar[0]);
-                    // }
+                    }
                 }
-            }
         }
-
+        console.table(auxId);
     }
-
+ 
     if (Category == "I1112") {
         //Se compara con el vector de la categoria j1314
         for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
@@ -2384,12 +2389,15 @@ function matchUpAge() {
         }
     }
 
+    //Para limpiar el vector
     for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
         auxDatos = outputsNetwork1[w];
         if (auxId.indexOf(auxDatos[0]) != -1) {
             delete outputsNetwork1[w];
         }
     }
+    auxId = [];
+    
 }
 
 function matchDownAge() {
@@ -2544,4 +2552,15 @@ function matchDownAge() {
             delete outputsNetwork1[w];
         }
     }
+
+    //Para limpiar el vector
+    for (var w = 0; w <= outputsNetwork1.length - 1; w++) {
+        auxDatos = outputsNetwork1[w];
+        if (auxId.indexOf(auxDatos[0]) != -1) {
+            delete outputsNetwork1[w];
+        }
+    }
+    auxId = [];
+
 }
+
