@@ -82,6 +82,10 @@ var auxId = new Array();
 var auxIdNext = new Array();
 ////////////////////////////////////////
 
+var scoreWonSend = new Array();
+var scoreWonClean = new Array();
+////////////////////////////////////////
+
 function graphic(texto) {
     $(document).ready(function () {
         $('#remove').on('click', function () {
@@ -102,6 +106,8 @@ function graphic(texto) {
         Category = get[tmp[0]];
     }
     Category = get.categoria;
+    Torneo  = get.torneo;
+    Torneo = Torneo.replace('+', '');
     //Agu dividimos  las categorias que tiene un torneo
     tournamentCategory = get.categorias.split(" ");
     delete tournamentCategory[1];
@@ -380,6 +386,8 @@ function graphic(texto) {
 
             } else {
                 console.log("Puntaje de " + $(this).text() + ": " + puntos);
+                scoreWonSend.push( $(this).text());
+                scoreWonSend.push(puntos);
             }
 
             var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text(), "3");
@@ -388,6 +396,8 @@ function graphic(texto) {
                 console.log("Cancelado");
             } else {
                 console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
+                scoreWonSend.push( $(this).text());
+                scoreWonSend.push(amonestacion);
             }
 
             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
@@ -411,19 +421,46 @@ function graphic(texto) {
 }
 
 function enviarGanadores() {
-    console.log("Enviando ganadores para que sean anunciados");
-    console.log(colaGanadores);
-    soundWon(colaGanadores);
+    var amonestacionesPuntuajes2 = new Array();
+    var wonPeople = new Array();
+    var People = new Array();
+    for(var y = 0; y < scoreWonSend.length - 1; y++){
+        scoreWonClean[y] = new Array(scoreWonSend[y], scoreWonSend[y+1]);
+        y++;
+    }
+    var amonestacionesPuntuajes = new Array();
+    for(var y = 0; y < scoreWonSend.length - 1; y++){
+        amonestacionesPuntuajes[y] = new Array(scoreWonSend[y], scoreWonSend[y+1], scoreWonSend[y+3]);
+        y ++;
+    }
+    amonestacionesPuntuajes = amonestacionesPuntuajes.filter(Boolean);
+    for(var y = 0; y < amonestacionesPuntuajes.length - 1; y++){
+        amonestacionesPuntuajes2[y] = amonestacionesPuntuajes[y];
+        y ++;
+    }
+    amonestacionesPuntuajes2.pop();
+    amonestacionesPuntuajes2 = amonestacionesPuntuajes2.filter(Boolean);
 
+    var limite = amonestacionesPuntuajes2.length - 1;
+    wonPeople.push(amonestacionesPuntuajes2[limite]);
+    wonPeople.push(amonestacionesPuntuajes2[limite-1]);
+    wonPeople.push(amonestacionesPuntuajes2[limite-2]);
+    wonPeople.push(amonestacionesPuntuajes2[limite-3]);
+    for(var y = 0; y < wonPeople.length - 1; y++){
+        aux = wonPeople[y];
+        People.push(aux[0]);
+    }
+    People = People.filter(Boolean);
+    soundWon(colaGanadores, wonPeople);
 }
 
-function soundWon(resultadoName) {
-    saveWon();
+function soundWon(resultadoName, wonPeople) { 
+    var auxNombre = wonPeople[3];
     //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
     var primer = "El ganador del primer lugar es: " + resultadoName[0] + ". Felicitaciones.";
     var segundo = "El ganador del segundo lugar es: " + resultadoName[1] + ". Felicitaciones.";
     var tercer = "El ganador del tercer lugar es: : " + resultadoName[2] + ". Felicitaciones.";
-    var tercer2 = "El ganador del tercer lugar es: : " + resultadoName[3] + ". Felicitaciones.";
+    var tercer2 = "El ganador del tercer lugar es: : " + auxNombre[0] + ". Felicitaciones.";
 
     // responsiveVoice.speak(categoriaTorneo, "Spanish Female");
     // text = encodeURIComponent(categoriaTorneo);
@@ -440,12 +477,29 @@ function soundWon(resultadoName) {
     responsiveVoice.speak(primer, "Spanish Female");
     text = encodeURIComponent(primer);
     var url = "http://";
+
+    //Guardamos amonestaciones y esas cosas
+    // saveWon(wonPeople);
 }
 
-function saveWon() {
-    console.log("Guardar ganadores");
+function saveWon(wonPeople) {
+    id = new Array();
+    puntuacion = new Array();
+    amonestaciones = new Array();
+    pos0 = wonPeople[0]; pos1 = wonPeople[1]; pos2 = wonPeople[2]; pos3 = wonPeople[3];
+    console.table(idScoreFinal);
+    console.table(nameScoreFinal);
+    id = [];
+    puntuacion.push(pos0[1]);
+    puntuacion.push(pos1[1]);
+    puntuacion.push(pos2[1]);
+    puntuacion.push(pos3[1]);
+    amonestaciones.push(pos0[2]);
+    amonestaciones.push(pos1[2]);
+    amonestaciones.push(pos2[2]);
+    amonestaciones.push(pos3[2]);
     elements = [0, 1, 2, 9, 5];
-    document.location.href = "save_won.php?id_alumno=" + elements + "&puntuacion=" + elements + "&amonestaciones=" + elements + "&torneo=" + 3;
+    // document.location.href = "save_won.php?id_alumno=" + elements + "&puntuacion=" + puntuacion + "&amonestaciones=" + amonestaciones + "&torneo=" + Torneo;
 }
 
 function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
