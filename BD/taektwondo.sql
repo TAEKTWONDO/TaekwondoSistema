@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2018 a las 01:55:34
+-- Tiempo de generación: 11-07-2018 a las 13:49:59
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -89,7 +89,9 @@ INSERT INTO `alumnos` (`ID_ALUMNO`, `NOMBRE`, `APELLIDOS`, `CINTA`, `EDAD`, `ALT
 (24, 'Leonardo\r\n', '-', 'Blanca', 12, 1.5, 'M', 20),
 (25, 'Ericka\r\n', '-', 'Azul', 18, 1.6, 'F', 22),
 (26, 'Tadeo\r\n', '-', 'Blanca', 12, 1.5, 'M', 20),
-(27, 'Tadeo\r\n', '-', 'Verde', 11, 1.4, 'M', 20);
+(27, 'Tadeo\r\n', '-', 'Verde', 11, 1.4, 'M', 20),
+(28, 'Andrea', 'Muñoz', 'Amarilla', 10, 1.3, 'F', 20),
+(29, 'Marco', 'Polo', 'Amarilla', 12, 1.5, 'M', 19);
 
 -- --------------------------------------------------------
 
@@ -112,7 +114,11 @@ INSERT INTO `concursantes` (`ID_CONCURSANTE`, `ID_TORNEO`, `ID_ALUMNO`) VALUES
 (3, 3, 12),
 (4, 3, 20),
 (6, 4, 21),
-(7, 3, 11);
+(7, 3, 11),
+(8, 3, 13),
+(9, 3, 28),
+(11, 3, 14),
+(12, 3, 29);
 
 -- --------------------------------------------------------
 
@@ -219,7 +225,44 @@ INSERT INTO `puntuaciones` (`ID_PUNTUACION`, `ID_ALUMNO`, `ID_TORNEO`, `PUNTUACI
 (51, 5, 3, 5, 5),
 (54, 2, 3, 2, 2),
 (55, 9, 3, 9, 9),
-(56, 5, 3, 5, 5);
+(56, 5, 3, 5, 5),
+(59, 2, 3, 2, 2),
+(60, 9, 3, 9, 9),
+(61, 5, 3, 5, 5),
+(64, 2, 3, 2, 2),
+(65, 9, 3, 9, 9),
+(66, 5, 3, 5, 5),
+(69, 2, 3, 3, 3),
+(72, 2, 3, 2, 2),
+(73, 9, 3, 9, 9),
+(74, 5, 3, 5, 5),
+(77, 2, 3, 3, 3),
+(80, 2, 3, 3, 3),
+(83, 2, 3, 3, 3),
+(86, 2, 3, 3, 3),
+(89, 2, 3, 3, 3),
+(92, 2, 3, 2, 2),
+(93, 9, 3, 9, 9),
+(94, 5, 3, 5, 5),
+(97, 2, 3, 3, 3),
+(98, 9, 3, 3, 3),
+(101, 2, 3, 3, 3),
+(102, 9, 3, 3, 3),
+(105, 2, 3, 3, 3),
+(106, 9, 3, 3, 3),
+(109, 2, 3, 3, 3),
+(110, 9, 3, 3, 3),
+(113, 2, 3, 3, 3),
+(114, 9, 3, 3, 3),
+(117, 2, 3, 3, 3),
+(118, 9, 3, 3, 3),
+(121, 2, 3, 3, 3),
+(122, 9, 3, 3, 3),
+(125, 2, 3, 3, 3),
+(126, 9, 3, 3, 3),
+(129, 2, 3, 3, 3),
+(132, 2, 3, 3, 3),
+(133, 9, 3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -249,7 +292,7 @@ CREATE TABLE `torneos` (
 --
 
 INSERT INTO `torneos` (`ID_TORNEO`, `NOMBRE`, `DESCRIPCION`, `HORA`, `FECHA`, `ESTADO`, `IM5`, `I56`, `I78`, `I910`, `I1112`, `J1314`, `J1516`, `A17`) VALUES
-(3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02', 'A', 'S', 'S', 'S', 'S', 'N', 'N', 'N', 'N'),
+(3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02', 'A', 'S', 'S', 'S', 'S', 'S', 'N', 'N', 'N'),
 (4, 'Copa Corona', 'orneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-08', 'I', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S');
 
 --
@@ -324,12 +367,12 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `ID_ALUMNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID_ALUMNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `concursantes`
 --
 ALTER TABLE `concursantes`
-  MODIFY `ID_CONCURSANTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_CONCURSANTE` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `gyms`
 --
@@ -349,7 +392,7 @@ ALTER TABLE `maestros`
 -- AUTO_INCREMENT de la tabla `puntuaciones`
 --
 ALTER TABLE `puntuaciones`
-  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 --
 -- AUTO_INCREMENT de la tabla `torneos`
 --

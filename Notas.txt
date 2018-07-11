@@ -11,15 +11,13 @@ Modulo maestros
         :P
 
 Modulo jueces
-    Agente graficas
+    Terminado
     
 Agente voz
     Terminado
 
 Agente graficas
-    hacer el match
-        arriba
-        abajo
+    Terminado
 
 Percetron multicapa
     Terminado
