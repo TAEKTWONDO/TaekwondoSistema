@@ -81,10 +81,19 @@ var participantes = new Array();
 var auxId = new Array();
 var auxIdNext = new Array();
 ////////////////////////////////////////
-
 var scoreWonSend = new Array();
 var scoreWonClean = new Array();
+var dataWon = new Array();
 ////////////////////////////////////////
+var idWon = new Array();
+var nameWon = new Array();
+var People = new Array();
+    var PeopleScore = new Array();
+    var PuntuacionAmonestaciones = new Array();
+    var auxiliarScore, auxiliarScore2;
+    var PeopleWon = new Array();
+/////////////////////////////////////
+
 
 function graphic(texto) {
     $(document).ready(function () {
@@ -199,7 +208,7 @@ function graphic(texto) {
             }
             if (tournamentCategory[7] == "J1314") {
                 if (values[3] >= 13 && values[3] <= 14) {
-                    categoryI1314[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
+                    categoryJ1314[i] = new Array(values[0], values[1], values[2], values[3], values[4], values[5]);
                 }
             }
             if (tournamentCategory[8] == "J1516") {
@@ -338,7 +347,6 @@ function graphic(texto) {
         changeToButtons();
     }
 
-
     function changeToButtons() {
         $(".bracket").each(function () {
             $winner = $(this).children(".winner");
@@ -382,10 +390,10 @@ function graphic(texto) {
             var puntos = prompt("Ingrese el puntaje de " + $(this).text(), "3");
 
             if (puntos == null || puntos == "") {
-                console.log("Cancelado");
+                // console.log("Cancelado");
 
             } else {
-                console.log("Puntaje de " + $(this).text() + ": " + puntos);
+                // console.log("Puntaje de " + $(this).text() + ": " + puntos);
                 scoreWonSend.push( $(this).text());
                 scoreWonSend.push(puntos);
             }
@@ -393,11 +401,11 @@ function graphic(texto) {
             var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text(), "3");
 
             if (amonestacion == null || amonestacion == "") {
-                console.log("Cancelado");
+                // console.log("Cancelado");
             } else {
-                console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
+                // console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
                 scoreWonSend.push( $(this).text());
-                scoreWonSend.push(amonestacion);
+                scoreWonSend.push(puntos);
             }
 
             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
@@ -421,40 +429,62 @@ function graphic(texto) {
 }
 
 function enviarGanadores() {
-    var amonestacionesPuntuajes2 = new Array();
-    var wonPeople = new Array();
-    var People = new Array();
-    for(var y = 0; y < scoreWonSend.length - 1; y++){
-        scoreWonClean[y] = new Array(scoreWonSend[y], scoreWonSend[y+1]);
-        y++;
-    }
-    var amonestacionesPuntuajes = new Array();
-    for(var y = 0; y < scoreWonSend.length - 1; y++){
-        amonestacionesPuntuajes[y] = new Array(scoreWonSend[y], scoreWonSend[y+1], scoreWonSend[y+3]);
-        y ++;
-    }
-    amonestacionesPuntuajes = amonestacionesPuntuajes.filter(Boolean);
-    for(var y = 0; y < amonestacionesPuntuajes.length - 1; y++){
-        amonestacionesPuntuajes2[y] = amonestacionesPuntuajes[y];
-        y ++;
-    }
-    amonestacionesPuntuajes2.pop();
-    amonestacionesPuntuajes2 = amonestacionesPuntuajes2.filter(Boolean);
-
-    var limite = amonestacionesPuntuajes2.length - 1;
-    wonPeople.push(amonestacionesPuntuajes2[limite]);
-    wonPeople.push(amonestacionesPuntuajes2[limite-1]);
-    wonPeople.push(amonestacionesPuntuajes2[limite-2]);
-    wonPeople.push(amonestacionesPuntuajes2[limite-3]);
-    for(var y = 0; y < wonPeople.length - 1; y++){
-        aux = wonPeople[y];
-        People.push(aux[0]);
-    }
-    People = People.filter(Boolean);
-    soundWon(colaGanadores, wonPeople);
+    score();
+    diference();
+    // soundWon(colaGanadores);
+     //Guardamos amonestaciones y esas cosas
+    saveWon(PeopleWon);
 }
 
-function soundWon(resultadoName, wonPeople) { 
+function score(){
+    //Combina el nombre con el id
+    for(var y = 0; y < idWon.length; y++){
+        People[y] = new Array(idWon[y], nameWon[y]);
+    }
+
+    //Combina el nombre, la puntuacion y las amonestaciones
+    for(var y = 0; y < scoreWonSend.length; y+= 4){
+        PuntuacionAmonestaciones[y] = new Array(scoreWonSend[y], scoreWonSend[y+1], scoreWonSend[y+3]);
+    }
+
+    //Suma todos los puntuajes y las amonestaciones
+    PuntuacionAmonestaciones = PuntuacionAmonestaciones.filter(Boolean);
+    for(var y = 0; y < PuntuacionAmonestaciones.length; y++){
+        for(var c = 0; c < PuntuacionAmonestaciones.length; c++){
+            auxiliarScore = PuntuacionAmonestaciones[y]; 
+            auxiliarScore2 = PuntuacionAmonestaciones[c];
+            if (auxiliarScore[0] == auxiliarScore2[0]){
+                conta = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
+                conta2 = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
+                conta = conta / 2;conta2 = conta2 / 2;
+                PeopleScore[y] = new Array(auxiliarScore[0], conta, conta2);
+            }
+        }
+    }
+    
+    PeopleScore = PeopleScore.filter(Boolean);
+    //Para de nuestro vector anterior ponerle el id a las personas
+    for(var y = 0; y < PeopleScore.length; y++){
+        for(var c = 0; c < People.length; c++){
+            auxiliarScore = PeopleScore[y]; 
+            auxiliarScore2 = People[c];
+            nombre = auxiliarScore[0]; nombre2 = auxiliarScore2[1];
+            //El trim es para eliminar espacios en blanco
+            nombre = $.trim(nombre);nombre2 = $.trim(nombre2);
+            if (nombre == nombre2){
+                PeopleWon[y] = new Array(auxiliarScore2[0], auxiliarScore[0], auxiliarScore[1], auxiliarScore[2]);
+            }
+        }
+    }
+
+    PeopleWon = PeopleWon.filter(Boolean);
+}
+
+function diference(){
+
+}
+
+function soundWon(resultadoName) { 
     var auxNombre = wonPeople[3];
     //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
     var primer = "El ganador del primer lugar es: " + resultadoName[0] + ". Felicitaciones.";
@@ -477,29 +507,19 @@ function soundWon(resultadoName, wonPeople) {
     responsiveVoice.speak(primer, "Spanish Female");
     text = encodeURIComponent(primer);
     var url = "http://";
-
-    //Guardamos amonestaciones y esas cosas
-    // saveWon(wonPeople);
 }
 
 function saveWon(wonPeople) {
-    id = new Array();
+    id  = new Array();
     puntuacion = new Array();
     amonestaciones = new Array();
-    pos0 = wonPeople[0]; pos1 = wonPeople[1]; pos2 = wonPeople[2]; pos3 = wonPeople[3];
-    console.table(idScoreFinal);
-    console.table(nameScoreFinal);
-    id = [];
-    puntuacion.push(pos0[1]);
-    puntuacion.push(pos1[1]);
-    puntuacion.push(pos2[1]);
-    puntuacion.push(pos3[1]);
-    amonestaciones.push(pos0[2]);
-    amonestaciones.push(pos1[2]);
-    amonestaciones.push(pos2[2]);
-    amonestaciones.push(pos3[2]);
-    elements = [0, 1, 2, 9, 5];
-    // document.location.href = "save_won.php?id_alumno=" + elements + "&puntuacion=" + puntuacion + "&amonestaciones=" + amonestaciones + "&torneo=" + Torneo;
+    for(var y = 0; y < wonPeople.length; y++){
+        aux = wonPeople[y];
+        id.push(aux[0]);
+        puntuacion.push(aux[2]);
+        amonestaciones.push(aux[3]);
+    }
+    document.location.href = "save_won.php?id_alumno=" + id + "&puntuacion=" + puntuacion + "&amonestaciones=" + amonestaciones + "&torneo=" + Torneo;
 }
 
 function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
@@ -1556,6 +1576,8 @@ function perceptronMethod() {
             if (auxiliar[2] == auxiliar2[2]) {
                 participantes.push(auxiliar[1]);
                 participantes.push(auxiliar2[1]);
+                idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                 //Aumentamos uno nuestro contador, para que no pase este problema:
                 //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                 //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1700,6 +1722,8 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1836,6 +1860,8 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -2397,6 +2423,8 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2405,6 +2433,8 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2599,6 +2629,8 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2607,6 +2639,8 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);

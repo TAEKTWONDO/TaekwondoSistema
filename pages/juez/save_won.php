@@ -34,7 +34,7 @@ if ($conexion->connect_error) {
         $sql_gym = "SELECT * FROM PUNTUACIONES";
         $res_gym = $conexion->query($sql_gym);
         // echo "\n" . $sql_gym;
-        // header('Location: graphic-index.php?categoria=I910&categorias= + IM5 I56 I78 I910 I1112');
+        header('Location: show-score.php?torneo='. $TORNEO);
         
     } catch (Exception $e) {
         echo("Error al agregar gym: " . $e);
