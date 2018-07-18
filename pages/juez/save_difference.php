@@ -1,12 +1,15 @@
 <?php
+echo "Hola";
 $ID = $_GET['id_alumno'];
 $PUNTUACION = $_GET['puntuacion'];
-$AMONESTACIONES = $_GET['amonestaciones'];
-$TORNEO = $_GET['torneo'];
+$PUNTUACIONOP = $_GET['puntuacionOP'];
+$STATUS = $_GET['status'];
 $IDSEPARADO = explode(',', $ID);
 $PUNTUACIONSEPARADO = explode(',', $PUNTUACION);
-$AMONESTACIONESSEPARADO = explode(',', $AMONESTACIONES);
+$PUNTUACIONOPSEPARADO = explode(',', $PUNTUACIONOP);
+$STATUSSEPARADO = explode(',', $STATUS);
 
+// echo (count($IDSEPARADO));
 
 $servidor = "localhost";
 $usuario = "root";
@@ -22,20 +25,20 @@ if ($conexion->connect_error) {
     echo "Error";
 } else {
     echo "Conexion correcta\n";
-
+   
     for ($i = 0; $i < count($IDSEPARADO); $i++){
-        $sql_insert = "INSERT INTO PUNTUACIONES (id_alumno, id_torneo, puntuacion, amonestaciones)
-        values (\"".$IDSEPARADO[$i]."\", \"".$TORNEO."\", \"".$PUNTUACIONSEPARADO[$i]."\",  \"".$AMONESTACIONESSEPARADO[$i]."\")";
+        $sql_insert = "INSERT INTO difeenfrentamientos (id_alumno, al_puntuaje, co_puntuaje, estatus)
+        values (\"".$IDSEPARADO[$i]."\", \"".$PUNTUACIONSEPARADO[$i]."\",  \"".$PUNTUACIONOPSEPARADO[$i]."\",  \"".$STATUSSEPARADO[$i]."\")";
     try {
         // echo "\nEntro";
         $gym_insert = $conexion->query($sql_insert);
-        $sql_gym = "SELECT * FROM PUNTUACIONES";
+        $sql_gym = "SELECT * FROM difeenfrentamientos";
         $res_gym = $conexion->query($sql_gym);
         // echo "\n" . $sql_gym;
-        header('Location: show-score.php?torneo='. $TORNEO);
+        header('Location:' .$_SERVER['HTTP_REFERER']);
         
     } catch (Exception $e) {
-        echo("Error al agregar gym: " . $e);
+        echo("Error al agregar enfrentamientos: " . $e);
     }
 }
     $conexion->close();

@@ -53,24 +53,59 @@ if ($conexion->connect_error) {
 
         <div class="mdl-cell--12-col mdl-grid">
 
-            <div class="mdl-cell mdl-cell--1-col" style="text-align: right;">
-                
-
-
-                
-            </div>
 
             <ul>
                 <br>
-                <h3 class="mdl-list__item-primary-content" style="text-align: center;">Jueces </h3>
+                <h3 class="mdl-list__item-primary-content" style="text-align: center;">Resultado del Torneo </h3>
 
                 
-                <?php foreach ($conexion->query('SELECT p.id_alumno, p.id_torneo, p.puntuacion, p.amonestaciones, a.nombre FROM puntuaciones as P, alumnos as A WHERE p.id_alumno = a.id_alumno') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+                <?php foreach ($conexion->query('SELECT p.id_alumno, p.id_torneo, p.puntuacion, p.amonestaciones, a.nombre, a.edad FROM puntuaciones as P, alumnos as A WHERE p.id_alumno = a.id_alumno') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
                     
                     <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
 				<i class="material-icons  mdl-list__item-avatar">person</i>
-				<?php echo $row['nombre'] ?>
+				<?php echo $row['nombre'] ?> ---
+                <?php if  ($row['edad'] <= 5){ ?>
+                    <strong>Infantiles menor a 5 años</strong>
+                <?php
+                    }
+                ?>
+                 <?php if  ($row['edad'] >= 5 && $row['edad'] <= 6){ ?>
+                    <strong>Infantiles de 5 a 6 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 7 && $row['edad'] <= 8){ ?>
+                    <strong>Infantiles de 7 a 8 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 9 && $row['edad'] <= 10){ ?>
+                    <strong>Infantiles de 9 a 10 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 11 && $row['edad'] <= 12){ ?>
+                    <strong>Infantiles de 11 a 12 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 13 && $row['edad'] <= 14){ ?>
+                    <strong>Juveniles de 13 a 14 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 15 && $row['edad'] <= 16){ ?>
+                    <strong>Juveniles de 15 a 16 años</strong>
+                <?php
+                    }
+                ?>
+                <?php if  ($row['edad'] >= 17){ ?>
+                    <strong>Adultos mayor a 17 años</strong>
+                <?php
+                    }
+                ?>
+                
 			</span>
             <span style="color:white;">...........................................</span>
                     <span class="mdl-list__item-secondary-action">
@@ -85,6 +120,7 @@ if ($conexion->connect_error) {
 					<i class="material-icons">Amonestaciones: <?php echo $row['amonestaciones'] ?></i>
 				</button>
 			</span>
+        
                 </li>
                     <?php
                     }
