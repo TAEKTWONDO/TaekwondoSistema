@@ -3129,7 +3129,8 @@ input.mdl-button[type="submit"] {
 }
 
 .mdl-button--fab.mdl-button--colored {
-    background: rgb(255, 64, 129);
+    background: rgb(252, 0, 84);
+  
     color: rgb(255, 255, 255)
 }
 
@@ -3230,7 +3231,10 @@ input.mdl-button[type="submit"] {
 .mdl-button--accent.mdl-button--accent.mdl-button--raised,
 .mdl-button--accent.mdl-button--accent.mdl-button--fab {
     color: rgb(255, 255, 255);
-    background-color: rgb(255, 64, 129)
+    /*background-color: rgb(255, 64, 129)
+     background-color: #3D8FC2;*/
+      background-color:rgb(252, 0, 84)
+     
 }
 
 .mdl-button[disabled][disabled],

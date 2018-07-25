@@ -11020,7 +11020,7 @@ label {
 }
 
 .section-signup .card-signup .card-body .input-group {
-  padding-bottom: 7px;
+padding-bottom: 0 px;
   margin: 27px 0 0 0;
 }
 
@@ -17114,7 +17114,7 @@ footer .pull-center {
 }
 
 .index-page .page-header {
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
 }
 
