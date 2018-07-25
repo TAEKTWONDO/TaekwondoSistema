@@ -436,12 +436,11 @@ function graphic() {
 
 function enviarGanadores() {
     score();
-    diference();
     auxNombre2 = PeopleWon[3];
     auxNombre = auxNombre2[1];
     soundWon(colaGanadores);
-     //Guardamos amonestaciones y esas cosas
-    saveWon(PeopleWon);
+        //Guardamos amonestaciones y esas cosas
+        saveWon(PeopleWon);
 }
 
 function score(){
@@ -488,7 +487,7 @@ function score(){
     PeopleWon = PeopleWon.filter(Boolean);
 }
 
-function diference(){
+function saveWon(wonPeople){
     var scorePeople = new Array();
     var scorePeopleId = new Array();
     var status = "";
@@ -523,8 +522,29 @@ function diference(){
         puntuacionOP.push(aux[3]);
         status.push(aux[4]);
     }
-    document.location.href = "save_difference.php?id_alumno=" + id + "&puntuacion=" + puntuacion + "&puntuacionOP=" + puntuacionOP + "&status=" + status;
 
+    ////////////////////////////////
+    var idAlumno = new Array();
+    var idContricante = new Array();
+    for (var u = 0; u < idWon.length; u++){
+        if (u + 1){
+            idAlumno.push(idWon[u]);
+            idContricante.push(idWon[u + 1]);
+            u ++;
+        }
+    }
+    ////////////////////////////////////////////////////////////////
+    idP  = new Array();
+    puntuacionP = new Array();
+    amonestacionesP = new Array();
+    for(var y = 0; y < wonPeople.length; y++){
+        aux = wonPeople[y];
+        idP.push(aux[0]);
+        puntuacionP.push(aux[2]);
+        amonestacionesP.push(aux[3]);
+    }
+
+    document.location.href = "save_won.php?idAlumno=" + idAlumno + "&idContricante=" + idContricante + "&id_alumno=" + id + "&puntuacion=" + puntuacion + "&puntuacionOP=" + puntuacionOP + "&status=" + status + "&id_alumnoP=" + idP + "&puntuacionP=" + puntuacionP + "&amonestacionesP=" + amonestacionesP + "&torneo=" + Torneo;
 }
 
 function soundWon(resultadoName) { 
@@ -558,20 +578,6 @@ function soundWon(resultadoName) {
     responsiveVoice.speak(primer, "Spanish Female");
     text = encodeURIComponent(primer);
     var url = "http://";
-}
-
-function saveWon(wonPeople) {
-    id  = new Array();
-    puntuacion = new Array();
-    amonestaciones = new Array();
-    for(var y = 0; y < wonPeople.length; y++){
-        aux = wonPeople[y];
-        id.push(aux[0]);
-        puntuacion.push(aux[2]);
-        amonestaciones.push(aux[3]);
-    }
-   
-    document.location.href = "save_won.php?id_alumno=" + id + "&puntuacion=" + puntuacion + "&amonestaciones=" + amonestaciones + "&torneo=" + Torneo;
 }
 
 function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
