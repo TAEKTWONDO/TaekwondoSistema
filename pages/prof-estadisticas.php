@@ -14,71 +14,69 @@ if ($conexion->connect_error) {
 }
 session_start();
 ?>
-  <!DOCTYPE html>
-  <html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../assets/css/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="../assets/scss/style.scss">
-    <link rel="stylesheet" href="./node_modules/mdl-selectfield/dist/mdl-selectfield.min.css">
-    <!-- getmdl -->
-    <script defer src="../assets/js/material.min.js"></script>
-    <!--getmdl-select-->
-    <link rel="stylesheet" href="../assets/css/getmdl-select.min.css">
-    <script defer src="../assets/js/getmdl-select.min.js"></script>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="../assets/css/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="../assets/scss/style.scss">
+        <link rel="stylesheet" href="./node_modules/mdl-selectfield/dist/mdl-selectfield.min.css">
+        <!-- getmdl -->
+        <script defer src="../assets/js/material.min.js"></script>
+        <!--getmdl-select-->
+        <link rel="stylesheet" href="../assets/css/getmdl-select.min.css">
+        <script defer src="../assets/js/getmdl-select.min.js"></script>
 
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <title>
-      Estadísticas
-    </title>
-  </head>
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <title>
+            Estadísticas
+        </title>
+    </head>
 
-  <body>
+    <body>
 
-    <!--Header-->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <div class="mdl-navigation mdl-layout">
-            <a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.php">
+        <!--Header-->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <div class="mdl-navigation mdl-layout">
+                        <a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.php">
               ALUMNOS
             </a>
 
-            <a class="mdl-navigation__link" href="prof-torneos.php">
+                        <a class="mdl-navigation__link" href="prof-torneos.php">
               TORNEOS
             </a>
-            <a class="mdl-navigation__link" href="">
-              ESTADÍSTICAS
-            </a>
-          </div>
-          <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
 
-          <a class="mdl__link" href="index.html">
-            <i class="material-icons md-32">input</i>
-          </a>
+                    </div>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
 
-        </div>
-      </header>
+                    <a class="mdl__link" href="index.html">
+                        <i class="material-icons md-32">input</i>
+                    </a>
 
-      <!--Contains-->
+                </div>
+            </header>
 
-      <div class="mdl-cell--12-col mdl-grid">
+            <!--Contains-->
 
-        <div class="mdl-cell mdl-cell--2-col" style="text-align: right;">
+            <div class="mdl-cell--12-col mdl-grid">
 
-        </div>
+                <div class="mdl-cell mdl-cell--2-col" style="text-align: right;">
 
-        <ul>
+                </div>
 
-          <h3 class="mdl-list__item-primary-content" style="text-align: center;">Estadísticas</h3>
-          <br>
-          <br>
-          <div class="valign-center">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="60" viewBox="0 0 252 252" style="fill:#ffffff;">
+                <ul>
+
+                    <h3 class="mdl-list__item-primary-content" style="text-align: center;">Estadísticas</h3>
+                    <br>
+                    <br>
+                    <div class="valign-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="60" viewBox="0 0 252 252" style="fill:#ffffff;">
               <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
                 stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
                 style="mix-blend-mode: normal">
@@ -96,26 +94,26 @@ session_start();
                 </g>
               </g>
             </svg>
-            <!-- Simple Select with arrow -->
-            <div class="mdl-textfield mdl-js-textfield getmdl-select">
-              <input type="text" value="" class="mdl-textfield__input" id="azul" name="azul" readonly>
-              <input type="hidden" value="" name="azul" id="azul">
-              <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-              <label for="sample2" class="mdl-textfield__label" for="azul">Mi competidor</label>
-              <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                        <!-- Simple Select with arrow -->
+                        <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                            <input type="text" value="" class="mdl-textfield__input" id="azul" name="azul" readonly>
+                            <input type="hidden" value="" name="azul" id="azul">
+                            <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                            <label for="sample2" class="mdl-textfield__label" for="azul">Mi competidor</label>
+                            <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
 
-                <?php foreach ($conexion->query('SELECT nombre, id_alumno, apellidos FROM ALUMNOS WHERE ID_MAESTRO = '. $_SESSION["ID_PROFE"]) as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
-                <li class="mdl-menu__item">
-                  <?php echo $row['nombre'].$row['apellidos'] ?>
-                </li>
-                <?php }  ?>
-              </ul>
-            </div>
-          </div>
+                                <?php foreach ($conexion->query('SELECT nombre, id_alumno, apellidos FROM ALUMNOS WHERE ID_MAESTRO = '. $_SESSION["ID_PROFE"]) as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+                                <li class="mdl-menu__item">
+                                    <?php echo $row['nombre'].$row['apellidos'] ?>
+                                </li>
+                                <?php }  ?>
+                            </ul>
+                        </div>
+                    </div>
 
-          <b style="font-size:23px; padding-right: 20px;padding-left: 20px;">VS</b>
-          <div class="valign-center">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="60" viewBox="0 0 252 252" style="fill:#ffffff;">
+                    <b style="font-size:23px; padding-right: 20px;padding-left: 20px;">VS</b>
+                    <div class="valign-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="60" viewBox="0 0 252 252" style="fill:#ffffff;">
               <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
                 stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
                 style="mix-blend-mode: normal">
@@ -133,38 +131,38 @@ session_start();
                 </g>
               </g>
             </svg>
-            <!-- Simple Select with arrow -->
-            <div class="mdl-textfield mdl-js-textfield getmdl-select">
-              <input type="text" value="" class="mdl-textfield__input" id="rojo" name="rojo" readonly>
-              <input type="hidden" value="" name="rojo" id="rojo">
-              <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-              <label for="sample2" class="mdl-textfield__label" for="rojo">Contrincante</label>
-              <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                <?php foreach ($conexion->query(' SELECT ID_ALUMNO, NOMBRE, APELLIDOS FROM ALUMNOS WHERE ID_ALUMNO NOT IN (SELECT ID_ALUMNO FROM ALUMNOS WHERE ID_MAESTRO ='. $_SESSION["ID_PROFE"].')') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
+                        <!-- Simple Select with arrow -->
+                        <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                            <input type="text" value="" class="mdl-textfield__input" id="rojo" name="rojo" readonly>
+                            <input type="hidden" value="" name="rojo" id="rojo">
+                            <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                            <label for="sample2" class="mdl-textfield__label" for="rojo">Contrincante</label>
+                            <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                <?php foreach ($conexion->query(' SELECT ID_ALUMNO, NOMBRE, APELLIDOS FROM ALUMNOS WHERE ID_ALUMNO NOT IN (SELECT ID_ALUMNO FROM ALUMNOS WHERE ID_MAESTRO ='. $_SESSION["ID_PROFE"].')') as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
 
-                <li class="mdl-menu__item">
-                  <?php echo $row['NOMBRE'].$row['APELLIDOS'] ?>
-                </li>
-                <?php }  ?>
-              </ul>
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-          <div style="text-align: center;">
+                                <li class="mdl-menu__item">
+                                    <?php echo $row['NOMBRE'].$row['APELLIDOS'] ?>
+                                </li>
+                                <?php }  ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div style="text-align: center;">
 
-            <button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--coloredBlue mdl-js-ripple-effect mdl-button--accent">
+                        <button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--coloredBlue mdl-js-ripple-effect mdl-button--accent">
               Diagnosticar resultados
             </button>
 
 
-          </div>
-        </ul>
-      </div>
-    </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
 
 
-  </body>
+    </body>
 
-  </html>
+    </html>

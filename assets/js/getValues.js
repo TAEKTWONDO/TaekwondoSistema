@@ -14,12 +14,11 @@ function get_values(values) {
             gender = i;
         } else if (i == 2) {
             age = i;
-        }
-        else if (i == 3) {
+        } else if (i == 3) {
             height = i;
         } else if (i == 4) {
             colorBelt = i;
         }
     }
-    console.log(gender, age, height,colorBelt);
+    console.log(gender, age, height, colorBelt);
 }

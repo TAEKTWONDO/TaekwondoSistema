@@ -3035,6 +3035,7 @@ input.mdl-button[type="submit"] {
     background-color: rgba(158, 158, 158, .4)
 }
 
+
 /**color de botones**/
 
 .mdl-button--raised.mdl-button--colored {
@@ -3051,6 +3052,7 @@ input.mdl-button[type="submit"] {
     background: rgb(1, 131, 29);
     color: rgb(255, 255, 255)
 }
+
 .mdl-button--raised.mdl-button--coloredGray {
     background: rgb(95, 104, 97);
     color: rgb(255, 255, 255)
@@ -3130,7 +3132,6 @@ input.mdl-button[type="submit"] {
 
 .mdl-button--fab.mdl-button--colored {
     background: rgb(252, 0, 84);
-  
     color: rgb(255, 255, 255)
 }
 
@@ -3233,8 +3234,7 @@ input.mdl-button[type="submit"] {
     color: rgb(255, 255, 255);
     /*background-color: rgb(255, 64, 129)
      background-color: #3D8FC2;*/
-      background-color:rgb(252, 0, 84)
-     
+    background-color: rgb(252, 0, 84)
 }
 
 .mdl-button[disabled][disabled],
@@ -6749,6 +6749,7 @@ fieldset[disabled] .mdl-switch .mdl-switch__ripple-container .mdl-ripple,
     top: 16px
 }
 
+
 /*Color de debajo del input*/
 
 .mdl-textfield__input {
@@ -6795,6 +6796,7 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__input,
 .mdl-textfield textarea.mdl-textfield__input {
     display: block
 }
+
 
 /*Color de label*/
 

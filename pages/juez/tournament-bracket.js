@@ -118,7 +118,7 @@ function graphic() {
         Category = get[tmp[0]];
     }
     Category = get.categoria;
-    Torneo  = get.torneo;
+    Torneo = get.torneo;
     Torneo = Torneo.replace('+', '');
     //Agu dividimos  las categorias que tiene un torneo
     tournamentCategory = get.categorias.split(" ");
@@ -401,7 +401,7 @@ function graphic() {
                 scoreWonSend.push(puntos);
                 socrePeople.push($(this).text());
                 socrePeople.push(puntos);
-                
+
             }
 
             var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text(), "3");
@@ -410,7 +410,7 @@ function graphic() {
                 // console.log("Cancelado");
             } else {
                 // console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
-                scoreWonSend.push( $(this).text());
+                scoreWonSend.push($(this).text());
                 scoreWonSend.push(puntos);
             }
 
@@ -439,46 +439,52 @@ function enviarGanadores() {
     auxNombre2 = PeopleWon[3];
     auxNombre = auxNombre2[1];
     soundWon(colaGanadores);
-        //Guardamos amonestaciones y esas cosas
-        saveWon(PeopleWon);
 }
 
-function score(){
+function guardarGanadores() {
+    //Guardamos amonestaciones y esas cosas
+    saveWon(PeopleWon);
+}
+
+function score() {
     //Combina el nombre con el id
-    for(var y = 0; y < idWon.length; y++){
+    for (var y = 0; y < idWon.length; y++) {
         People[y] = new Array(idWon[y], nameWon[y]);
     }
 
     //Combina el nombre, la puntuacion y las amonestaciones
-    for(var y = 0; y < scoreWonSend.length; y+= 4){
-        PuntuacionAmonestaciones[y] = new Array(scoreWonSend[y], scoreWonSend[y+1], scoreWonSend[y+3]);
+    for (var y = 0; y < scoreWonSend.length; y += 4) {
+        PuntuacionAmonestaciones[y] = new Array(scoreWonSend[y], scoreWonSend[y + 1], scoreWonSend[y + 3]);
     }
 
     //Suma todos los puntuajes y las amonestaciones
     PuntuacionAmonestaciones = PuntuacionAmonestaciones.filter(Boolean);
-    for(var y = 0; y < PuntuacionAmonestaciones.length; y++){
-        for(var c = 0; c < PuntuacionAmonestaciones.length; c++){
-            auxiliarScore = PuntuacionAmonestaciones[y]; 
+    for (var y = 0; y < PuntuacionAmonestaciones.length; y++) {
+        for (var c = 0; c < PuntuacionAmonestaciones.length; c++) {
+            auxiliarScore = PuntuacionAmonestaciones[y];
             auxiliarScore2 = PuntuacionAmonestaciones[c];
-            if (auxiliarScore[0] == auxiliarScore2[0]){
+            if (auxiliarScore[0] == auxiliarScore2[0]) {
                 conta = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
                 conta2 = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
-                conta = conta / 2;conta2 = conta2 / 2;
+                conta = conta / 2;
+                conta2 = conta2 / 2;
                 PeopleScore[y] = new Array(auxiliarScore[0], conta, conta2);
             }
         }
     }
-    
+
     PeopleScore = PeopleScore.filter(Boolean);
     //Para de nuestro vector anterior ponerle el id a las personas
-    for(var y = 0; y < PeopleScore.length; y++){
-        for(var c = 0; c < People.length; c++){
-            auxiliarScore = PeopleScore[y]; 
+    for (var y = 0; y < PeopleScore.length; y++) {
+        for (var c = 0; c < People.length; c++) {
+            auxiliarScore = PeopleScore[y];
             auxiliarScore2 = People[c];
-            nombre = auxiliarScore[0]; nombre2 = auxiliarScore2[1];
+            nombre = auxiliarScore[0];
+            nombre2 = auxiliarScore2[1];
             //El trim es para eliminar espacios en blanco
-            nombre = $.trim(nombre);nombre2 = $.trim(nombre2);
-            if (nombre == nombre2){
+            nombre = $.trim(nombre);
+            nombre2 = $.trim(nombre2);
+            if (nombre == nombre2) {
                 PeopleWon[y] = new Array(auxiliarScore2[0], auxiliarScore[0], auxiliarScore[1], auxiliarScore[2]);
             }
         }
@@ -487,11 +493,11 @@ function score(){
     PeopleWon = PeopleWon.filter(Boolean);
 }
 
-function saveWon(wonPeople){
+function saveWon(wonPeople) {
     var scorePeople = new Array();
     var scorePeopleId = new Array();
     var status = "";
-    for (var k = 0; k < socrePeople.length; k++){
+    for (var k = 0; k < socrePeople.length; k++) {
         if (socrePeople[k + 1] > socrePeople[k + 3]) status = "G";
         if (socrePeople[k + 1] < socrePeople[k + 3]) status = "P";
         if (socrePeople[k + 1] == socrePeople[k + 3]) status = "E";
@@ -499,11 +505,11 @@ function saveWon(wonPeople){
         k += 3;
     }
     scorePeople = scorePeople.filter(Boolean);
-    for (var k = 0; k < PeopleWon.length; k++){
-        for (var r = 0; r < scorePeople.length; r++){
+    for (var k = 0; k < PeopleWon.length; k++) {
+        for (var r = 0; r < scorePeople.length; r++) {
             aux1 = PeopleWon[k];
             aux2 = scorePeople[r];
-            if (aux1[1] == aux2[0]){
+            if (aux1[1] == aux2[0]) {
                 scorePeopleId[k] = new Array(aux1[0], aux2[0], aux2[1], aux2[2], aux2[3]);
             }
 
@@ -511,11 +517,11 @@ function saveWon(wonPeople){
     }
     scorePeopleId = scorePeopleId.filter(Boolean);
     console.table(scorePeopleId);
-    id  = new Array();
+    id = new Array();
     puntuacion = new Array();
     puntuacionOP = new Array();
     status = new Array();
-    for(var y = 0; y < scorePeopleId.length; y++){
+    for (var y = 0; y < scorePeopleId.length; y++) {
         aux = scorePeopleId[y];
         id.push(aux[0]);
         puntuacion.push(aux[2]);
@@ -526,18 +532,18 @@ function saveWon(wonPeople){
     ////////////////////////////////
     var idAlumno = new Array();
     var idContricante = new Array();
-    for (var u = 0; u < idWon.length; u++){
-        if (u + 1){
+    for (var u = 0; u < idWon.length; u++) {
+        if (u + 1) {
             idAlumno.push(idWon[u]);
             idContricante.push(idWon[u + 1]);
-            u ++;
+            u++;
         }
     }
     ////////////////////////////////////////////////////////////////
-    idP  = new Array();
+    idP = new Array();
     puntuacionP = new Array();
     amonestacionesP = new Array();
-    for(var y = 0; y < wonPeople.length; y++){
+    for (var y = 0; y < wonPeople.length; y++) {
         aux = wonPeople[y];
         idP.push(aux[0]);
         puntuacionP.push(aux[2]);
@@ -547,13 +553,13 @@ function saveWon(wonPeople){
     document.location.href = "save_won.php?idAlumno=" + idAlumno + "&idContricante=" + idContricante + "&id_alumno=" + id + "&puntuacion=" + puntuacion + "&puntuacionOP=" + puntuacionOP + "&status=" + status + "&id_alumnoP=" + idP + "&puntuacionP=" + puntuacionP + "&amonestacionesP=" + amonestacionesP + "&torneo=" + Torneo;
 }
 
-function soundWon(resultadoName) { 
+function soundWon(resultadoName) {
     //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
     var primer = "El ganador del primer lugar es: " + resultadoName[0] + ". Felicitaciones.";
     var segundo = "El ganador del segundo lugar es: " + resultadoName[1] + ". Felicitaciones.";
     var tercer = "El ganador del tercer lugar es: : " + resultadoName[2] + ". Felicitaciones.";
     var tercer2 = "El ganador del tercer lugar es: : " + auxNombre + ". Felicitaciones.";
-    
+
     if (Category == "IM5") categoriaTorneo = "Los ganadores de la categoría Infantiles menor a 5 años son";
     if (Category == "I56") categoriaTorneo = "Los ganadores de la categoría Infantiles de 5 a 6 años son";
     if (Category == "I78") categoriaTorneo = "Los ganadores de la categoría Infantiles de 7 a 8 años son";
@@ -562,7 +568,7 @@ function soundWon(resultadoName) {
     if (Category == "J1314") categoriaTorneo = "Los ganadores de la categoría Juveniles de 13 a 14 años son";
     if (Category == "J1516") categoriaTorneo = "Los ganadores de la categoría Juveniles de 15 a 16 años son";
     if (Category == "A17") categoriaTorneo = "Los ganadores de la categoría Adultos mayor a 17 años son";
-    
+
     responsiveVoice.speak(categoriaTorneo, "Spanish Female");
     text = encodeURIComponent(categoriaTorneo);
     var url = "http://";
@@ -1634,8 +1640,10 @@ function perceptronMethod() {
             if (auxiliar[2] == auxiliar2[2]) {
                 participantes.push(auxiliar[1]);
                 participantes.push(auxiliar2[1]);
-                idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                idWon.push(auxiliar[0]);
+                idWon.push(auxiliar2[0]);
+                nameWon.push(auxiliar[1]);
+                nameWon.push(auxiliar2[1]);
                 //Aumentamos uno nuestro contador, para que no pase este problema:
                 //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                 //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1717,8 +1725,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1741,8 +1751,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1764,8 +1776,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1786,8 +1800,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1809,8 +1825,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1832,8 +1850,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1854,8 +1874,10 @@ function matchUp() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1890,8 +1912,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1912,8 +1936,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1934,8 +1960,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1957,8 +1985,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -1980,8 +2010,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -2002,8 +2034,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -2024,8 +2058,10 @@ function matchDown() {
                 if (auxiliar[2] == auxiliar2[5]) {
                     participantes.push(auxiliar[1]);
                     participantes.push(auxiliar2[1]);
-                    idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                    idWon.push(auxiliar[0]);
+                    idWon.push(auxiliar2[0]);
+                    nameWon.push(auxiliar[1]);
+                    nameWon.push(auxiliar2[1]);
                     //Aumentamos uno nuestro contador, para que no pase este problema:
                     //Se tiene 3 participantes con los mismos valores, el participante 1 y 2 se comparan y grafica
                     //Y el 2 y 3 tambien se compara y se grafica, un participante tiene 2 competidores
@@ -2412,8 +2448,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2422,8 +2460,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2447,8 +2487,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2457,8 +2499,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2482,8 +2526,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2492,8 +2538,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2517,8 +2565,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2527,8 +2577,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2552,8 +2604,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2562,8 +2616,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2587,8 +2643,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2597,8 +2655,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2622,8 +2682,10 @@ function matchUpAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2632,8 +2694,10 @@ function matchUpAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2673,8 +2737,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2683,8 +2749,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2708,8 +2776,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2718,8 +2788,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2743,8 +2815,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2753,8 +2827,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                        nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2778,8 +2854,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2788,8 +2866,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2813,8 +2893,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2823,8 +2905,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2848,8 +2932,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2858,8 +2944,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
@@ -2883,8 +2971,10 @@ function matchDownAge() {
                     if (conta == 0) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);
                         conta++;
@@ -2893,8 +2983,10 @@ function matchDownAge() {
                     if (conta >= 0 && auxIdNext.indexOf(auxiliar2[0]) == -1) {
                         participantes.push(auxiliar[1]);
                         participantes.push(auxiliar2[1]);
-                        idWon.push(auxiliar[0]);idWon.push(auxiliar2[0]);
-                    nameWon.push(auxiliar[1]); nameWon.push(auxiliar2[1]);
+                        idWon.push(auxiliar[0]);
+                        idWon.push(auxiliar2[0]);
+                        nameWon.push(auxiliar[1]);
+                        nameWon.push(auxiliar2[1]);
                         //Guardamos id's
                         auxId.push(auxiliar[0]);
                         auxIdNext.push(auxiliar2[0]);

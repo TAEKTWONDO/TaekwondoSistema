@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-07-2018 a las 19:20:24
+-- Tiempo de generación: 04-08-2018 a las 19:19:23
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -150,9 +150,14 @@ INSERT INTO `difeenfrentamientos` (`ID_DIFEENFRENTAMIENTO`, `ID_ALUMNO`, `AL_PUN
 (100, 12, 3, 4, 'P'),
 (101, 11, 4, 6, 'P'),
 (102, 20, 8, 5, 'G'),
-(103, 28, 0, 4, 'P'),
+(103, 14, 0, 4, 'P'),
 (104, 20, 5, 6, 'P'),
-(105, 12, 7, 8, 'P');
+(105, 12, 7, 8, 'P'),
+(106, 11, 3, 3, 'E'),
+(107, 20, 3, 3, 'E'),
+(108, 28, 3, 3, 'E'),
+(109, 13, 3, 3, 'E'),
+(110, 12, 3, 3, 'E');
 
 -- --------------------------------------------------------
 
@@ -198,7 +203,7 @@ CREATE TABLE `jueces` (
 
 INSERT INTO `jueces` (`ID_JUEZ`, `NOMBRE`, `APELLIDOS`, `TELEFONO`, `CONTRASENA`, `CORREO`) VALUES
 (7, 'Marco', 'Reyes Polo', 618456223, 'marco', 'Polo@gmail.com'),
-(6, 'Karem', 'Reyes', 618469745, 'ana', 'karem@gmail.com');
+(6, 'Karem', 'Reyes', 618469745, 'ana2', 'karem@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -244,6 +249,12 @@ CREATE TABLE `peleadores` (
 --
 
 INSERT INTO `peleadores` (`id_peleadores`, `id_alumno`, `id_contricante`) VALUES
+(50, 28, 14),
+(49, 20, 13),
+(48, 11, 12),
+(47, 28, 14),
+(46, 20, 13),
+(45, 11, 12),
 (44, 28, 14),
 (43, 20, 13),
 (42, 11, 12),
@@ -279,7 +290,12 @@ INSERT INTO `puntuaciones` (`ID_PUNTUACION`, `ID_ALUMNO`, `ID_TORNEO`, `PUNTUACI
 (576, 20, 3, 6, 6),
 (577, 28, 3, 8, 8),
 (578, 20, 3, 5, 5),
-(579, 12, 3, 0, 0);
+(579, 12, 3, 0, 0),
+(580, 11, 3, 3, 3),
+(581, 20, 3, 3, 3),
+(582, 28, 3, 3, 3),
+(583, 13, 3, 3, 3),
+(584, 12, 3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -311,6 +327,112 @@ CREATE TABLE `torneos` (
 INSERT INTO `torneos` (`ID_TORNEO`, `NOMBRE`, `DESCRIPCION`, `HORA`, `FECHA`, `ESTADO`, `IM5`, `I56`, `I78`, `I910`, `I1112`, `J1314`, `J1516`, `A17`) VALUES
 (3, 'Copa Telmex', 'Torneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-02', 'A', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'N'),
 (4, 'Copa Corona', 'orneo abierto a todas cintas y todas edades. Contará con un total de seis áreas en el estado\r\n                                    de Durango, Durango En el gimnacion del CCH y tomará inicio a las 9 am.', '09:00:00.000000', '2018-06-08', 'I', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `weka_datos`
+--
+
+CREATE TABLE `weka_datos` (
+  `id_weka_dato` int(11) NOT NULL,
+  `id_alumno` int(11) NOT NULL,
+  `total_puntaje` decimal(11,0) NOT NULL,
+  `dif_puntuaje` decimal(11,0) NOT NULL,
+  `dif_edad` decimal(11,0) NOT NULL,
+  `dif_altura` decimal(11,0) NOT NULL,
+  `dif_cinta` decimal(11,0) NOT NULL,
+  `dif_combates` decimal(11,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `weka_datos`
+--
+
+INSERT INTO `weka_datos` (`id_weka_dato`, `id_alumno`, `total_puntaje`, `dif_puntuaje`, `dif_edad`, `dif_altura`, `dif_cinta`, `dif_combates`) VALUES
+(1, 8, '4', '4', '1', '1', '1', '2'),
+(6, 5, '2', '-3', '0', '1', '0', '-1'),
+(7, 2, '4', '3', '0', '-1', '0', '0'),
+(8, 3, '1', '-3', '0', '1', '0', '0'),
+(9, 2, '5', '2', '-1', '-1', '-1', '0'),
+(10, 4, '3', '-2', '1', '1', '1', '0'),
+(11, 2, '7', '4', '0', '-1', '-1', '1'),
+(12, 5, '3', '-4', '0', '1', '1', '-1'),
+(13, 4, '10', '2', '0', '-1', '0', '2'),
+(14, 6, '8', '-2', '0', '1', '0', '0'),
+(15, 6, '9', '3', '0', '0', '0', '1'),
+(16, 7, '6', '-3', '0', '0', '0', '-1'),
+(17, 5, '8', '1', '0', '-2', '0', '1'),
+(18, 7, '7', '-1', '0', '2', '0', '-1'),
+(27, 2, '0', '0', '0', '0', '0', '0'),
+(28, 2, '0', '0', '0', '0', '0', '0'),
+(29, 2, '0', '0', '0', '0', '0', '0'),
+(30, 2, '0', '0', '0', '0', '0', '0'),
+(31, 2, '0', '0', '0', '0', '0', '0'),
+(32, 2, '0', '0', '0', '0', '0', '0'),
+(33, 3, '0', '0', '0', '0', '0', '0'),
+(34, 3, '0', '0', '0', '0', '0', '0'),
+(35, 3, '0', '0', '0', '0', '0', '0'),
+(36, 3, '0', '0', '0', '0', '0', '0'),
+(37, 3, '0', '0', '0', '0', '0', '0'),
+(38, 3, '0', '0', '0', '0', '0', '0'),
+(39, 3, '0', '0', '0', '0', '0', '0'),
+(40, 3, '0', '0', '0', '0', '0', '0'),
+(41, 4, '0', '0', '0', '0', '0', '0'),
+(42, 4, '0', '0', '0', '0', '0', '0'),
+(43, 4, '0', '0', '0', '0', '0', '0'),
+(44, 4, '0', '0', '0', '0', '0', '0'),
+(45, 4, '0', '0', '0', '0', '0', '0'),
+(46, 4, '0', '0', '0', '0', '0', '0'),
+(47, 4, '0', '0', '0', '0', '0', '0'),
+(48, 4, '0', '0', '0', '0', '0', '0'),
+(49, 4, '0', '0', '0', '0', '0', '0'),
+(50, 5, '0', '0', '0', '0', '0', '0'),
+(51, 5, '0', '0', '0', '0', '0', '0'),
+(52, 5, '0', '0', '0', '0', '0', '0'),
+(53, 5, '0', '0', '0', '0', '0', '0'),
+(54, 5, '0', '0', '0', '0', '0', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `weka_datos2`
+--
+
+CREATE TABLE `weka_datos2` (
+  `id_weka_dato` int(255) NOT NULL,
+  `id_alumno` int(11) DEFAULT NULL,
+  `edad_alumno` varchar(255) DEFAULT NULL,
+  `cinta_alumno` varchar(255) DEFAULT NULL,
+  `altura_alumno` double(25,1) DEFAULT NULL,
+  `puntaje_total` varchar(255) DEFAULT NULL,
+  `puntaje_contrincante` varchar(255) DEFAULT NULL,
+  `diferencia_puntaje` varchar(255) DEFAULT NULL,
+  `edad_contrincante` varchar(255) DEFAULT NULL,
+  `altura_contrincante` double(25,1) DEFAULT NULL,
+  `cinta_contrincante` varchar(255) DEFAULT NULL,
+  `combates_contrincantes` int(11) DEFAULT NULL,
+  `combates_alumno` int(11) DEFAULT NULL,
+  `resultado` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `weka_datos2`
+--
+
+INSERT INTO `weka_datos2` (`id_weka_dato`, `id_alumno`, `edad_alumno`, `cinta_alumno`, `altura_alumno`, `puntaje_total`, `puntaje_contrincante`, `diferencia_puntaje`, `edad_contrincante`, `altura_contrincante`, `cinta_contrincante`, `combates_contrincantes`, `combates_alumno`, `resultado`) VALUES
+(316, 28, '10', 'Amarilla', 1.3, '9', '8', '1', '10', 1.3, 'Amarilla', 4, 4, 'Gano'),
+(317, 20, '10', 'Blanca', 1.2, '3', '3', '0', '10', 1.2, 'Blanca', 4, 4, 'Perdio'),
+(318, 11, '10', 'Amarilla', 1.4, '4', '7', '-3', '10', 1.4, 'Amarilla', 4, 4, 'Perdio'),
+(319, 28, '10', 'Amarilla', 1.3, '1', '2', '-1', '10', 1.3, 'Amarilla', 4, 4, 'Perdio'),
+(320, 20, '10', 'Blanca', 1.2, '8', '5', '3', '10', 1.2, 'Blanca', 4, 4, 'Gano'),
+(321, 11, '10', 'Amarilla', 1.4, '5', '6', '-1', '10', 1.4, 'Amarilla', 4, 4, 'Perdio'),
+(322, 28, '10', 'Amarilla', 1.3, '3', '3', '0', '10', 1.3, 'Amarilla', 4, 4, 'Perdio'),
+(323, 20, '10', 'Blanca', 1.2, '5', '7', '-2', '10', 1.2, 'Blanca', 4, 4, 'Perdio'),
+(324, 11, '10', 'Amarilla', 1.4, '4', '6', '-2', '10', 1.4, 'Amarilla', 4, 4, 'Perdio'),
+(325, 28, '10', 'Amarilla', 1.3, '3', '3', '0', '10', 1.3, 'Amarilla', 4, 4, 'Perdio'),
+(326, 20, '10', 'Blanca', 1.2, '9', '8', '1', '10', 1.2, 'Blanca', 4, 4, 'Gano'),
+(327, 11, '10', 'Amarilla', 1.4, '3', '3', '0', '10', 1.4, 'Amarilla', 4, 4, 'Perdio');
 
 --
 -- Índices para tablas volcadas
@@ -385,6 +507,20 @@ ALTER TABLE `torneos`
   ADD PRIMARY KEY (`ID_TORNEO`);
 
 --
+-- Indices de la tabla `weka_datos`
+--
+ALTER TABLE `weka_datos`
+  ADD PRIMARY KEY (`id_weka_dato`),
+  ADD KEY `id_alumno` (`id_alumno`);
+
+--
+-- Indices de la tabla `weka_datos2`
+--
+ALTER TABLE `weka_datos2`
+  ADD PRIMARY KEY (`id_weka_dato`),
+  ADD KEY `id_alumno` (`id_alumno`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -407,7 +543,7 @@ ALTER TABLE `concursantes`
 -- AUTO_INCREMENT de la tabla `difeenfrentamientos`
 --
 ALTER TABLE `difeenfrentamientos`
-  MODIFY `ID_DIFEENFRENTAMIENTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `ID_DIFEENFRENTAMIENTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT de la tabla `gyms`
 --
@@ -427,17 +563,27 @@ ALTER TABLE `maestros`
 -- AUTO_INCREMENT de la tabla `peleadores`
 --
 ALTER TABLE `peleadores`
-  MODIFY `id_peleadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_peleadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT de la tabla `puntuaciones`
 --
 ALTER TABLE `puntuaciones`
-  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=580;
+  MODIFY `ID_PUNTUACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=585;
 --
 -- AUTO_INCREMENT de la tabla `torneos`
 --
 ALTER TABLE `torneos`
   MODIFY `ID_TORNEO` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `weka_datos`
+--
+ALTER TABLE `weka_datos`
+  MODIFY `id_weka_dato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+--
+-- AUTO_INCREMENT de la tabla `weka_datos2`
+--
+ALTER TABLE `weka_datos2`
+  MODIFY `id_weka_dato` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 --
 -- Restricciones para tablas volcadas
 --
@@ -473,6 +619,18 @@ ALTER TABLE `maestros`
 ALTER TABLE `puntuaciones`
   ADD CONSTRAINT `puntuaciones_ibfk_1` FOREIGN KEY (`ID_ALUMNO`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `puntuaciones_ibfk_2` FOREIGN KEY (`ID_TORNEO`) REFERENCES `torneos` (`ID_TORNEO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `weka_datos`
+--
+ALTER TABLE `weka_datos`
+  ADD CONSTRAINT `weka_datos_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `weka_datos2`
+--
+ALTER TABLE `weka_datos2`
+  ADD CONSTRAINT `id_alumno` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`ID_ALUMNO`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

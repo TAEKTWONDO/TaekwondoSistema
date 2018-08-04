@@ -42,6 +42,9 @@ $_SESSION["CATEGORIA"] = $CATEGORIA;
 					<a class="mdl-navigation__link mdl-js-ripple-effect"  onclick="enviarGanadores()">
 						ANUNCIAR GANADORES
 					</a>
+					<a class="mdl-navigation__link mdl-js-ripple-effect"  onclick="guardarGanadores()">
+						GUARDAR VALORES
+					</a>
 
 					
 				</div>

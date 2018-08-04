@@ -18,81 +18,78 @@ $results_num =0;
 
 
 ?>
-	<!DOCTYPE html>
-	<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-	<head>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="../assets/css/material.indigo-pink.min.css">
-		<link rel="stylesheet" href="../assets/scss/style.scss">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="../assets/css/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="../assets/scss/style.scss">
 
-		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-		<title>
-			Karem
-		</title>
-	</head>
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <title>
+            Karem
+        </title>
+    </head>
 
-	<body>
-		<!--Header-->
-		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-			<header class="mdl-layout__header">
-				<div class="mdl-layout__header-row">
-					<!-- Title -->
-					<div class="mdl-navigation mdl-layout">
-						<a class="mdl-navigation__link mdl-js-ripple-effect" href="">
+    <body>
+        <!--Header-->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <div class="mdl-navigation mdl-layout">
+                        <a class="mdl-navigation__link mdl-js-ripple-effect" href="">
 							ALUMNOS
 						</a>
 
-						<a class="mdl-navigation__link" href="prof-torneos.php">
+                        <a class="mdl-navigation__link" href="prof-torneos.php">
 							TORNEOS
 						</a>
-						<a class="mdl-navigation__link" href="prof-estadisticas.php">
-							ESTADÍSTICAS
-						</a>
-					</div>
-					<!-- Add spacer, to align navigation to the right -->
-					<div class="mdl-layout-spacer"></div>
 
-					<a class="mdl__link" href="index.html">
-						<i class="material-icons md-32">input</i>
-					</a>
+                    </div>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
 
-				</div>
-			</header>
+                    <a class="mdl__link" href="index.html">
+                        <i class="material-icons md-32">input</i>
+                    </a>
 
-			<!--Contains-->
+                </div>
+            </header>
 
-			<div class="mdl-cell--12-col mdl-grid">
+            <!--Contains-->
 
-				<div class="mdl-cell mdl-cell--3-col" style="text-align: right;">
-					<br>
-					<br>
+            <div class="mdl-cell--12-col mdl-grid">
+
+                <div class="mdl-cell mdl-cell--3-col" style="text-align: right;">
+                    <br>
+                    <br>
 
 
-					
-				</div>
 
-				<ul>
-					<br>
-					<h3 class="mdl-list__item-primary-content" style="text-align: center;">Alumnos</h3>
+                </div>
 
-					<form action="" method="GET">
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <ul>
+                    <br>
+                    <h3 class="mdl-list__item-primary-content" style="text-align: center;">Alumnos</h3>
 
-							<div class="mdl-textfield__expandable-holder">
-								<input class="mdl-textfield__input" type="text" id="sample6" name="query">
-								<label class="mdl-textfield__label" for="sample-expandable" style="color: black;">Buscar</label>
-							</div>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredBlue mdl-js-ripple-effect mdl-checkbox__input"
-							    name="submit">
+                    <form action="" method="GET">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+
+                            <div class="mdl-textfield__expandable-holder">
+                                <input class="mdl-textfield__input" type="text" id="sample6" name="query">
+                                <label class="mdl-textfield__label" for="sample-expandable" style="color: black;">Buscar</label>
+                            </div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredBlue mdl-js-ripple-effect mdl-checkbox__input" name="submit">
 								<i class="material-icons">search</i>
 							</button>
-							</a>
+                            </a>
 
-						</div>
-					</form>
-					<?php 
+                        </div>
+                    </form>
+                    <?php 
 					if(isset($_GET['submit'])){	
 							$query=$_GET['query'];	
 											
@@ -103,23 +100,23 @@ $results_num =0;
 							echo "Nadaaaaaaaaaaaaa";
 					}else{
 					?>
-					<li class="mdl-list__item">
-						<span class="mdl-list__item-primary-content">
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
 							<i class="material-icons  mdl-list__item-avatar">person</i>
 							<?php echo $row['nombre'].$row['apellidos']  ?>
 						</span>
 
-						<span style="color:white;">...........................................</span>
+                        <span style="color:white;">...........................................</span>
 
-						<span class="mdl-list__item-secondary-action">
+                        <span class="mdl-list__item-secondary-action">
 							<a href="../assets/php/prof-delete.php?id='+<?php echo $row['id_alumno'] ?>'">
 								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
 									<i class="material-icons">delete</i>
 								</button>
 							</a>
 						</span>
-				
-					<?php
+
+                        <?php
 				
 				
 			}		
@@ -129,40 +126,40 @@ $results_num =0;
 			if( $results_num=0){
 				echo "<h1>None</h1>";
 		}	?>
-			</li>										
-			<?php
+                    </li>
+                    <?php
 					}
                 		
 					else{
 					foreach ($conexion->query('SELECT nombre, id_alumno, apellidos FROM ALUMNOS WHERE ID_MAESTRO = '. $_SESSION["ID_PROFE"]) as $row){ // aca puedes hacer la consulta e iterarla con each. ?>
-					
-					<li class="mdl-list__item">
-						<span class="mdl-list__item-primary-content">
+
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
 							<i class="material-icons  mdl-list__item-avatar">person</i>
 							<?php echo $row['nombre'].$row['apellidos']  ?>
 						</span>
 
-						<span style="color:white;">...........................................</span>
+                            <span style="color:white;">...........................................</span>
 
-						<span class="mdl-list__item-secondary-action">
+                            <span class="mdl-list__item-secondary-action">
 							<a href="../assets/php/prof-delete.php?id='+<?php echo $row['id_alumno'] ?>'">
 								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
 									<i class="material-icons">delete</i>
 								</button>
 							</a>
 						</span>
-					</li>
-					<?php
+                        </li>
+                        <?php
                     }}
                 ?>
 
 
 
-				</ul>
-			</div>
-		</div>
+                </ul>
+            </div>
+        </div>
 
 
-	</body>
+    </body>
 
-	</html>
+    </html>
