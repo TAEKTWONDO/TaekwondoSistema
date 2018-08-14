@@ -25,7 +25,7 @@ $_SESSION["CATEGORIA"] = $CATEGORIA;
     <!-- Esta libreria no se debe borrar -->
     <script src="synaptic.js"></script>
 	<title>
-		Karem
+		Grafica de Combates
 	</title>
 </head>
 
