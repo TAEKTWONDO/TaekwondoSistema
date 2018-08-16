@@ -29,6 +29,7 @@ var genderScoreFinal = new Array();
 var beltScoreFinal = new Array();
 var heightScoreFinal = new Array();
 var ageScoreFinal = new Array();
+var ColaGanadoresFinal = new Array();
 //////////////////////////////////////////
 /////////////////////////////////////////
 var outputsNetwork1 = new Array();
@@ -397,8 +398,10 @@ function graphic() {
                 .parent();
             console.log($ul);
         }
-
+        console.table(nameWon);
         $ul.find("button").each(function () {
+            
+            var nombreaux = "";
             //primer competidor
             if (cont == 0) {
                 cont++;
@@ -406,10 +409,10 @@ function graphic() {
                 var puntos = prompt("Ingrese el puntaje del primer competidor " + $(this).text());
                 com_1_nombre = $(this).text();
                 scoreName.push(com_1_nombre);
+                
                 if (puntos == null || puntos == "") {
                     scorePuntos.push(0);
                 } else {
-                    console.log("Puntaje de " + $(this).text() + ": " + puntos);
                     /*  scoreWonSend.push($(this).text());
                       scoreWonSend.push(puntos);
                       socrePeople.push($(this).text());
@@ -468,7 +471,11 @@ function graphic() {
         });
 
         // console.log("Ganador " + $(this).text());
-        socrePeople.push($(this).text());
+       socrePeople.push($(this).text());
+        
+
+
+
         // console.table(socrePeople);
         /*  scoreWonSend.push($(this).text());
                       scoreWonSend.push(puntos);
@@ -557,7 +564,7 @@ function graphic() {
 
 
         cola.unshift($(this).text().replace(/^\s+|\s+$/gm, ''));
-        //console.log(cola);
+        console.log(cola);
 
 
         //Eliminar datos repetidos
@@ -565,11 +572,14 @@ function graphic() {
             return index == self.indexOf(elem);
             // console.log(index);
         });
+        console.log(colaGanadores);
+        ColaGanadoresFinal = colaGanadores;
 
-        colaGanadores = colaGanadores.filter(function (str) {
-            return /\S/.test(str);
-        });
+        // colaGanadores = colaGanadores.filter(function (str) {
+        //     return /\S/.test(str);
+        // });
     });
+    // console.log(colaGanadores);
 }
 
 function enviarGanadores() {
@@ -584,8 +594,8 @@ function enviarGanadores() {
         return index == self.indexOf(elem);
         // console.log(index);
     });
-    console.table(peopleName);
-    soundWon(peopleName);
+    console.table(ColaGanadoresFinal);
+    soundWon(ColaGanadoresFinal);
 }
 
 function guardarGanadores() {
@@ -598,6 +608,7 @@ function score() {
     //Combina el nombre con el id
     var peoplePuntuaje = new Array();
     var scoreName2 = new Array();
+    var scoreName3 = new Array();
     
     for (var y = 0; y < idWon.length; y++) {
         People[y] = new Array(idWon[y], nameWon[y]);
@@ -611,16 +622,32 @@ function score() {
     console.table(peopleFinalistas);
     console.table(scorePuntos);
     console.table(scoreAmones);
-var aux = "", aux2 = "";
+    var aux ;
+    var aux2 ;
     for (var e = 0; e < scoreName.length;e++) {
        
-            aux = scoreName[y];
-            aux2 = aux.replace('                                   ', '');
-            scoreName[e] = aux2;
+        aux = scoreName[y];
+        aux2 = $.trim(aux);
+        console.log(aux2);
+        scoreName2.push(aux2);
     
         
         }
-        console.table(scoreName);
+        console.table(scoreName2);
+
+
+
+
+        for (var e = 0; e < scoreName2.length;e++) {
+       
+           
+            aux2 = scoreName2[y].replace(' ', '');
+            scoreName3.push(aux2);
+        
+            
+            }
+            // console.table(scoreName2);
+            console.table(scoreName3);
 //     for (var y = 0; y < People.length; y++) {
 //         for (var e = 0; e < peoplePuntuaje.length;e++) {
 //         // console.log(People[y][0]);
