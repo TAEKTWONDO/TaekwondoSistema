@@ -30,7 +30,7 @@ if ($conexion->connect_error) {
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <title>
-            Karem
+            Agregar alumno
         </title>
     </head>
 

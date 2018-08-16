@@ -34,7 +34,7 @@ if ($conexion->connect_error) {
         <script src="data_concursantes.js"></script>
         <script src="data.js"></script>
         <title>
-            Karem
+            Jueces
         </title>
     </head>
 

@@ -48,9 +48,7 @@ if ($conexion->connect_error) {
                         <a class="mdl-navigation__link" href="admn-jueces.php">
                         JUECES
                     </a>
-                        <a class="mdl-navigation__link" href="juez/weka.php">
-                        MINERÍA DE DATOS
-                    </a>
+                       
                     </div>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
