@@ -93,6 +93,9 @@ var PuntuacionAmonestaciones = new Array();
 var auxiliarScore, auxiliarScore2;
 var PeopleWon = new Array();
 var socrePeople = new Array();
+var scoreName = new Array();
+var scorePuntos = new Array();
+var scoreAmones = new Array();
 /////////////////////////////////////
 var auxNombre = "";
 ///////////////////////////////////
@@ -401,8 +404,9 @@ function graphic() {
 
                 var puntos = prompt("Ingrese el puntaje del primer competidor " + $(this).text());
                 com_1_nombre = $(this).text();
+                scoreName.push(com_1_nombre);
                 if (puntos == null || puntos == "") {
-
+                    scorePuntos.push(0);
                 } else {
                     console.log("Puntaje de " + $(this).text() + ": " + puntos);
                     /*  scoreWonSend.push($(this).text());
@@ -410,17 +414,21 @@ function graphic() {
                       socrePeople.push($(this).text());
                       socrePeople.push(puntos);*/
                     com_1_puntaje = puntos;
+                    
+                scorePuntos.push(com_1_puntaje );
 
                 }
                 var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text());
 
                 if (amonestacion == null || amonestacion == "") {
                     // console.log("Cancelado");
+                    scoreAmones.push(0);
                 } else {
                     // console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
                     /*scoreWonSend.push($(this).text());
                     scoreWonSend.push(puntos);*/
                     com_1_amones = amonestacion;
+                    scoreAmones.push(com_1_amones );
                 }
 
             }
@@ -428,8 +436,9 @@ function graphic() {
             else {
                 var puntos = prompt("Ingrese el puntaje del segundo competidor " + $(this).text());
                 com_2_nombre = $(this).text();
+                scoreName.push(com_2_nombre);
                 if (puntos == null || puntos == "") {
-
+                    scorePuntos.push(0 );
                 } else {
                     // console.log("Puntaje de " + $(this).text() + ": " + puntos);
                     /*  scoreWonSend.push($(this).text());
@@ -437,17 +446,20 @@ function graphic() {
                       socrePeople.push($(this).text());
                       socrePeople.push(puntos);*/
                     com_2_puntaje = puntos;
+                    scorePuntos.push(com_2_puntaje );
 
                 }
                 var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text());
 
                 if (amonestacion == null || amonestacion == "") {
+                    scoreAmones.push(0);
                     // console.log("Cancelado");
                 } else {
                     // console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
                     /*scoreWonSend.push($(this).text());
                     scoreWonSend.push(puntos);*/
                     com_2_amones = amonestacion;
+                    scoreAmones.push(com_2_amones );
                 }
 
             }
@@ -562,8 +574,14 @@ function graphic() {
 function enviarGanadores() {
     var peopleName = new Array();
     // score();
-    // auxNombre2 = PeopleWon[3];
-    // auxNombre = auxNombre2[1];
+    console.table(scoreName);
+    console.table(scorePuntos);
+    console.table(scoreAmones);
+
+
+
+
+
     for (var y = socrePeople.length; y >= 0; y--) {
         peopleName.push(socrePeople[y]);
     }
