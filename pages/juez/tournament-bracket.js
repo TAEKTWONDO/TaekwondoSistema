@@ -404,7 +404,7 @@ function graphic() {
                 if (puntos == null || puntos == "") {
 
                 } else {
-                    // console.log("Puntaje de " + $(this).text() + ": " + puntos);
+                    console.log("Puntaje de " + $(this).text() + ": " + puntos);
                     /*  scoreWonSend.push($(this).text());
                       scoreWonSend.push(puntos);
                       socrePeople.push($(this).text());
@@ -454,7 +454,13 @@ function graphic() {
 
         });
 
-        console.log("Ganador " + $(this).text());
+        // console.log("Ganador " + $(this).text());
+        socrePeople.push($(this).text());
+        // console.table(socrePeople);
+        /*  scoreWonSend.push($(this).text());
+                      scoreWonSend.push(puntos);
+                      socrePeople.push($(this).text());
+                      socrePeople.push(puntos);*/
         //Uno mayor 
         var i_com_1_puntaje = Number(com_1_puntaje);
         var i_com_2_puntaje = Number(com_2_puntaje);
@@ -475,59 +481,59 @@ function graphic() {
                 if (com_1_nombre == $(this).text()) {
 
                     if (confirm("¿Ganó " + com_1_nombre + " " + i_com_1_puntaje + "-" + i_com_2_puntaje + " contra " + com_2_nombre + "?")) {
-                        console.log("Sí");
-                        console.log("Guardar al ganador sin problemas");
+                        // console.log("Sí");
+                        // console.log("Guardar al ganador sin problemas");
                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
                         $ul.find("button").each(function () {
                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
                         });
                         changeToButtons();
                     } else {
-                        console.log("a weno, ño >:c");
+                        // console.log("a weno, ño >:c");
                     }
 
                 }
                 //y dos ganador
                 else {
-                    console.log("Gano por abandono de combate el dos?");
+                    // console.log("Gano por abandono de combate el dos?");
                     if (confirm("¿Ganó " + $(this).text() + " a causa de abandono de combate?")) {
-                        console.log("Sí");
+                        // console.log("Sí");
                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
                         $ul.find("button").each(function () {
                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
                         });
                         changeToButtons();
                     } else {
-                        console.log("ño >:c");
+                        // console.log("ño >:c");
                     }
                 }
             } //dos mayor y dos ganador
             else if (i_com_1_puntaje < i_com_2_puntaje) {
                 if (com_2_nombre == $(this).text()) {
                     if (confirm("¿Ganó " + com_2_nombre + " " + i_com_2_puntaje + "-" + i_com_1_puntaje + " contra " + com_1_nombre + "?")) {
-                        console.log("Sí");
-                        console.log("Guardar al ganador sin problemas");
+                        // console.log("Sí");
+                        // console.log("Guardar al ganador sin problemas");
                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
                         $ul.find("button").each(function () {
                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
                         });
                         changeToButtons();
                     } else {
-                        console.log("a weno, ño >:c");
+                        // console.log("a weno, ño >:c");
                     }
                 }
                 //y dos ganador
                 else {
-                    console.log("Gano por abandono de combate el uno?");
+                    // console.log("Gano por abandono de combate el uno?");
                     if (confirm("¿Ganó " + $(this).text() + " a causa de abandono de combate?")) {
-                        console.log("Sí");
+                        // console.log("Sí");
                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
                         $ul.find("button").each(function () {
                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
                         });
                         changeToButtons();
                     } else {
-                        console.log("ño >:c");
+                        // console.log("ño >:c");
                     }
                 }
             } else if (i_com_1_puntaje == i_com_2_puntaje) {
@@ -544,7 +550,7 @@ function graphic() {
         //Eliminar datos repetidos
         colaGanadores = cola.filter(function (elem, index, self) {
             return index == self.indexOf(elem);
-            console.log(index);
+            // console.log(index);
         });
 
         colaGanadores = colaGanadores.filter(function (str) {
@@ -554,11 +560,15 @@ function graphic() {
 }
 
 function enviarGanadores() {
-    score();
-    auxNombre2 = PeopleWon[3];
-    auxNombre = auxNombre2[1];
-    soundWon(colaGanadores);
-    console.log("Ganadores: " + colaGanadores);
+    var peopleName = new Array();
+    // score();
+    // auxNombre2 = PeopleWon[3];
+    // auxNombre = auxNombre2[1];
+    for (var y = socrePeople.length; y >= 0; y--) {
+        peopleName.push(socrePeople[y]);
+    }
+    peopleName = peopleName.filter(Boolean);
+    soundWon(peopleName);
 }
 
 function guardarGanadores() {
@@ -614,25 +624,30 @@ function score() {
 }
 
 function saveWon(wonPeople) {
-    var scorePeople = new Array();
-    var scorePeopleId = new Array();
-    var status = "";
-    for (var k = 0; k < socrePeople.length; k++) {
-        if (socrePeople[k + 1] > socrePeople[k + 3]) status = "G";
-        if (socrePeople[k + 1] < socrePeople[k + 3]) status = "P";
-        if (socrePeople[k + 1] == socrePeople[k + 3]) status = "E";
-        scorePeople[k] = new Array(socrePeople[k], socrePeople[k + 1], socrePeople[k + 3], status);
-        k += 3;
+    if (wonPeople == null || wonPeople.length == 0){
+        alert("Lo sentimos, esta opción no esta disponible hasta anunciar a los ganadores.");
     }
-    scorePeople = scorePeople.filter(Boolean);
-    for (var k = 0; k < PeopleWon.length; k++) {
-        for (var r = 0; r < scorePeople.length; r++) {
-            aux1 = PeopleWon[k];
-            aux2 = scorePeople[r];
-            if (aux1[1] == aux2[0]) {
-                scorePeopleId[k] = new Array(aux1[0], aux2[0], aux2[1], aux2[2], aux2[3]);
-            }
+    else {
+        var scorePeople = new Array();
+        var scorePeopleId = new Array();
+        var status = "";
+        for (var k = 0; k < socrePeople.length; k++) {
+            if (socrePeople[k + 1] > socrePeople[k + 3]) status = "G";
+            if (socrePeople[k + 1] < socrePeople[k + 3]) status = "P";
+            if (socrePeople[k + 1] == socrePeople[k + 3]) status = "E";
+            scorePeople[k] = new Array(socrePeople[k], socrePeople[k + 1], socrePeople[k + 3], status);
+            k += 3;
+        }
+        scorePeople = scorePeople.filter(Boolean);
+        for (var k = 0; k < PeopleWon.length; k++) {
+            for (var r = 0; r < scorePeople.length; r++) {
+                aux1 = PeopleWon[k];
+                aux2 = scorePeople[r];
+                if (aux1[1] == aux2[0]) {
+                    scorePeopleId[k] = new Array(aux1[0], aux2[0], aux2[1], aux2[2], aux2[3]);
+                }
 
+            }
         }
     }
     scorePeopleId = scorePeopleId.filter(Boolean);
@@ -673,37 +688,38 @@ function saveWon(wonPeople) {
     document.location.href = "save_won.php?idAlumno=" + idAlumno + "&idContricante=" + idContricante + "&id_alumno=" + id + "&puntuacion=" + puntuacion + "&puntuacionOP=" + puntuacionOP + "&status=" + status + "&id_alumnoP=" + idP + "&puntuacionP=" + puntuacionP + "&amonestacionesP=" + amonestacionesP + "&torneo=" + Torneo;
 }
 
-function soundWon(resultadoName) {
-    //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
-    var primer = "El ganador del primer lugar es: " + resultadoName[0] + ". Felicitaciones.";
-    var segundo = "El ganador del segundo lugar es: " + resultadoName[1] + ". Felicitaciones.";
-    var tercer = "El ganador del tercer lugar es: : " + resultadoName[2] + ". Felicitaciones.";
-    var tercer2 = "El ganador del tercer lugar es: : " + auxNombre + ". Felicitaciones.";
-
-    if (Category == "IM5") categoriaTorneo = "Los ganadores de la categoría Infantiles menor a 5 años son";
-    if (Category == "I56") categoriaTorneo = "Los ganadores de la categoría Infantiles de 5 a 6 años son";
-    if (Category == "I78") categoriaTorneo = "Los ganadores de la categoría Infantiles de 7 a 8 años son";
-    if (Category == "I910") categoriaTorneo = "Los ganadores de la categoría Infantiles de 9 a 10 años son";
-    if (Category == "I1112") categoriaTorneo = "Los ganadores de la categoría Infantiles de 11 a 12 años son";
-    if (Category == "J1314") categoriaTorneo = "Los ganadores de la categoría Juveniles de 13 a 14 años son";
-    if (Category == "J1516") categoriaTorneo = "Los ganadores de la categoría Juveniles de 15 a 16 años son";
-    if (Category == "A17") categoriaTorneo = "Los ganadores de la categoría Adultos mayor a 17 años son";
-
-    responsiveVoice.speak(categoriaTorneo, "Spanish Female");
-    text = encodeURIComponent(categoriaTorneo);
-    var url = "http://";
-    responsiveVoice.speak(tercer, "Spanish Female");
-    text = encodeURIComponent(tercer);
-    var url = "http://";
-    responsiveVoice.speak(tercer2, "Spanish Female");
-    text = encodeURIComponent(tercer2);
-    var url = "http://";
-    responsiveVoice.speak(segundo, "Spanish Female");
-    text = encodeURIComponent(segundo);
-    var url = "http://";
-    responsiveVoice.speak(primer, "Spanish Female");
-    text = encodeURIComponent(primer);
-    var url = "http://";
+function soundWon(peopleName) {
+    if (peopleName == null || peopleName.length == 0){
+        alert("Lo sentimos, esta opción no esta disponible hasta realizar la graficación y tener un ganador.");
+    }
+    else {
+         //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
+         var primer = "El ganador del primer lugar es: " + peopleName[2] + ". Felicitaciones.";
+         var segundo = "El ganador del segundo lugar es: " + peopleName[4] + ". Felicitaciones.";
+         var tercer = "El ganador del tercer lugar es: : " + peopleName[3] + ". Felicitaciones.";
+ 
+         if (Category == "IM5") categoriaTorneo = "Los ganadores de la categoría Infantiles menor a 5 años son";
+         if (Category == "I56") categoriaTorneo = "Los ganadores de la categoría Infantiles de 5 a 6 años son";
+         if (Category == "I78") categoriaTorneo = "Los ganadores de la categoría Infantiles de 7 a 8 años son";
+         if (Category == "I910") categoriaTorneo = "Los ganadores de la categoría Infantiles de 9 a 10 años son";
+         if (Category == "I1112") categoriaTorneo = "Los ganadores de la categoría Infantiles de 11 a 12 años son";
+         if (Category == "J1314") categoriaTorneo = "Los ganadores de la categoría Juveniles de 13 a 14 años son";
+         if (Category == "J1516") categoriaTorneo = "Los ganadores de la categoría Juveniles de 15 a 16 años son";
+         if (Category == "A17") categoriaTorneo = "Los ganadores de la categoría Adultos mayor a 17 años son";
+ 
+         responsiveVoice.speak(categoriaTorneo, "Spanish Female");
+         text = encodeURIComponent(categoriaTorneo);
+         var url = "http://";
+         responsiveVoice.speak(tercer, "Spanish Female");
+         text = encodeURIComponent(tercer);
+         var url = "http://";
+         responsiveVoice.speak(segundo, "Spanish Female");
+         text = encodeURIComponent(segundo);
+         var url = "http://";
+         responsiveVoice.speak(primer, "Spanish Female");
+         text = encodeURIComponent(primer);
+         var url = "http://";
+    }
 }
 
 function getValues(idStudent, nameStudent, genderStudent, ageStudent, heightStudent, beltStudent) {
