@@ -30,7 +30,7 @@ $results_num =0;
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script defer src="../assets/js/alerts.js"></script>
         <title>
-            Alumnos
+            Mis Alumnos
         </title>
     </head>
 
@@ -41,7 +41,7 @@ $results_num =0;
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
                     <div class="mdl-navigation mdl-layout">
-                        <a class="mdl-navigation__link mdl-js-ripple-effect" href="">
+                        <a class="mdl-navigation__link mdl-js-ripple-effect" href="prof-alumnos.php">
 							ALUMNOS
 						</a>
 
@@ -73,7 +73,7 @@ $results_num =0;
 						<i class="material-icons">add</i>
 					</button>
                     <div class="mdl-tooltip mdl-tooltip--large  " data-mdl-for="tt3">
-                        Agregar Alumno Nuevo
+                        Agregar Nuevo Alumno
                     </div>
                 </div>
 
@@ -102,24 +102,23 @@ $results_num =0;
 					foreach ($conexion->query('SELECT nombre, id_alumno, apellidos FROM ALUMNOS WHERE (nombre LIKE "%'.$query.'%" OR apellidos LIKE "%'.$query.'%") AND ID_MAESTRO = '. $_SESSION["ID_PROFE"]) as $row){ // aca puedes hacer la consulta e iterarla con each. 
 						
 						$results_num =+1;
-						if(sizeof($row)== 0){
-							echo "Nadaaaaaaaaaaaaa";
+						if(sizeof($row) == 0){
+							echo "No hay alumnos";
 					}else{
 					?>
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
 							<i class="material-icons  mdl-list__item-avatar">person</i>
-							<?php echo $row['nombre'].$row['apellidos']  ?>
+							<?php echo $row['nombre'] . " " . $row['apellidos']  ?>
 						</span>
 
                         <span style="color:white;">...........................................</span>
 
                         <span class="mdl-list__item-secondary-action">
-							<a href="../assets/php/prof-delete.php?id='+<?php echo $row['id_alumno'] ?>'">
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                                    onclick="eraseItem('alumno', <?php echo $row['id_alumno'] ?> )" >
 									<i class="material-icons">delete</i>
 								</button>
-							</a>
 						</span>
 
                         <?php
@@ -142,17 +141,16 @@ $results_num =0;
                         <li class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
 							<i class="material-icons  mdl-list__item-avatar">person</i>
-							<?php echo $row['nombre'].$row['apellidos']  ?>
+							<?php echo $row['nombre']." ".$row['apellidos']  ?>
 						</span>
 
                             <span style="color:white;">...........................................</span>
 
                             <span class="mdl-list__item-secondary-action">
-							<a href="../assets/php/prof-delete.php?id='+<?php echo $row['id_alumno'] ?>'">
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-									<i class="material-icons">delete</i>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                                    onclick="eraseItem('alumno', <?php echo $row['id_alumno'] ?> )" >
+									    <i class="material-icons">delete</i>
 								</button>
-							</a>
 						</span>
                         </li>
                         <?php

@@ -97,14 +97,13 @@ $subject = $_GET['id_torneo'];
                         <li class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
 								<i class="material-icons  mdl-list__item-avatar">person</i>
-								<?php echo $row['NOMBRE'].$row['APELLIDOS']  ?>
+								<?php echo $row['NOMBRE'] . " " . $row['APELLIDOS']  ?>
 							</span>
                             <span style="color:white;">...........................................</span>
                             <span class="mdl-list__item-secondary-action">							
 
 								<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="background:rgb(241, 0, 0);"
-								  onclick="location.href='../assets/php/prof-quitar-participante.php?id_alumno='+<?php echo $row['ID_ALUMNO'] ?>+'&id_torneo='+<?php echo $subject ?>+''"
-								  type="button">
+                                    onclick="getContestant('retirar', <?php echo $row['ID_ALUMNO'] ?>, <?php echo $subject ?> )" type="button">
 									<i class="material-icons">clear</i>
 								</button>
 							</span>
@@ -133,14 +132,13 @@ $subject = $_GET['id_torneo'];
                         <li class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
 								<i class="material-icons  mdl-list__item-avatar">person</i>
-								<?php echo $row['NOMBRE'].$row['APELLIDOS']  ?>
+								<?php echo $row['NOMBRE'] . " " . $row['APELLIDOS']  ?>
 							</span>
                             <span style="color:white;">...........................................</span>
                             <span class="mdl-list__item-secondary-action">
 								<!--a href="../assets/php/prof-agregar-participante.php?id_alumno='+<?php// echo $row['ID_ALUMNO'] ?>+'?id_torneo='+<?php //echo $subject ?>'"-->
 								<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="background:rgb(42, 149, 24);"
-								  onclick="location.href='../assets/php/prof-agregar.php?id_alumno='+<?php echo $row['ID_ALUMNO'] ?>+'&id_torneo='+<?php echo $subject ?>+''"
-								  type="button">
+                                    onclick="getContestant('registrar', <?php echo $row['ID_ALUMNO'] ?>, <?php echo $subject ?> )" type="button">
 									<i class="material-icons">add</i>
 								</button>
 								
