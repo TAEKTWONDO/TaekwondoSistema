@@ -45,3 +45,8 @@
                 document.getElementById("logout").href = "index.html";
         }
     }
+
+    //Mensaje de Alerta
+    function alertBadSession() {
+        window.alert("El correo y/o contraseña son inválidos.\nCorregir por favor.");
+    }

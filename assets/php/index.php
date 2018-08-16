@@ -31,7 +31,7 @@ if ($conexion->connect_error) {
             header('Location: ../../pages/admn-profesores.php');
         }
         else {
-            header('Location: ../../pages/index.html');
+            header('Location: ../../pages/index.html?ses=0');
         }
     }
    elseif ($res_profe->num_rows > 0){
@@ -41,7 +41,7 @@ if ($conexion->connect_error) {
             header('Location: ../../pages/prof-alumnos.php');
         }
         else {
-            header('Location: ../../pages/index.html');
+            header('Location: ../../pages/index.html?ses=0');
         }
     }
    elseif ($res_juez->num_rows > 0){
@@ -49,8 +49,10 @@ if ($conexion->connect_error) {
             header('Location: ../../pages/juez/juez-index.php');
         }
         else {
-            header('Location: ../../pages/index.html');
+            header('Location: ../../pages/index.html?ses=0');
         }
+    } else {
+        header('Location: ../../pages/index.html?ses=0');
     }
     
     $conexion->close();
