@@ -35,6 +35,7 @@ var outputsNetwork1 = new Array();
 var outputsNetwork2 = new Array();
 var outputsNetwork3 = new Array();
 var outputsNetwork4 = new Array();
+var peopleFinalistas = new Array();
 //////////////////////////////////////////
 /////////////////////////////////////////
 var positionDelete = new Array();
@@ -573,19 +574,17 @@ function graphic() {
 
 function enviarGanadores() {
     var peopleName = new Array();
-    // score();
-    console.table(scoreName);
-    console.table(scorePuntos);
-    console.table(scoreAmones);
-
-
-
-
-
-    for (var y = socrePeople.length; y >= 0; y--) {
-        peopleName.push(socrePeople[y]);
-    }
-    peopleName = peopleName.filter(Boolean);
+    // for (var y = socrePeople.length; y >= 0; y--) {
+    //     peopleName.push(socrePeople[y]);
+    // }
+    
+    // peopleName = peopleName.filter(Boolean);
+    //Eliminar datos repetidos
+    peopleName = socrePeople.filter(function (elem, index, self) {
+        return index == self.indexOf(elem);
+        // console.log(index);
+    });
+    console.table(peopleName);
     soundWon(peopleName);
 }
 
@@ -595,10 +594,69 @@ function guardarGanadores() {
 }
 
 function score() {
+    
     //Combina el nombre con el id
+    var peoplePuntuaje = new Array();
+    var scoreName2 = new Array();
+    
     for (var y = 0; y < idWon.length; y++) {
         People[y] = new Array(idWon[y], nameWon[y]);
     }
+    for (var y = 0; y < scoreName.length; y++) {
+        peoplePuntuaje[y] = new Array(scoreName[y], scorePuntos[y], scoreAmones[y]);
+    }
+    console.table(idWon);
+    console.table(nameWon);
+    console.table(scoreName);
+    console.table(peopleFinalistas);
+    console.table(scorePuntos);
+    console.table(scoreAmones);
+var aux = "", aux2 = "";
+    for (var e = 0; e < scoreName.length;e++) {
+       
+            aux = scoreName[y];
+            aux2 = aux.replace('                                   ', '');
+            scoreName[e] = aux2;
+    
+        
+        }
+        console.table(scoreName);
+//     for (var y = 0; y < People.length; y++) {
+//         for (var e = 0; e < peoplePuntuaje.length;e++) {
+//         // console.log(People[y][0]);
+//         // console.log(People[y][1]);
+//         console.log(People[y][1] == peoplePuntuaje[e]);
+//         if (People[y][1] == peoplePuntuaje[e]){
+//             peopleFinalistas[y] = new Array(People[y][0], scoreName[y], scorePuntos[y], scoreAmones[y]);
+//         }
+//     }
+// }
+//     console.table(peopleFinalistas);
+    // console.table(scoreAmones);
+    
+    // console.table(idWon);
+    // console.table(People);
+    
+    // for (var y = 0; y < nameWon.length; y++) {
+    //     for (var e = 0; e < scoreName.length; e++) {
+    //         console.log(nameWon[y] );
+    //         console.log(scoreName[y] );
+    //         console.log(scoreName[y] == nameWon[y]);
+    //         if (nameWon[y] == scoreName[e]){
+    //             peopleId.push(idWon[y]);
+                
+
+    //         }
+    // }
+// }
+console.table(peopleId);
+    
+    
+    
+    
+    
+    
+    
 
     //Combina el nombre, la puntuacion y las amonestaciones
     for (var y = 0; y < scoreWonSend.length; y += 4) {
@@ -712,9 +770,9 @@ function soundWon(peopleName) {
     }
     else {
          //var categoriaTorneo = "A continuación nombraremos los ganadores de la categoría: "; //Agregar categoria
-         var primer = "El ganador del primer lugar es: " + peopleName[2] + ". Felicitaciones.";
-         var segundo = "El ganador del segundo lugar es: " + peopleName[4] + ". Felicitaciones.";
-         var tercer = "El ganador del tercer lugar es: : " + peopleName[3] + ". Felicitaciones.";
+         var primer = "El ganador del primer lugar es: " + peopleName[0] + ". Felicitaciones.";
+         var segundo = "El ganador del segundo lugar es: " + peopleName[1] + ". Felicitaciones.";
+         var tercer = "El ganador del tercer lugar es: : " + peopleName[2] + ". Felicitaciones.";
  
          if (Category == "IM5") categoriaTorneo = "Los ganadores de la categoría Infantiles menor a 5 años son";
          if (Category == "I56") categoriaTorneo = "Los ganadores de la categoría Infantiles de 5 a 6 años son";
