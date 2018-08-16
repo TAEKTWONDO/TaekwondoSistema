@@ -103,8 +103,9 @@ var auxNombre = "";
 ///////////////////////////////////
 
 
-function graphic() {
-
+function graphic(btn) {
+document.getElementById(btn.id).disabled = true;
+				//alert("Button has been disabled.");
     $(document).ready(function () {
         $('#remove').on('click', function () {
             console.log('removed');

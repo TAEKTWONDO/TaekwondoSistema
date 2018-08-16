@@ -77,9 +77,10 @@ $_SESSION["CATEGORIA"] = $CATEGORIA;
 						<br>
 
 						<div style="text-align:center;">
-							<a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="graphic()">
-								Iniciar graficación
-							</a>
+							
+
+							<p><input type="button" id="btn1" value="Iniciar Graficación" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="graphic(this)"</p>
+
 							<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 							
 							<div class="tournament">
