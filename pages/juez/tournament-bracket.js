@@ -399,7 +399,7 @@ document.getElementById(btn.id).disabled = true;
                 .parent();
             console.log($ul);
         }
-        console.table(nameWon);
+        // console.table(nameWon);
         $ul.find("button").each(function () {
             
             var nombreaux = "";
@@ -565,7 +565,7 @@ document.getElementById(btn.id).disabled = true;
 
 
         cola.unshift($(this).text().replace(/^\s+|\s+$/gm, ''));
-        console.log(cola);
+        // console.log(cola);
 
 
         //Eliminar datos repetidos
@@ -573,7 +573,7 @@ document.getElementById(btn.id).disabled = true;
             return index == self.indexOf(elem);
             // console.log(index);
         });
-        console.log(colaGanadores);
+        // console.log(colaGanadores);
         ColaGanadoresFinal = colaGanadores;
 
         // colaGanadores = colaGanadores.filter(function (str) {
@@ -583,19 +583,7 @@ document.getElementById(btn.id).disabled = true;
     // console.log(colaGanadores);
 }
 
-function enviarGanadores() {
-    var peopleName = new Array();
-    // for (var y = socrePeople.length; y >= 0; y--) {
-    //     peopleName.push(socrePeople[y]);
-    // }
-    
-    // peopleName = peopleName.filter(Boolean);
-    //Eliminar datos repetidos
-    peopleName = socrePeople.filter(function (elem, index, self) {
-        return index == self.indexOf(elem);
-        // console.log(index);
-    });
-    console.table(ColaGanadoresFinal);
+function enviarGanadores() {;
     soundWon(ColaGanadoresFinal);
 }
 
@@ -605,126 +593,35 @@ function guardarGanadores() {
 }
 
 function score() {
-    
     //Combina el nombre con el id
     var peoplePuntuaje = new Array();
+    var peoplePuntuaje2 = new Array();
     var scoreName2 = new Array();
-    var scoreName3 = new Array();
-    
-    for (var y = 0; y < idWon.length; y++) {
-        People[y] = new Array(idWon[y], nameWon[y]);
-    }
-    for (var y = 0; y < scoreName.length; y++) {
-        peoplePuntuaje[y] = new Array(scoreName[y], scorePuntos[y], scoreAmones[y]);
-    }
-    console.table(idWon);
-    console.table(nameWon);
-    console.table(scoreName);
-    console.table(peopleFinalistas);
-    console.table(scorePuntos);
-    console.table(scoreAmones);
-    var aux ;
-    var aux2 ;
+    var nameWon2 = new Array();
+
+    var aux2 = "" ;
     for (var e = 0; e < scoreName.length;e++) {
-       
-        aux = scoreName[y];
-        aux2 = $.trim(aux);
-        console.log(aux2);
+        aux2 = scoreName[e].replace(/^\s+|\s+$/gm, '');
         scoreName2.push(aux2);
-    
-        
-        }
-        console.table(scoreName2);
-
-
-
-
-        for (var e = 0; e < scoreName2.length;e++) {
-       
-           
-            aux2 = scoreName2[y].replace(' ', '');
-            scoreName3.push(aux2);
-        
-            
-            }
-            // console.table(scoreName2);
-            console.table(scoreName3);
-//     for (var y = 0; y < People.length; y++) {
-//         for (var e = 0; e < peoplePuntuaje.length;e++) {
-//         // console.log(People[y][0]);
-//         // console.log(People[y][1]);
-//         console.log(People[y][1] == peoplePuntuaje[e]);
-//         if (People[y][1] == peoplePuntuaje[e]){
-//             peopleFinalistas[y] = new Array(People[y][0], scoreName[y], scorePuntos[y], scoreAmones[y]);
-//         }
-//     }
-// }
-//     console.table(peopleFinalistas);
-    // console.table(scoreAmones);
-    
-    // console.table(idWon);
-    // console.table(People);
-    
-    // for (var y = 0; y < nameWon.length; y++) {
-    //     for (var e = 0; e < scoreName.length; e++) {
-    //         console.log(nameWon[y] );
-    //         console.log(scoreName[y] );
-    //         console.log(scoreName[y] == nameWon[y]);
-    //         if (nameWon[y] == scoreName[e]){
-    //             peopleId.push(idWon[y]);
-                
-
-    //         }
-    // }
-// }
-console.table(peopleId);
-    
-    
-    
-    
-    
-    
-    
-
-    //Combina el nombre, la puntuacion y las amonestaciones
-    for (var y = 0; y < scoreWonSend.length; y += 4) {
-        PuntuacionAmonestaciones[y] = new Array(scoreWonSend[y], scoreWonSend[y + 1], scoreWonSend[y + 3]);
+    }
+    for (var e = 0; e < nameWon.length;e++) {
+        aux2 = nameWon[e].replace(/^\s+|\s+$/gm, '');
+        nameWon2.push(aux2);
     }
 
-    //Suma todos los puntuajes y las amonestaciones
-    PuntuacionAmonestaciones = PuntuacionAmonestaciones.filter(Boolean);
-    for (var y = 0; y < PuntuacionAmonestaciones.length; y++) {
-        for (var c = 0; c < PuntuacionAmonestaciones.length; c++) {
-            auxiliarScore = PuntuacionAmonestaciones[y];
-            auxiliarScore2 = PuntuacionAmonestaciones[c];
-            if (auxiliarScore[0] == auxiliarScore2[0]) {
-                conta = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
-                conta2 = parseInt(auxiliarScore[1]) + parseInt(auxiliarScore2[1]);
-                conta = conta / 2;
-                conta2 = conta2 / 2;
-                PeopleScore[y] = new Array(auxiliarScore[0], conta, conta2);
+    for (var e = 0; e < scoreName2.length;e++) {
+        for (var y = 0; y < nameWon2.length; y++) {
+            if (nameWon2[y] == scoreName2[e]){
+                peoplePuntuaje.push(idWon[y]);
             }
         }
     }
 
-    PeopleScore = PeopleScore.filter(Boolean);
-    //Para de nuestro vector anterior ponerle el id a las personas
-    for (var y = 0; y < PeopleScore.length; y++) {
-        for (var c = 0; c < People.length; c++) {
-            auxiliarScore = PeopleScore[y];
-            auxiliarScore2 = People[c];
-            nombre = auxiliarScore[0];
-            nombre2 = auxiliarScore2[1];
-            //El trim es para eliminar espacios en blanco
-            nombre = $.trim(nombre);
-            nombre2 = $.trim(nombre2);
-            if (nombre == nombre2) {
-                PeopleWon[y] = new Array(auxiliarScore2[0], auxiliarScore[0], auxiliarScore[1], auxiliarScore[2]);
-            }
-        }
-    }
+    savePuntuaciones(peoplePuntuaje, scorePuntos, scoreAmones);
+}
 
-    PeopleWon = PeopleWon.filter(Boolean);
+function savePuntuaciones(idAlumno, Puntuaje, Amonestaciones){
+    document.location.href = "save_won.php?idAlumnoPun=" + idAlumno + "&puntuacionPun=" + Puntuaje + "&amonestacionesPun=" + Amonestaciones + "&torneo=" + Torneo;
 }
 
 function saveWon(wonPeople) {
