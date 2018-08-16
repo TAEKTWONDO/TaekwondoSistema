@@ -6,7 +6,7 @@ $GENERO = $_POST["genero"];
 $CINTA = $_POST["cinta"];
 $PESO = $_POST["peso"];
 $ALTURA = $_POST["altura"];
-echo $MAESTRO;
+//echo $MAESTRO;
 session_start();
 //echo $_SESSION["ID_PROFE"];
 
@@ -27,12 +27,18 @@ if ($conexion->connect_error) {
     $sql_insert = "INSERT INTO ALUMNOS (nombre, apellidos, cinta, edad, altura, sexo, id_maestro)
      values (\"".$NOMBRE."\", \"".$APELLIDOS."\", \"".$CINTA."\", \"".$NACIMIENTO."\", \"".$ALTURA."\", \"".$GENERO."\" , \"".$_SESSION["ID_PROFE"]."\")";
     try {
-        echo "\nEntro";
-        $alumno_insert = $conexion->query($sql_insert);
-        $sql_alumno = "SELECT * FROM alumnos";
-        $res_alumno = $conexion->query($sql_alumno);
-        echo "\n" . $sql_alumno;
-        header('Location: ../../pages/prof-alumnos.php');
+        echo "<br>Entro";
+
+        if ($NOMBRE == null || $APELLIDOS == null || $CINTA == "" || $ALTURA == null || $PESO == null || $GENERO == "" || $NACIMIENTO == ""){
+            echo("<br>Registro Incompleto");
+            header('Location: ../../pages/prof-alumnos.php?op=0');
+        } else {
+            $alumno_insert = $conexion->query($sql_insert);
+            $sql_alumno = "SELECT * FROM alumnos";
+            $res_alumno = $conexion->query($sql_alumno);
+            echo "\n" . $sql_alumno;
+            header('Location: ../../pages/prof-alumnos.php');
+        }
         
     } catch (Exception $e) {
         echo("Error al agregar alumno: " . $e);

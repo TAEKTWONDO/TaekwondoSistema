@@ -61,12 +61,19 @@ if ($conexion->connect_error) {
     $sql_insert = "INSERT INTO TORNEOS (nombre, descripcion, hora, fecha, estado, im5, i56, i78, i910, i1112, j1314, j1516, a17)
      values (\"".$NOMBRE_TORNEO."\", \"".$DESCRIPCION."\", \"".$HORA_TORNEO."\",  \"".$FECHA."\" ,  \"".$ESTADO."\",  \"".$IM5N."\",  \"".$I56N."\",  \"".$I78N."\",  \"".$I910N."\",  \"".$I1112N."\",  \"".$J1314N."\",  \"".$J1516N."\",  \"".$A17N."\")";
     try {
-        echo "\nEntro";
-        $torneo_insert = $conexion->query($sql_insert);
-        $sql_torneo = "SELECT * FROM TORNEOS";
-        $res_torneo = $conexion->query($sql_torneo);
-        echo "\n" . $sql_torneo;
-        header('Location: ../../pages/admn-torneos.php');
+        echo "<br>Entro";
+
+        if ($NOMBRE_TORNEO == null || $DESCRIPCION == null || $HORA_TORNEO == null || $FECHA == null || $ESTADO == null ||
+        $IM5N == "N" && $I56N == "N" && $I78N == "N" && $I910N == "N" && $I1112N == "N" && $J1314N == "N" && $J1516N == "N" && $A17N == "N"){
+            echo("<br>Registro Incompleto");
+            header('Location: ../../pages/admn-torneos.php?op=0');
+        } else {
+            $torneo_insert = $conexion->query($sql_insert);
+            $sql_torneo = "SELECT * FROM TORNEOS";
+            $res_torneo = $conexion->query($sql_torneo);
+            echo "\n" . $sql_torneo;
+            header('Location: ../../pages/admn-torneos.php');
+        }
         
     } catch (Exception $e) {
         echo("Error al agregar torneo: " . $e);

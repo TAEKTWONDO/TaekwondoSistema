@@ -22,12 +22,17 @@ if ($conexion->connect_error) {
     $sql_insert = "INSERT INTO JUECES (nombre, apellidos, telefono, contrasena, correo)
      values (\"".$NOMBRE_JUEZ."\", \"".$APELLIDOS_JUEZ."\", \"".$TELEFONO."\", \"".$CONTRASENA."\", \"".$CORREO_MAESTRO."\")";
     try {
-        echo "\nEntro";
-        $juez_insert = $conexion->query($sql_insert);
-        $sql_juez = "SELECT * FROM JUECES";
-        $res_juez = $conexion->query($sql_juez);
-        echo "\n" . $sql_juez;
-        header('Location: ../../pages/admn-jueces.php');
+        echo "<br>Entro";
+
+        if ($NOMBRE_JUEZ == null || $APELLIDOS_JUEZ == null || $TELEFONO == null || $CONTRASENA == null || $CORREO_MAESTRO == null) {
+            header('Location: ../../pages/admn-jueces.php?op=0');
+        } else {
+            $juez_insert = $conexion->query($sql_insert);
+            $sql_juez = "SELECT * FROM JUECES";
+            $res_juez = $conexion->query($sql_juez);
+            echo "\n" . $sql_juez;
+            header('Location: ../../pages/admn-jueces.php');
+        }
         
     } catch (Exception $e) {
         echo("Error al agregar juez: " . $e);

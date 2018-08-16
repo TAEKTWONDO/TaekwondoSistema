@@ -31,6 +31,17 @@ if ($conexion->connect_error) {
     </head>
 
     <body>
+
+        <script> window.onload = function() {
+                res = document.URL.search("op=0");
+                res = document.URL.substr(res);
+                //console.log(res);
+                if (res == "op=0"){
+                    alert("Lo sentimos. La operación no pudo ser completada\nIntente de nuevo más tarde");
+                }
+            };
+        </script>
+
         <!--Header-->
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <header class="mdl-layout__header">
