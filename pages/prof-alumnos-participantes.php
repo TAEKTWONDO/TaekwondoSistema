@@ -20,7 +20,7 @@ $subject = $_GET['id_torneo'];
 
 ?>
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -29,8 +29,9 @@ $subject = $_GET['id_torneo'];
         <link rel="stylesheet" href="../assets/scss/style.scss">
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script defer src="../assets/js/alerts.js"></script>
         <title>
-            Alumnos Participantes
+            Mis Participantes
         </title>
     </head>
 
@@ -53,7 +54,7 @@ $subject = $_GET['id_torneo'];
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
 
-                    <a class="mdl__link" href="index.html">
+                    <a class="mdl__link" id="logout" onclick="logOut()" href="">
                         <i class="material-icons md-32">input</i>
                     </a>
 

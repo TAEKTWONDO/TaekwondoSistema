@@ -23,6 +23,7 @@ if ($conexion->connect_error) {
         <link rel="stylesheet" href="../assets/scss/style.scss">
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script defer src="../assets/js/alerts.js"></script>
         <title>
 Torneos        </title>
     </head>
@@ -46,7 +47,7 @@ Torneos        </title>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
 
-                    <a class="mdl__link" href="index.html">
+                    <a class="mdl__link" id="logout" onclick="logOut()" href="">
                         <i class="material-icons md-32">input</i>
                     </a>
 

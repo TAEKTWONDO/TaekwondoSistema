@@ -23,8 +23,9 @@ if ($conexion->connect_error) {
         <link rel="stylesheet" href="../assets/scss/style.scss">
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script defer src="../assets/js/alerts.js"></script>
         <title>
-            ADM PROFESORES
+            Admon. Jueces
         </title>
     </head>
 
@@ -51,7 +52,7 @@ if ($conexion->connect_error) {
                     </div>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
-                    <a class="mdl__link" href="index.html">
+                    <a class="mdl__link" id="logout" onclick="logOut()" href="">
                         <i class="material-icons md-32">input</i>
                     </a>
 
@@ -89,9 +90,10 @@ if ($conexion->connect_error) {
                         <span style="color:white;">...........................................</span>
                         <span class="mdl-list__item-secondary-action">
 				
-                    <a href="../assets/php/admn-delete-juez.php?id='+<?php echo $row['id_juez'] ?>'" ><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-					<i class="material-icons">delete</i>
-				</button></a>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                    onclick="eraseItem('juez', <?php echo $row['id_juez'] ?> )" >
+					    <i class="material-icons">delete</i>
+				</button>
 			</span>
                     </li>
                     <?php

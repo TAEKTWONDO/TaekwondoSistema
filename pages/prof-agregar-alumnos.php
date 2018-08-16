@@ -29,6 +29,7 @@ if ($conexion->connect_error) {
         <script defer src="../assets/js/getmdl-select.min.js"></script>
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script defer src="../assets/js/alerts.js"></script>
         <title>
             Agregar alumno
         </title>
@@ -53,7 +54,7 @@ if ($conexion->connect_error) {
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
 
-                    <a class="mdl__link" href="index.html">
+                    <a class="mdl__link" id="logout" onclick="logOut()" href="">
                         <i class="material-icons md-32">input</i>
                     </a>
 

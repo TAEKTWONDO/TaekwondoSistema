@@ -23,8 +23,9 @@ if ($conexion->connect_error) {
         <link rel="stylesheet" href="../assets/scss/style.scss">
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script defer src="../assets/js/alerts.js"></script>
         <title>
-            ADM TORNEOS
+            Admon. Torneos
         </title>
     </head>
 
@@ -52,7 +53,8 @@ if ($conexion->connect_error) {
                     </div>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
-                    <a class="mdl__link" href="index.html">
+                    
+                    <a class="mdl__link" id="logout" onclick="logOut()" href="">
                         <i class="material-icons md-32">input</i>
                     </a>
 
@@ -145,30 +147,39 @@ if ($conexion->connect_error) {
 
                                 </div>
 
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <div class="mdl-card__actions" style="text-align: right;">
+        <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-card__actions" style="text-align: right;">
 
-                                        <?php if  ($row['estado'] == "A"){ ?>
-                                        <a href="../assets/php/admn-change-torneo.php?id='+<?php echo $row['id_torneo'] ?>'&categoria=I"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-                    <i class="material-icons">assignment_turned_in</i>
-                </button></a>
-                                        <?php
+                <?php if  ($row['estado'] == "A"){ ?>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredGreen mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                                onclick="activeTournament('desactivar', <?php echo $row['id_torneo'] ?> )" >
+                                    <i class="material-icons">assignment_turned_in</i>
+                            </button>
+                        </a>
+                                        
+                <?php
                     }
                 ?>
-                                            <?php if  ($row['estado'] == "I"){ ?>
-                                            <a href="../assets/php/admn-change-torneo.php?id='+<?php echo $row['id_torneo'] ?>' &categoria=A"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredWhite mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-                    <i class="material-icons">assignment_late</i>
-                </button></a>
-                                            <?php
+
+                <?php if  ($row['estado'] == "I"){ ?>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredWhite mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                            onclick="activeTournament('activar', <?php echo $row['id_torneo'] ?> )" >
+                                <i class="material-icons">assignment_late</i>
+                        </button>
+                    </a>
+                                            
+                <?php
                     }
                 ?>
-                                                <a href="../assets/php/admn-delete-torneo.php?id='+<?php echo $row['id_torneo'] ?>'"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights">
-                    <i class="material-icons">delete</i>
+
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                        onclick="eraseItem('torneo', <?php echo $row['id_torneo'] ?> )" >
+                            <i class="material-icons">delete</i>
                     
-                </button></a>
+                    </button>
 
-                                    </div>
-                                </div>
+            </div>
+        </div>
 
                             </div>
 
