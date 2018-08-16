@@ -11,6 +11,31 @@
  }
 
  //Mensaje de Confirmación
+ function cancelOp(elemento) {
+    if (confirm("¿Seguro que cancelar el registro del " + elemento + "?")) {
+        switch (elemento) {
+            case "maestro":
+                location.href = 'admn-profesores.php';
+                break;
+            case "gimnasio":
+                location.href = 'admn-gimnasios.php';
+                break;
+            case "juez":
+                location.href = 'admn-jueces.php';
+                break;
+            case "torneo":
+                location.href = 'admn-torneos.php';
+                break;
+            case "alumno":
+                location.href = 'prof-alumnos.php';
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+ //Mensaje de Confirmación
  function eraseItem(elemento, id) {
      if (confirm("¿Seguro que deseas eliminar a este " + elemento + "?")) {
          switch (elemento) {

@@ -267,9 +267,10 @@ if ($conexion->connect_error) {
 					<i class="material-icons">send</i>
 				</button>
 
-                                        <a href="admn-profesores.php"><button type="button"  class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"> 
-                        <i class="material-icons" >cancel</i>
-                          </button></a>
+                            <button type="button"  class="mdl-button mdl-js-button mdl-button--raised mdl-button--coloredRed mdl-js-ripple-effect mdl-checkbox__input aling-rights"
+                                onclick="cancelOp('maestro')"> 
+                                    <i class="material-icons" >cancel</i>
+                          </button>
                                     </div>
                                 </div>
                             </form>
