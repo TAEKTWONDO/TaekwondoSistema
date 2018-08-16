@@ -64,6 +64,19 @@ if ($conexion->connect_error) {
     }
     }
 
+    $sql_tor = "UPDATE TORNEOS SET ESTADO = 'I' WHERE ID_TORNEO = \"".$TORNEO."\"";
+    try {
+        // echo "\nEntro";
+        $tor_insert = $conexion->query($sql_tor);
+        $sql_tor = "SELECT * FROM TORNEOS";
+        $res_tor = $conexion->query($sql_tor);
+        echo "Torneo";
+        
+    } catch (Exception $e) {
+        echo("Error al modificar el torneo: " . $e);
+    
+}
+
     for ($i = 0; $i < count($IDSEPARADOP); $i++){
         $sql_insert = "INSERT INTO PUNTUACIONES (id_alumno, id_torneo, puntuacion, amonestaciones)
         values (\"".$IDSEPARADOP[$i]."\", \"".$TORNEO."\", \"".$PUNTUACIONSEPARADOP[$i]."\",  \"".$AMONESTACIONESSEPARADOP[$i]."\")";
@@ -78,7 +91,12 @@ if ($conexion->connect_error) {
     } catch (Exception $e) {
         echo("Error al agregar gym: " . $e);
     }
+
+
+    
 }
+
+
     // header('Location: show-score.php?torneo='. $TORNEO);
     $conexion->close();
 }
