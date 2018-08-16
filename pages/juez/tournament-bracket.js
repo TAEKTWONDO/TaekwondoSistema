@@ -412,7 +412,7 @@ function graphic() {
                     com_1_puntaje = puntos;
 
                 }
-                var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text(), "3");
+                var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text());
 
                 if (amonestacion == null || amonestacion == "") {
                     // console.log("Cancelado");
@@ -420,7 +420,7 @@ function graphic() {
                     // console.log("Amonestaciones de " + $(this).text() + ": " + amonestacion);
                     /*scoreWonSend.push($(this).text());
                     scoreWonSend.push(puntos);*/
-                    com_1_amones=amonestacion;
+                    com_1_amones = amonestacion;
                 }
 
             }
@@ -439,7 +439,7 @@ function graphic() {
                     com_2_puntaje = puntos;
 
                 }
-                var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text(), "3");
+                var amonestacion = prompt("Ingrese las amonestaciones de " + $(this).text());
 
                 if (amonestacion == null || amonestacion == "") {
                     // console.log("Cancelado");
@@ -462,24 +462,30 @@ function graphic() {
         var i_com_2_amones = Number(com_2_amones);
 
         if (i_com_1_amones >> i_com_2_puntaje || i_com_2_amones >> i_com_1_puntaje) {
-        alert("Las amonestaciones no pueden ser mayor al puntaje del contrincante");
+            if (com_2_nombre != "" && com_1_nombre !="") {
+                alert("Las amonestaciones no pueden ser mayor al puntaje del contrincante");
+            }else{
+                alert("El alumno no tuvo comperidores");
+            } 
+        } else if (i_com_1_amones == null || i_com_2_puntaje == null || i_com_2_amones == null || i_com_1_puntaje == null) {
+            alert("Todos los datos deber ser ingresados");
         } else {
             if (i_com_1_puntaje > i_com_2_puntaje) {
                 //y uno ganador
                 if (com_1_nombre == $(this).text()) {
 
-                     if (confirm("¿Ganó " + com_1_nombre + " " + i_com_1_puntaje + "-" + i_com_2_puntaje + " contra " + com_2_nombre+"?")) {
-                         console.log("Sí");
+                    if (confirm("¿Ganó " + com_1_nombre + " " + i_com_1_puntaje + "-" + i_com_2_puntaje + " contra " + com_2_nombre + "?")) {
+                        console.log("Sí");
                         console.log("Guardar al ganador sin problemas");
                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
                         $ul.find("button").each(function () {
                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
                         });
                         changeToButtons();
-                     } else {
-                         console.log("a weno, ño >:c");
-                     }
-     
+                    } else {
+                        console.log("a weno, ño >:c");
+                    }
+
                 }
                 //y dos ganador
                 else {
@@ -498,17 +504,17 @@ function graphic() {
             } //dos mayor y dos ganador
             else if (i_com_1_puntaje < i_com_2_puntaje) {
                 if (com_2_nombre == $(this).text()) {
-                     if (confirm("¿Ganó " + com_2_nombre + " " + i_com_2_puntaje + "-" + i_com_1_puntaje + " contra " + com_1_nombre + "?")) {
-                         console.log("Sí");
-                         console.log("Guardar al ganador sin problemas");
-                         $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
-                         $ul.find("button").each(function () {
-                             $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
-                         });
-                         changeToButtons();
-                     } else {
-                         console.log("a weno, ño >:c");
-                     }
+                    if (confirm("¿Ganó " + com_2_nombre + " " + i_com_2_puntaje + "-" + i_com_1_puntaje + " contra " + com_1_nombre + "?")) {
+                        console.log("Sí");
+                        console.log("Guardar al ganador sin problemas");
+                        $ul.append($('<li class="winner"> <div style="margin-top: 0px; font-size: 13px; color:red"> <b>' + $(this).text() + " </b></div></li > "));
+                        $ul.find("button").each(function () {
+                            $(this).replaceWith($('<div style="margin-top: 0px;font-size: 13px">' + $(this).text() + "</div>"));
+                        });
+                        changeToButtons();
+                    } else {
+                        console.log("a weno, ño >:c");
+                    }
                 }
                 //y dos ganador
                 else {
